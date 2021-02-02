@@ -25,20 +25,9 @@ info@bright.supply
 </head>
 <body>
 <div class="slidecontainer"><input type="range" id="brightness" value="1000" min="0" max="1000"  class="slider"></div>
-<script>
-function updateBrightness() {
- let number = (1000-document.getElementById('brightness').value)/1000;
- let color = 'rgb(0,0,0,' + number + ')';
- document.body.style.backgroundColor = color;
-}
-document.getElementById('brightness').addEventListener('input',updateBrightness);
-</script>
+<script>function updateBrightness() { let number = (1000-document.getElementById('brightness').value)/1000; let color = 'rgb(0,0,0,' + number + ')'; document.body.style.backgroundColor = color; }
+document.getElementById('brightness').addEventListener('input',updateBrightness);</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
- gtag('js', new Date());
- gtag('config', 'G-DP3EWLQT9L');
-</script>
+<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-DP3EWLQT9L');</script>
 </body>
 </html>
