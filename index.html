@@ -14,6 +14,7 @@ info@bright.supply
 <title>bright.supply</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
 <link rel="shortcut icon" href="bright.supply.png">
+<meta name="theme-color" content="#fffff">
 <meta name="twitter:title" content="bright.supply">
 <meta name="twitter:description" content="Use your 2nd monitor as a lightbox for video calls.">
 <meta name="twitter:card" content="summary">
@@ -30,7 +31,5 @@ info@bright.supply
 <div class="slidecontainer"><input type="range" id="brightness" value="1000" min="0" max="1000"  class="slider"></div>
 <script>function updateBrightness() { let number = (1000-document.getElementById('brightness').value)/1000; let color = 'rgb(0,0,0,' + number + ')'; document.body.style.backgroundColor = color; }
 document.getElementById('brightness').addEventListener('input',updateBrightness);</script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
-<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-DP3EWLQT9L');</script>
 </body>
 </html>
