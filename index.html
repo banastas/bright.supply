@@ -31,7 +31,7 @@ Made in California w/ ❤️ by https://banast.as
 </head>
 <body>
 <!--div class="centered"><a href="https://www.producthunt.com/posts/bright-supply?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bright-supply" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=283141&theme=light" alt="bright.supply - Use your 2nd monitor as a lightbox for video calls. | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a></div-->
-<div class="slidecontainer"><input type="range" id="brightness" value="1000" min="0" max="1000"  class="slider"></div>
+<div class="slidecontainer"><input type="range" id="brightness" value="500" min="0" max="1000"  class="slider"></div>
 <script>function updateBrightness() { let number = (1000-document.getElementById('brightness').value)/1000; let color = 'rgb(0,0,0,' + number + ')'; document.body.style.backgroundColor = color; }
 document.getElementById('brightness').addEventListener('input',updateBrightness);</script>
 </body>
