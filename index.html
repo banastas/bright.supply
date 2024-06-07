@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <!--
 ___.         .__       .__     __                                .__         
 \_ |_________|__| ____ |  |___/  |_     ________ ________ ______ |  | ___.__.
@@ -12,27 +13,33 @@ info@bright.supply
 Made in California w/ ❤️ by https://banast.as
 -->
 <head>
-<title>bright.supply</title>
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
+<title>bright.supply</title>
 <link rel="shortcut icon" href="bright.supply.png">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#ffffff">
+<meta name="description" content="Use your 2nd monitor as a lightbox for video calls.">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bright.supply">
 <meta name="twitter:description" content="Use your 2nd monitor as a lightbox for video calls.">
-<meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://bright.supply/bright.supply.png">
-
 <style>
-.slider { -webkit-appearance: none; width: 95%; left: 50%; height: 15px; position: fixed; bottom: 50; border-radius: 5px; background: #d3d3d3; outline: none; opacity: 0.7; -webkit-transition: .2s; transition: opacity .2s; transform: translate(-50%, -50%); }
-.slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 25px; height: 25px; border-radius: 50%; background: #fccd03; cursor: pointer; }
-.slider::-moz-range-thumb { width: 25px; height: 25px; border-radius: 50%; background: #fccd03; cursor: pointer; }
-.centered { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+:root { --slider-width: 95%; --slider-height: 15px; --slider-thumb-size: 25px; --slider-bg: #d3d3d3; --slider-thumb-bg: #fccd03; --slider-opacity: 0.7; --slider-transition: 0.2s; --slider-bottom: 30px; }
+body { margin: 0; padding: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: rgb(0, 0, 0, 0); transition: background-color var(--slider-transition); }
+.slider { -webkit-appearance: none; width: var(--slider-width); height: var(--slider-height); position: fixed; bottom: var(--slider-bottom); left: 50%; border-radius: 5px; background: var(--slider-bg); outline: none; opacity: var(--slider-opacity); transition: opacity var(--slider-transition); transform: translateX(-50%); }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: var(--slider-thumb-size); height: var(--slider-thumb-size); border-radius: 50%; background: var(--slider-thumb-bg); cursor: pointer; }
+.slider::-moz-range-thumb { width: var(--slider-thumb-size); height: var(--slider-thumb-size); border-radius: 50%; background: var(--slider-thumb-bg); cursor: pointer; }
 </style>
 </head>
 <body>
 <!--div class="centered"><a href="https://www.producthunt.com/posts/bright-supply?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bright-supply" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=283141&theme=light" alt="bright.supply - Use your 2nd monitor as a lightbox for video calls. | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a></div-->
-<div class="slidecontainer"><input type="range" id="brightness" value="1000" min="0" max="1000"  class="slider"></div>
-<script>function updateBrightness() { let number = (1000-document.getElementById('brightness').value)/1000; let color = 'rgb(0,0,0,' + number + ')'; document.body.style.backgroundColor = color; }
-document.getElementById('brightness').addEventListener('input',updateBrightness);</script>
+<div class="slidecontainer"><input type="range" id="brightness" value="1000" min="0" max="1000" class="slider" aria-label="Adjust brightness"></div>
+<script>
+function updateBrightness() { let brightnessValue = document.getElementById('brightness').value; let number = (1000 - brightnessValue) / 1000; let color = 'rgba(0, 0, 0, ' + number + ')'; document.body.style.backgroundColor = color; }
+document.getElementById('brightness').addEventListener('input', updateBrightness);
+// Set initial background color
+updateBrightness();
+</script>
 </body>
 </html>
