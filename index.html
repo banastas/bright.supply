@@ -13,33 +13,115 @@ info@bright.supply
 Made in California w/ ❤️ by https://banast.as
 -->
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
-<title>bright.supply</title>
-<link rel="shortcut icon" href="bright.supply.png">
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#ffffff">
-<meta name="description" content="Use your 2nd monitor as a lightbox for video calls.">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="bright.supply">
-<meta name="twitter:description" content="Use your 2nd monitor as a lightbox for video calls.">
-<meta name="twitter:image" content="https://bright.supply/bright.supply.png">
-<style>
-:root { --slider-width: 95%; --slider-height: 15px; --slider-thumb-size: 25px; --slider-bg: #d3d3d3; --slider-thumb-bg: #fccd03; --slider-opacity: 0.7; --slider-transition: 0.2s; --slider-bottom: 30px; }
-body { margin: 0; padding: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: rgb(0, 0, 0, 0); transition: background-color var(--slider-transition); }
-.slider { -webkit-appearance: none; width: var(--slider-width); height: var(--slider-height); position: fixed; bottom: var(--slider-bottom); left: 50%; border-radius: 5px; background: var(--slider-bg); outline: none; opacity: var(--slider-opacity); transition: opacity var(--slider-transition); transform: translateX(-50%); }
-.slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: var(--slider-thumb-size); height: var(--slider-thumb-size); border-radius: 50%; background: var(--slider-thumb-bg); cursor: pointer; }
-.slider::-moz-range-thumb { width: var(--slider-thumb-size); height: var(--slider-thumb-size); border-radius: 50%; background: var(--slider-thumb-bg); cursor: pointer; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1">
+    <title>bright.supply - Lightbox for Video Calls</title>
+    <link rel="shortcut icon" href="assets/images/bright.supply.png">
+    <link rel="icon" type="image/png" href="assets/images/bright.supply.png">
+    <link rel="apple-touch-icon" href="assets/images/bright.supply.png">
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels for better lighting.">
+    <meta name="keywords" content="lightbox, video calls, lighting, webcam, video conferencing, brightness, monitor, light">
+    <meta name="author" content="banastas">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Theme Colors -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fccd03">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#fccd03">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bright.supply/">
+    <meta property="og:title" content="bright.supply - Lightbox for Video Calls">
+    <meta property="og:description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.">
+    <meta property="og:image" content="https://bright.supply/assets/images/bright.supply.png">
+    <meta property="og:site_name" content="bright.supply">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://bright.supply/">
+    <meta name="twitter:title" content="bright.supply - Lightbox for Video Calls">
+    <meta name="twitter:description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.">
+    <meta name="twitter:image" content="https://bright.supply/assets/images/bright.supply.png">
+    <meta name="twitter:creator" content="@banastas">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="assets/images/bright.supply.png" as="image">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<!--div class="centered"><a href="https://www.producthunt.com/posts/bright-supply?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bright-supply" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=283141&theme=light" alt="bright.supply - Use your 2nd monitor as a lightbox for video calls. | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a></div-->
-<div class="slidecontainer"><input type="range" id="brightness" value="1000" min="0" max="1000" class="slider" aria-label="Adjust brightness"></div>
-<script>
-function updateBrightness() { let brightnessValue = document.getElementById('brightness').value; let number = (1000 - brightnessValue) / 1000; let color = 'rgba(0, 0, 0, ' + number + ')'; document.body.style.backgroundColor = color; }
-document.getElementById('brightness').addEventListener('input', updateBrightness);
-// Set initial background color
-updateBrightness();
-</script>
+    <!-- Main Content -->
+    <main role="main" aria-label="Brightness control interface">
+        <!-- Product Hunt Badge (Hidden by default, can be toggled) -->
+        <div id="product-hunt-badge" class="product-hunt-badge" style="display: none;" aria-hidden="true">
+            <a href="https://www.producthunt.com/posts/bright-supply?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bright-supply" target="_blank" rel="noopener noreferrer" aria-label="View on Product Hunt">
+                <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=283141&theme=light" alt="bright.supply - Use your 2nd monitor as a lightbox for video calls. | Product Hunt" width="250" height="54">
+            </a>
+        </div>
+        
+        <!-- Controls Container -->
+        <div class="controls-container" role="region" aria-label="Brightness controls">
+            <!-- Preset Buttons -->
+            <div class="preset-buttons" role="group" aria-label="Brightness presets">
+                <button id="preset-low" class="preset-btn" aria-label="Set to low brightness">Low</button>
+                <button id="preset-medium" class="preset-btn" aria-label="Set to medium brightness">Medium</button>
+                <button id="preset-high" class="preset-btn" aria-label="Set to high brightness">High</button>
+                <button id="preset-max" class="preset-btn" aria-label="Set to maximum brightness">Max</button>
+            </div>
+            
+            <!-- Brightness Slider -->
+            <div class="slider-container">
+                <label for="brightness" class="slider-label">Brightness</label>
+                <input 
+                    type="range" 
+                    id="brightness" 
+                    value="1000" 
+                    min="0" 
+                    max="1000" 
+                    class="slider" 
+                    aria-label="Adjust brightness level"
+                    aria-valuemin="0"
+                    aria-valuemax="1000"
+                    aria-valuenow="1000"
+                >
+                <div class="slider-value" id="brightness-value" aria-live="polite">100%</div>
+            </div>
+            
+            <!-- Control Buttons -->
+            <div class="control-buttons" role="group" aria-label="Additional controls">
+                <button id="reset-btn" class="control-btn" aria-label="Reset to maximum brightness">Reset</button>
+                <button id="fullscreen-btn" class="control-btn" aria-label="Toggle fullscreen mode">Fullscreen</button>
+                <button id="ph-toggle" class="control-btn" aria-label="Toggle Product Hunt badge">PH Badge</button>
+            </div>
+        </div>
+        
+        <!-- Instructions -->
+        <div class="instructions" id="instructions" aria-live="polite">
+            <p>Use the slider or arrow keys to adjust brightness. Press <kbd>F</kbd> for fullscreen, <kbd>R</kbd> to reset.</p>
+        </div>
+    </main>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+    
+    <!-- Main Application Script -->
+    <script src="app.js"></script>
 </body>
 </html>

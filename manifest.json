@@ -1,0 +1,96 @@
+{
+  "name": "bright.supply - Lightbox for Video Calls",
+  "short_name": "bright.supply",
+  "description": "Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.",
+  "version": "2.0.0",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "any",
+  "theme_color": "#fccd03",
+  "background_color": "#000000",
+  "categories": ["productivity", "utilities", "photography"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "assets/images/bright.supply.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/images/bright.supply.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/images/readme.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "bright.supply interface showing brightness controls"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Low Brightness",
+      "short_name": "Low",
+      "description": "Set to low brightness preset",
+      "url": "/?preset=low",
+      "icons": [
+        {
+          "src": "bright.supply.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Medium Brightness",
+      "short_name": "Medium",
+      "description": "Set to medium brightness preset",
+      "url": "/?preset=medium",
+      "icons": [
+        {
+          "src": "bright.supply.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "High Brightness",
+      "short_name": "High",
+      "description": "Set to high brightness preset",
+      "url": "/?preset=high",
+      "icons": [
+        {
+          "src": "bright.supply.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Maximum Brightness",
+      "short_name": "Max",
+      "description": "Set to maximum brightness",
+      "url": "/?preset=max",
+      "icons": [
+        {
+          "src": "bright.supply.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "name": "bright-supply",
+  "version": "2.0.0",
+  "description": "Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "echo 'Deploy to your hosting provider'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linter configured'",
+    "format": "echo 'No formatter configured'"
+  },
+  "keywords": [
+    "lightbox",
+    "video-calls",
+    "monitor",
+    "lighting",
+    "webcam",
+    "video-conferencing",
+    "html5",
+    "css3",
+    "javascript",
+    "vanilla-js",
+    "web-app",
+    "utility",
+    "productivity",
+    "pwa",
+    "progressive-web-app"
+  ],
+  "author": {
+    "name": "banastas",
+    "email": "info@bright.supply",
+    "url": "https://banast.as"
+  },
+  "license": "MIT",
+  "homepage": "https://bright.supply",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/banastas/bright.supply.git"
+  },
+  "bugs": {
+    "url": "https://github.com/banastas/bright.supply/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "files": [
+    "index.html",
+    "styles.css",
+    "app.js",
+    "manifest.json",
+    "bright.supply.png",
+    "readme.png",
+    "robots.txt",
+    "LICENSE",
+    "README.md"
+  ],
+  "devDependencies": {},
+  "dependencies": {},
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  }
+}

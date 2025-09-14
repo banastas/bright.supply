@@ -1,0 +1,389 @@
+/* bright.supply - Styles */
+
+:root {
+    /* Color Variables */
+    --primary-color: #fccd03;
+    --secondary-color: #333;
+    --background-color: rgba(0, 0, 0, 0);
+    --text-color: #fff;
+    --slider-bg: #d3d3d3;
+    --slider-thumb-bg: var(--primary-color);
+    --button-bg: rgba(255, 255, 255, 0.1);
+    --button-hover-bg: rgba(255, 255, 255, 0.2);
+    --button-active-bg: rgba(255, 255, 255, 0.3);
+    
+    /* Layout Variables */
+    --slider-width: 95%;
+    --slider-height: 15px;
+    --slider-thumb-size: 25px;
+    --slider-opacity: 0.7;
+    --slider-transition: 0.2s;
+    --slider-bottom: 30px;
+    --controls-bottom: 80px;
+    --preset-bottom: 140px;
+    
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-size-small: 0.875rem;
+    --font-size-medium: 1rem;
+    --font-size-large: 1.125rem;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    
+    /* Border Radius */
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    transition: background-color var(--slider-transition);
+    font-family: var(--font-family);
+    font-size: var(--font-size-medium);
+    color: var(--text-color);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Main Content */
+main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Product Hunt Badge */
+.product-hunt-badge {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    z-index: 1000;
+    opacity: 0.9;
+    transition: opacity var(--slider-transition);
+}
+
+.product-hunt-badge:hover {
+    opacity: 1;
+}
+
+.product-hunt-badge img {
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+}
+
+/* Controls Container */
+.controls-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--spacing-lg);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+    z-index: 100;
+}
+
+/* Preset Buttons */
+.preset-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    position: fixed;
+    bottom: var(--preset-bottom);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.preset-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--button-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-md);
+    color: var(--text-color);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--slider-transition);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.preset-btn:hover {
+    background: var(--button-hover-bg);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.preset-btn:active {
+    background: var(--button-active-bg);
+    transform: translateY(0);
+}
+
+.preset-btn.active {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border-color: var(--primary-color);
+}
+
+/* Slider Container */
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: var(--spacing-lg);
+}
+
+.slider-label {
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+    opacity: 0.8;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: var(--slider-width);
+    height: var(--slider-height);
+    border-radius: 5px;
+    background: var(--slider-bg);
+    outline: none;
+    opacity: var(--slider-opacity);
+    transition: opacity var(--slider-transition);
+    cursor: pointer;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider:focus {
+    opacity: 1;
+    box-shadow: 0 0 0 3px rgba(252, 205, 3, 0.3);
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: var(--slider-thumb-size);
+    height: var(--slider-thumb-size);
+    border-radius: 50%;
+    background: var(--slider-thumb-bg);
+    cursor: pointer;
+    transition: all var(--slider-transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.slider::-webkit-slider-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.slider::-moz-range-thumb {
+    width: var(--slider-thumb-size);
+    height: var(--slider-thumb-size);
+    border-radius: 50%;
+    background: var(--slider-thumb-bg);
+    cursor: pointer;
+    border: none;
+    transition: all var(--slider-transition);
+    box-shadow: var(--shadow-sm);
+}
+
+.slider::-moz-range-thumb:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-md);
+}
+
+.slider-value {
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-small);
+    font-weight: 600;
+    opacity: 0.9;
+    min-width: 3ch;
+    text-align: center;
+}
+
+/* Control Buttons */
+.control-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+}
+
+.control-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--button-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius-md);
+    color: var(--text-color);
+    font-size: var(--font-size-small);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--slider-transition);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.control-btn:hover {
+    background: var(--button-hover-bg);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.control-btn:active {
+    background: var(--button-active-bg);
+    transform: translateY(0);
+}
+
+/* Instructions */
+.instructions {
+    position: fixed;
+    top: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-small);
+    opacity: 0.8;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: opacity 0.3s ease;
+    max-width: 90%;
+    text-align: center;
+}
+
+.instructions.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.instructions kbd {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.8em;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .preset-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--spacing-xs);
+    }
+    
+    .preset-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.75rem;
+    }
+    
+    .control-buttons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .control-btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.75rem;
+    }
+    
+    .instructions {
+        font-size: 0.75rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+}
+
+@media (max-width: 480px) {
+    .slider-container {
+        max-width: 90%;
+    }
+    
+    .preset-buttons {
+        position: relative;
+        bottom: auto;
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .controls-container {
+        padding: var(--spacing-md);
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --slider-bg: #666;
+        --button-bg: rgba(255, 255, 255, 0.2);
+        --button-hover-bg: rgba(255, 255, 255, 0.3);
+    }
+    
+    .slider {
+        border: 2px solid var(--text-color);
+    }
+    
+    .preset-btn,
+    .control-btn {
+        border-width: 2px;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .controls-container,
+    .instructions,
+    .product-hunt-badge {
+        display: none !important;
+    }
+    
+    body {
+        background-color: white !important;
+    }
+}
