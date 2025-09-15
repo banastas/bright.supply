@@ -125,8 +125,13 @@ class BrightSupply {
     updateUIStyling(percentage) {
         const isHighBrightness = percentage >= 76;
         
+        console.log(`Updating UI styling: ${percentage}% brightness, high brightness: ${isHighBrightness}`);
+        
         // Toggle high brightness class on body
         document.body.classList.toggle('high-brightness', isHighBrightness);
+        
+        // Get slider label element
+        const sliderLabel = document.querySelector('.slider-label');
         
         // Update all preset buttons
         Object.values(this.presetButtons).forEach(button => {
@@ -136,55 +141,81 @@ class BrightSupply {
                 button.style.color = 'rgba(255, 255, 255, 0.95)';
                 button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
                 button.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
+                console.log('Applied high brightness styling to preset button');
             } else {
                 // Normal brightness styling - light background with dark text
                 button.style.background = 'rgba(255, 255, 255, 0.9)';
                 button.style.color = 'rgba(0, 0, 0, 0.9)';
                 button.style.borderColor = 'rgba(0, 0, 0, 0.3)';
                 button.style.textShadow = 'none';
+                console.log('Applied normal brightness styling to preset button');
             }
         });
         
         // Update control buttons
         const controlButtons = [this.resetBtn, this.fullscreenBtn, this.phToggle];
         controlButtons.forEach(button => {
-            if (isHighBrightness) {
-                // High brightness styling - dark background with light text
-                button.style.background = 'rgba(0, 0, 0, 0.8)';
-                button.style.color = 'rgba(255, 255, 255, 0.95)';
-                button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                button.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
-            } else {
-                // Normal brightness styling - light background with dark text
-                button.style.background = 'rgba(255, 255, 255, 0.9)';
-                button.style.color = 'rgba(0, 0, 0, 0.9)';
-                button.style.borderColor = 'rgba(0, 0, 0, 0.3)';
-                button.style.textShadow = 'none';
+            if (button) { // Check if button exists
+                if (isHighBrightness) {
+                    // High brightness styling - dark background with light text
+                    button.style.background = 'rgba(0, 0, 0, 0.8)';
+                    button.style.color = 'rgba(255, 255, 255, 0.95)';
+                    button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    button.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
+                    console.log('Applied high brightness styling to control button');
+                } else {
+                    // Normal brightness styling - light background with dark text
+                    button.style.background = 'rgba(255, 255, 255, 0.9)';
+                    button.style.color = 'rgba(0, 0, 0, 0.9)';
+                    button.style.borderColor = 'rgba(0, 0, 0, 0.3)';
+                    button.style.textShadow = 'none';
+                    console.log('Applied normal brightness styling to control button');
+                }
             }
         });
         
-        // Update slider label
-        if (isHighBrightness) {
-            this.brightnessSlider.previousElementSibling.style.background = 'rgba(0, 0, 0, 0.8)';
-            this.brightnessSlider.previousElementSibling.style.color = 'rgba(255, 255, 255, 0.95)';
-            this.brightnessSlider.previousElementSibling.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-            this.brightnessSlider.previousElementSibling.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
-        } else {
-            this.brightnessSlider.previousElementSibling.style.background = 'rgba(255, 255, 255, 0.95)';
-            this.brightnessSlider.previousElementSibling.style.color = 'rgba(0, 0, 0, 0.9)';
-            this.brightnessSlider.previousElementSibling.style.borderColor = 'rgba(0, 0, 0, 0.2)';
-            this.brightnessSlider.previousElementSibling.style.textShadow = 'none';
+        // Update slider label - keep as clean text
+        if (sliderLabel) {
+            if (isHighBrightness) {
+                sliderLabel.style.background = 'none';
+                sliderLabel.style.color = 'rgba(0, 0, 0, 0.9)';
+                sliderLabel.style.border = 'none';
+                sliderLabel.style.textShadow = '0 1px 3px rgba(255, 255, 255, 0.9)';
+                sliderLabel.style.padding = '0';
+                sliderLabel.style.borderRadius = '0';
+                sliderLabel.style.boxShadow = 'none';
+                console.log('Applied high brightness styling to slider label');
+            } else {
+                sliderLabel.style.background = 'none';
+                sliderLabel.style.color = 'rgba(0, 0, 0, 0.8)';
+                sliderLabel.style.border = 'none';
+                sliderLabel.style.textShadow = '0 1px 2px rgba(255, 255, 255, 0.8)';
+                sliderLabel.style.padding = '0';
+                sliderLabel.style.borderRadius = '0';
+                sliderLabel.style.boxShadow = 'none';
+                console.log('Applied normal brightness styling to slider label');
+            }
         }
         
-        // Update slider value
-        if (isHighBrightness) {
-            this.brightnessValue.style.background = 'rgba(0, 0, 0, 0.8)';
-            this.brightnessValue.style.color = 'rgba(255, 255, 255, 0.95)';
-            this.brightnessValue.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
-        } else {
-            this.brightnessValue.style.background = 'rgba(255, 255, 255, 0.2)';
-            this.brightnessValue.style.color = 'rgba(0, 0, 0, 0.9)';
-            this.brightnessValue.style.textShadow = '0 1px 2px rgba(255, 255, 255, 0.8)';
+        // Update slider value - keep as clean text
+        if (this.brightnessValue) {
+            if (isHighBrightness) {
+                this.brightnessValue.style.background = 'none';
+                this.brightnessValue.style.color = 'rgba(0, 0, 0, 0.9)';
+                this.brightnessValue.style.textShadow = '0 1px 3px rgba(255, 255, 255, 0.9)';
+                this.brightnessValue.style.padding = '0';
+                this.brightnessValue.style.borderRadius = '0';
+                this.brightnessValue.style.boxShadow = 'none';
+                console.log('Applied high brightness styling to slider value');
+            } else {
+                this.brightnessValue.style.background = 'none';
+                this.brightnessValue.style.color = 'rgba(0, 0, 0, 0.8)';
+                this.brightnessValue.style.textShadow = '0 1px 2px rgba(255, 255, 255, 0.8)';
+                this.brightnessValue.style.padding = '0';
+                this.brightnessValue.style.borderRadius = '0';
+                this.brightnessValue.style.boxShadow = 'none';
+                console.log('Applied normal brightness styling to slider value');
+            }
         }
     }
     
