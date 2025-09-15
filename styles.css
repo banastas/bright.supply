@@ -131,32 +131,27 @@ main {
 
 .preset-btn {
     padding: var(--spacing-sm) var(--spacing-md);
-    background: rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: var(--button-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--border-radius-md);
-    color: rgba(0, 0, 0, 0.8);
+    color: var(--text-color);
     font-size: var(--font-size-small);
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     transition: all var(--slider-transition);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .preset-btn:hover {
-    background: rgba(0, 0, 0, 0.2);
-    color: rgba(0, 0, 0, 0.9);
+    background: var(--button-hover-bg);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
 }
 
 .preset-btn:active {
-    background: rgba(0, 0, 0, 0.3);
-    color: rgba(0, 0, 0, 1);
+    background: var(--button-active-bg);
     transform: translateY(0);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 1);
 }
 
 .preset-btn.active {
@@ -177,10 +172,9 @@ main {
 
 .slider-label {
     font-size: var(--font-size-small);
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: var(--spacing-sm);
-    color: rgba(0, 0, 0, 0.8);
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    opacity: 0.8;
 }
 
 .slider {
@@ -240,16 +234,10 @@ main {
 .slider-value {
     margin-top: var(--spacing-sm);
     font-size: var(--font-size-small);
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.9);
+    font-weight: 600;
+    opacity: 0.9;
     min-width: 3ch;
     text-align: center;
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.2);
-    padding: 2px 8px;
-    border-radius: 4px;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
 }
 
 /* Control Buttons */
@@ -261,32 +249,27 @@ main {
 
 .control-btn {
     padding: var(--spacing-sm) var(--spacing-md);
-    background: rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: var(--button-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--border-radius-md);
-    color: rgba(0, 0, 0, 0.8);
+    color: var(--text-color);
     font-size: var(--font-size-small);
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
     transition: all var(--slider-transition);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
 .control-btn:hover {
-    background: rgba(0, 0, 0, 0.2);
-    color: rgba(0, 0, 0, 0.9);
+    background: var(--button-hover-bg);
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
 }
 
 .control-btn:active {
-    background: rgba(0, 0, 0, 0.3);
-    color: rgba(0, 0, 0, 1);
+    background: var(--button-active-bg);
     transform: translateY(0);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 1);
 }
 
 /* Instructions */
