@@ -76,6 +76,12 @@ class BrightSupply {
         
         // Window resize
         window.addEventListener('resize', () => this.handleResize());
+        
+        // Orientation change
+        window.addEventListener('orientationchange', () => this.handleOrientationChange());
+        
+        // Touch events for better mobile interaction
+        this.setupTouchEvents();
     }
     
     updateBrightness() {
@@ -341,6 +347,49 @@ class BrightSupply {
     handleResize() {
         // Handle any resize-specific logic if needed
         this.updatePresetButtons();
+    }
+    
+    handleOrientationChange() {
+        // Delay to allow viewport to adjust
+        setTimeout(() => {
+            this.updatePresetButtons();
+            this.updateBrightness();
+        }, 100);
+    }
+    
+    setupTouchEvents() {
+        // Prevent double-tap zoom on buttons
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                button.click();
+            });
+        });
+        
+        // Improve slider touch interaction
+        this.brightnessSlider.addEventListener('touchstart', (e) => {
+            e.stopPropagation();
+        });
+        
+        this.brightnessSlider.addEventListener('touchend', (e) => {
+            e.stopPropagation();
+        });
+        
+        // Add haptic feedback for supported devices
+        this.addHapticFeedback();
+    }
+    
+    addHapticFeedback() {
+        // Add subtle haptic feedback for touch interactions
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+            button.addEventListener('touchstart', () => {
+                if (navigator.vibrate) {
+                    navigator.vibrate(10); // Very short vibration
+                }
+            });
+        });
     }
 }
 
