@@ -46,9 +46,6 @@ class BrightSupply {
         this.updateBrightness();
         this.hideInstructionsAfterDelay();
         this.updatePresetButtons();
-        // Apply initial styling
-        const percentage = Math.round((this.currentBrightness / 1000) * 100);
-        this.updateUIStyling(percentage);
     }
     
     setupEventListeners() {
@@ -97,9 +94,6 @@ class BrightSupply {
         // Update preset buttons
         this.updatePresetButtons();
         
-        // Update UI styling based on brightness level
-        this.updateUIStyling(percentage);
-        
         // Save settings
         this.saveSettings();
     }
@@ -120,72 +114,6 @@ class BrightSupply {
             button.classList.toggle('active', isActive);
             button.setAttribute('aria-pressed', isActive);
         });
-    }
-    
-    updateUIStyling(percentage) {
-        const isHighBrightness = percentage >= 76;
-        
-        // Toggle high brightness class on body
-        document.body.classList.toggle('high-brightness', isHighBrightness);
-        
-        // Update all preset buttons
-        Object.values(this.presetButtons).forEach(button => {
-            if (isHighBrightness) {
-                // High brightness styling - dark background with light text
-                button.style.background = 'rgba(0, 0, 0, 0.8)';
-                button.style.color = 'rgba(255, 255, 255, 0.95)';
-                button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                button.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
-            } else {
-                // Normal brightness styling - light background with dark text
-                button.style.background = 'rgba(255, 255, 255, 0.9)';
-                button.style.color = 'rgba(0, 0, 0, 0.9)';
-                button.style.borderColor = 'rgba(0, 0, 0, 0.3)';
-                button.style.textShadow = 'none';
-            }
-        });
-        
-        // Update control buttons
-        const controlButtons = [this.resetBtn, this.fullscreenBtn, this.phToggle];
-        controlButtons.forEach(button => {
-            if (isHighBrightness) {
-                // High brightness styling - dark background with light text
-                button.style.background = 'rgba(0, 0, 0, 0.8)';
-                button.style.color = 'rgba(255, 255, 255, 0.95)';
-                button.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-                button.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
-            } else {
-                // Normal brightness styling - light background with dark text
-                button.style.background = 'rgba(255, 255, 255, 0.9)';
-                button.style.color = 'rgba(0, 0, 0, 0.9)';
-                button.style.borderColor = 'rgba(0, 0, 0, 0.3)';
-                button.style.textShadow = 'none';
-            }
-        });
-        
-        // Update slider label
-        if (isHighBrightness) {
-            this.brightnessSlider.previousElementSibling.style.background = 'rgba(0, 0, 0, 0.8)';
-            this.brightnessSlider.previousElementSibling.style.color = 'rgba(255, 255, 255, 0.95)';
-            this.brightnessSlider.previousElementSibling.style.borderColor = 'rgba(255, 255, 255, 0.3)';
-            this.brightnessSlider.previousElementSibling.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
-        } else {
-            this.brightnessSlider.previousElementSibling.style.background = 'rgba(255, 255, 255, 0.95)';
-            this.brightnessSlider.previousElementSibling.style.color = 'rgba(0, 0, 0, 0.9)';
-            this.brightnessSlider.previousElementSibling.style.borderColor = 'rgba(0, 0, 0, 0.2)';
-            this.brightnessSlider.previousElementSibling.style.textShadow = 'none';
-        }
-        
-        // Update slider value
-        if (isHighBrightness) {
-            this.brightnessValue.style.background = 'rgba(0, 0, 0, 0.8)';
-            this.brightnessValue.style.color = 'rgba(255, 255, 255, 0.95)';
-            this.brightnessValue.style.textShadow = '0 1px 2px rgba(0, 0, 0, 0.8)';
-        } else {
-            this.brightnessValue.style.background = 'rgba(255, 255, 255, 0.2)';
-            this.brightnessValue.style.color = 'rgba(0, 0, 0, 0.9)';
-            this.brightnessValue.style.textShadow = '0 1px 2px rgba(255, 255, 255, 0.8)';
-        }
     }
     
     resetBrightness() {
