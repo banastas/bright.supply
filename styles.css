@@ -85,24 +85,6 @@ main {
     position: relative;
 }
 
-/* Product Hunt Badge */
-.product-hunt-badge {
-    position: fixed;
-    top: var(--spacing-lg);
-    right: var(--spacing-lg);
-    z-index: 1000;
-    opacity: 0.9;
-    transition: opacity var(--slider-transition);
-}
-
-.product-hunt-badge:hover {
-    opacity: 1;
-}
-
-.product-hunt-badge img {
-    border-radius: var(--border-radius-md);
-    box-shadow: var(--shadow-md);
-}
 
 /* Controls Container */
 .controls-container {

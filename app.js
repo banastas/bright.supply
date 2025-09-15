@@ -8,7 +8,6 @@ class BrightSupply {
         this.brightnessSlider = document.getElementById('brightness');
         this.brightnessValue = document.getElementById('brightness-value');
         this.instructions = document.getElementById('instructions');
-        this.phBadge = document.getElementById('product-hunt-badge');
         
         // Preset buttons
         this.presetButtons = {
@@ -21,13 +20,11 @@ class BrightSupply {
         // Control buttons
         this.resetBtn = document.getElementById('reset-btn');
         this.fullscreenBtn = document.getElementById('fullscreen-btn');
-        this.phToggle = document.getElementById('ph-toggle');
         
         // State
         this.currentBrightness = 1000;
         this.previousBrightness = 1000;
         this.isFullscreen = false;
-        this.isPhBadgeVisible = false;
         
         // Preset values
         this.presets = {
@@ -64,7 +61,6 @@ class BrightSupply {
         // Control buttons
         this.resetBtn.addEventListener('click', () => this.resetBrightness());
         this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
-        this.phToggle.addEventListener('click', () => this.togglePhBadge());
         
         // Keyboard shortcuts
         document.addEventListener('keydown', (e) => this.handleKeydown(e));
@@ -126,11 +122,14 @@ class BrightSupply {
         const isHighBrightness = percentage >= 76;
         const darkColor = 'rgba(0, 0, 0, 0.9)';
         const lightColor = 'rgba(255, 255, 255, 0.8)';
+        const darkBorderColor = 'rgba(0, 0, 0, 0.4)';
+        const lightBorderColor = 'rgba(255, 255, 255, 0.2)';
         
-        // Update unselected preset buttons text color
+        // Update unselected preset buttons text color and border
         Object.values(this.presetButtons).forEach(button => {
             if (!button.classList.contains('active')) {
                 button.style.color = isHighBrightness ? darkColor : lightColor;
+                button.style.borderColor = isHighBrightness ? darkBorderColor : lightBorderColor;
             }
         });
         
@@ -139,6 +138,19 @@ class BrightSupply {
         if (sliderLabel) {
             sliderLabel.style.color = isHighBrightness ? darkColor : lightColor;
         }
+        
+        // Update percentage marker text color
+        if (this.brightnessValue) {
+            this.brightnessValue.style.color = isHighBrightness ? darkColor : lightColor;
+        }
+        
+        // Update control buttons text color
+        const controlButtons = [this.resetBtn, this.fullscreenBtn];
+        controlButtons.forEach(button => {
+            if (button) {
+                button.style.color = isHighBrightness ? darkColor : lightColor;
+            }
+        });
     }
     
     resetBrightness() {
@@ -195,12 +207,6 @@ class BrightSupply {
         );
     }
     
-    togglePhBadge() {
-        this.isPhBadgeVisible = !this.isPhBadgeVisible;
-        this.phBadge.style.display = this.isPhBadgeVisible ? 'block' : 'none';
-        this.phToggle.textContent = this.isPhBadgeVisible ? 'Hide PH' : 'Show PH';
-        this.phToggle.setAttribute('aria-pressed', this.isPhBadgeVisible);
-    }
     
     handleKeydown(e) {
         // Prevent default for our shortcuts
@@ -308,10 +314,6 @@ class BrightSupply {
             if (saved) {
                 const settings = JSON.parse(saved);
                 this.brightnessSlider.value = settings.brightness || 1000;
-                this.isPhBadgeVisible = settings.showPhBadge || false;
-                this.phBadge.style.display = this.isPhBadgeVisible ? 'block' : 'none';
-                this.phToggle.textContent = this.isPhBadgeVisible ? 'Hide PH' : 'Show PH';
-                this.phToggle.setAttribute('aria-pressed', this.isPhBadgeVisible);
             }
         } catch (e) {
             console.warn('Could not load settings:', e);
@@ -322,7 +324,6 @@ class BrightSupply {
         try {
             const settings = {
                 brightness: this.currentBrightness,
-                showPhBadge: this.isPhBadgeVisible,
                 timestamp: Date.now()
             };
             localStorage.setItem('brightSupplySettings', JSON.stringify(settings));
