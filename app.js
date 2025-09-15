@@ -46,6 +46,9 @@ class BrightSupply {
         this.updateBrightness();
         this.hideInstructionsAfterDelay();
         this.updatePresetButtons();
+        // Apply initial text colors
+        const percentage = Math.round((this.currentBrightness / 1000) * 100);
+        this.updateTextColors(percentage);
     }
     
     setupEventListeners() {
@@ -94,6 +97,9 @@ class BrightSupply {
         // Update preset buttons
         this.updatePresetButtons();
         
+        // Update text colors for high brightness
+        this.updateTextColors(percentage);
+        
         // Save settings
         this.saveSettings();
     }
@@ -114,6 +120,25 @@ class BrightSupply {
             button.classList.toggle('active', isActive);
             button.setAttribute('aria-pressed', isActive);
         });
+    }
+    
+    updateTextColors(percentage) {
+        const isHighBrightness = percentage >= 76;
+        const darkColor = 'rgba(0, 0, 0, 0.9)';
+        const lightColor = 'rgba(255, 255, 255, 0.8)';
+        
+        // Update unselected preset buttons text color
+        Object.values(this.presetButtons).forEach(button => {
+            if (!button.classList.contains('active')) {
+                button.style.color = isHighBrightness ? darkColor : lightColor;
+            }
+        });
+        
+        // Update "Brightness" label text color
+        const sliderLabel = document.querySelector('.slider-label');
+        if (sliderLabel) {
+            sliderLabel.style.color = isHighBrightness ? darkColor : lightColor;
+        }
     }
     
     resetBrightness() {
