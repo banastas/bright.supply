@@ -13,108 +13,65 @@ info@bright.supply
 Made in California w/ ❤️ by https://banast.as
 -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
-    <title>bright.supply - Lightbox for Video Calls</title>
-    <link rel="shortcut icon" href="assets/images/bright.supply.png">
-    <link rel="icon" type="image/png" href="assets/images/bright.supply.png">
-    <link rel="apple-touch-icon" href="assets/images/bright.supply.png">
-    <link rel="manifest" href="manifest.json">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels for better lighting.">
-    <meta name="keywords" content="lightbox, video calls, lighting, webcam, video conferencing, brightness, monitor, light">
-    <meta name="author" content="banastas">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Theme Colors -->
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fccd03">
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#fccd03">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://bright.supply/">
-    <meta property="og:title" content="bright.supply - Lightbox for Video Calls">
-    <meta property="og:description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.">
-    <meta property="og:image" content="https://bright.supply/assets/images/bright.supply.png">
-    <meta property="og:site_name" content="bright.supply">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://bright.supply/">
-    <meta name="twitter:title" content="bright.supply - Lightbox for Video Calls">
-    <meta name="twitter:description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.">
-    <meta name="twitter:image" content="https://bright.supply/assets/images/bright.supply.png">
-    <meta name="twitter:creator" content="@banastas">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="assets/images/bright.supply.png" as="image">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>bright.supply - Lightbox for Video Calls</title>
+<link rel="shortcut icon" href="assets/images/bright.supply.png">
+<link rel="icon" type="image/png" href="assets/images/bright.supply.png">
+<link rel="apple-touch-icon" href="assets/images/bright.supply.png">
+<link rel="manifest" href="manifest.json">
+<meta name="description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels for better lighting.">
+<meta name="keywords" content="lightbox, video calls, lighting, webcam, video conferencing, brightness, monitor, light">
+<meta name="author" content="banastas">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fccd03">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#fccd03">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bright.supply/">
+<meta property="og:title" content="bright.supply - Lightbox for Video Calls">
+<meta property="og:description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.">
+<meta property="og:image" content="https://bright.supply/assets/images/bright.supply.png">
+<meta property="og:site_name" content="bright.supply">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://bright.supply/">
+<meta name="twitter:title" content="bright.supply - Lightbox for Video Calls">
+<meta name="twitter:description" content="Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.">
+<meta name="twitter:image" content="https://bright.supply/assets/images/bright.supply.png">
+<meta name="twitter:creator" content="@banastas">
+<link rel="preload" href="styles.css" as="style">
+<link rel="preload" href="assets/images/bright.supply.png" as="image">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Main Content -->
-    <main role="main" aria-label="Brightness control interface">
-        
-        <!-- Controls Container -->
-        <div class="controls-container" role="region" aria-label="Brightness controls">
-            <!-- Preset Buttons -->
-            <div class="preset-buttons" role="group" aria-label="Brightness presets">
-                <button id="preset-low" class="preset-btn" aria-label="Set to low brightness">Low</button>
-                <button id="preset-medium" class="preset-btn" aria-label="Set to medium brightness">Medium</button>
-                <button id="preset-high" class="preset-btn" aria-label="Set to high brightness">High</button>
-                <button id="preset-max" class="preset-btn" aria-label="Set to maximum brightness">Max</button>
-            </div>
-            
-            <!-- Brightness Slider -->
-            <div class="slider-container">
-                <label for="brightness" class="slider-label">Brightness</label>
-                <input 
-                    type="range" 
-                    id="brightness" 
-                    value="750" 
-                    min="0" 
-                    max="1000" 
-                    class="slider" 
-                    aria-label="Adjust brightness level"
-                    aria-valuemin="0"
-                    aria-valuemax="1000"
-                    aria-valuenow="750"
-                >
-                <div class="slider-value" id="brightness-value" aria-live="polite">75%</div>
-            </div>
-            
-            <!-- Control Buttons -->
-            <div class="control-buttons" role="group" aria-label="Additional controls">
-                <button id="reset-btn" class="control-btn" aria-label="Reset to maximum brightness">Reset</button>
-                <button id="fullscreen-btn" class="control-btn" aria-label="Toggle fullscreen mode">Fullscreen</button>
-            </div>
-        </div>
-        
-        <!-- Instructions -->
-        <div class="instructions" id="instructions" aria-live="polite">
-            <p>Use the slider or arrow keys to adjust brightness. Press <kbd>F</kbd> for fullscreen, <kbd>R</kbd> to reset.</p>
-        </div>
-    </main>
-    
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then((registration) => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch((registrationError) => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-    </script>
-    
-    <!-- Main Application Script -->
-    <script src="app.js"></script>
+<main role="main" aria-label="Brightness control interface">
+<div class="controls-container" role="region" aria-label="Brightness controls">
+<div class="preset-buttons" role="group" aria-label="Brightness presets">
+<button id="preset-low" class="preset-btn" aria-label="Set to low brightness">Low</button>
+<button id="preset-medium" class="preset-btn" aria-label="Set to medium brightness">Medium</button>
+ <button id="preset-high" class="preset-btn" aria-label="Set to high brightness">High</button>
+<button id="preset-max" class="preset-btn" aria-label="Set to maximum brightness">Max</button>
+</div>
+<div class="slider-container">
+<label for="brightness" class="slider-label">Brightness</label>
+<input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Adjust brightness level" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
+<div class="slider-value" id="brightness-value" aria-live="polite">75%</div>
+</div>
+<div class="control-buttons" role="group" aria-label="Additional controls">
+<button id="reset-btn" class="control-btn" aria-label="Reset to maximum brightness">Reset</button>
+<button id="fullscreen-btn" class="control-btn" aria-label="Toggle fullscreen mode">Fullscreen</button>
+</div>
+</div>
+<div class="instructions" id="instructions" aria-live="polite"><p>Use the slider or arrow keys to adjust brightness. Press <kbd>F</kbd> for fullscreen, <kbd>R</kbd> to reset.</p></div>
+</main>
+<script>
+if ('serviceWorker' in navigator) {
+window.addEventListener('load', () => {
+navigator.serviceWorker.register('/sw.js')
+.then((registration) => { console.log('SW registered: ', registration); })
+.catch((registrationError) => { console.log('SW registration failed: ', registrationError); });
+});
+}
+</script>
+<script src="app.js"></script>
 </body>
 </html>
