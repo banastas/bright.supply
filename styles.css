@@ -403,6 +403,35 @@ main {
     }
 }
 
+/* High Brightness Mode */
+body.high-brightness .preset-btn:not(.active),
+body.high-brightness .control-btn {
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.high-brightness .preset-btn:not(.active):hover,
+body.high-brightness .control-btn:hover {
+    background: rgba(0, 0, 0, 0.9) !important;
+    color: rgba(255, 255, 255, 1) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+body.high-brightness .slider-label {
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+body.high-brightness .slider-value {
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
 /* Print Styles */
 @media print {
     .controls-container,
