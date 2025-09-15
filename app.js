@@ -22,8 +22,8 @@ class BrightSupply {
         this.fullscreenBtn = document.getElementById('fullscreen-btn');
         
         // State
-        this.currentBrightness = 1000;
-        this.previousBrightness = 1000;
+        this.currentBrightness = 750;
+        this.previousBrightness = 750;
         this.isFullscreen = false;
         
         // Preset values
@@ -313,7 +313,7 @@ class BrightSupply {
             const saved = localStorage.getItem('brightSupplySettings');
             if (saved) {
                 const settings = JSON.parse(saved);
-                this.brightnessSlider.value = settings.brightness || 1000;
+                this.brightnessSlider.value = settings.brightness || 750;
             }
         } catch (e) {
             console.warn('Could not load settings:', e);
