@@ -131,35 +131,34 @@ main {
 
 .preset-btn {
     padding: var(--spacing-sm) var(--spacing-md);
-    background: rgba(0, 0, 0, 0.25);
-    border: 2px solid rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: var(--border-radius-md);
-    color: rgba(0, 0, 0, 0.95);
+    color: rgba(0, 0, 0, 0.9);
     font-size: var(--font-size-small);
     font-weight: 700;
     cursor: pointer;
     transition: all var(--slider-transition);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .preset-btn:hover {
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(255, 255, 255, 1);
     color: rgba(0, 0, 0, 1);
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 1);
-    border-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.4);
 }
 
 .preset-btn:active {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(240, 240, 240, 1);
     color: rgba(0, 0, 0, 1);
     transform: translateY(0);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 1);
-    border-color: rgba(0, 0, 0, 0.6);
+    border-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .preset-btn.active {
@@ -182,15 +181,15 @@ main {
     font-size: var(--font-size-small);
     font-weight: 800;
     margin-bottom: var(--spacing-sm);
-    color: rgba(0, 0, 0, 0.95);
-    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.9);
-    background: rgba(255, 255, 255, 0.3);
-    padding: 4px 12px;
-    border-radius: 6px;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.9);
+    text-shadow: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 6px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .slider {
@@ -271,35 +270,34 @@ main {
 
 .control-btn {
     padding: var(--spacing-sm) var(--spacing-md);
-    background: rgba(0, 0, 0, 0.25);
-    border: 2px solid rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid rgba(0, 0, 0, 0.3);
     border-radius: var(--border-radius-md);
-    color: rgba(0, 0, 0, 0.95);
+    color: rgba(0, 0, 0, 0.9);
     font-size: var(--font-size-small);
     font-weight: 700;
     cursor: pointer;
     transition: all var(--slider-transition);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-shadow: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .control-btn:hover {
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(255, 255, 255, 1);
     color: rgba(0, 0, 0, 1);
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 1);
-    border-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.4);
 }
 
 .control-btn:active {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(240, 240, 240, 1);
     color: rgba(0, 0, 0, 1);
     transform: translateY(0);
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 1);
-    border-color: rgba(0, 0, 0, 0.6);
+    border-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Instructions */
