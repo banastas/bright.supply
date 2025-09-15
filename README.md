@@ -1,10 +1,8 @@
 # bright.supply 💡
 
-<img src="https://github.com/banastas/bright.supply/blob/main/assets/images/readme.png?raw=true" alt="bright.supply - Lightbox for video calls" width="800">
+<img src="https://github.com/banastas/bright.supply/blob/main/assets/images/readme.png?raw=true" alt="bright.supply - Lightbox for video calls">
 
 **Use your 2nd monitor as a lightbox for video calls.**
-
-[![Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=283141&theme=light)](https://www.producthunt.com/posts/bright-supply?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bright-supply)
 
 ## ✨ Features
 
