@@ -122,7 +122,7 @@ main {
 .preset-buttons {
     display: flex;
     gap: var(--spacing-sm);
-    margin-bottom: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
     position: fixed;
     bottom: var(--preset-bottom);
     left: 50%;
@@ -174,23 +174,22 @@ main {
     align-items: center;
     width: 100%;
     max-width: 500px;
-    margin-bottom: var(--spacing-xl);
-    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
 }
 
 .slider-label {
     font-size: var(--font-size-small);
-    font-weight: 600;
-    margin-bottom: 0;
-    color: rgba(0, 0, 0, 0.8);
-    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    background: none;
-    padding: 0;
-    border-radius: 0;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
-    box-shadow: none;
+    font-weight: 800;
+    margin-bottom: var(--spacing-sm);
+    color: rgba(0, 0, 0, 0.9);
+    text-shadow: none;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 6px 16px;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .slider {
@@ -250,23 +249,23 @@ main {
 .slider-value {
     margin-top: var(--spacing-sm);
     font-size: var(--font-size-small);
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.8);
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.9);
     min-width: 3ch;
     text-align: center;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
-    background: none;
-    padding: 0;
-    border-radius: 0;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 /* Control Buttons */
 .control-buttons {
     display: flex;
     gap: var(--spacing-sm);
-    margin-top: var(--spacing-lg);
+    margin-top: var(--spacing-sm);
 }
 
 .control-btn {
@@ -404,20 +403,8 @@ main {
     }
 }
 
-/* High Brightness Mode - More specific selectors */
-body.high-brightness .preset-btn:not(.active) {
-    background: rgba(0, 0, 0, 0.8) !important;
-    color: rgba(255, 255, 255, 0.95) !important;
-    border-color: rgba(255, 255, 255, 0.3) !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
-}
-
-body.high-brightness .preset-btn:not(.active):hover {
-    background: rgba(0, 0, 0, 0.9) !important;
-    color: rgba(255, 255, 255, 1) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
-}
-
+/* High Brightness Mode */
+body.high-brightness .preset-btn:not(.active),
 body.high-brightness .control-btn {
     background: rgba(0, 0, 0, 0.8) !important;
     color: rgba(255, 255, 255, 0.95) !important;
@@ -425,6 +412,7 @@ body.high-brightness .control-btn {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
 }
 
+body.high-brightness .preset-btn:not(.active):hover,
 body.high-brightness .control-btn:hover {
     background: rgba(0, 0, 0, 0.9) !important;
     color: rgba(255, 255, 255, 1) !important;
@@ -432,22 +420,16 @@ body.high-brightness .control-btn:hover {
 }
 
 body.high-brightness .slider-label {
-    background: none !important;
-    color: rgba(0, 0, 0, 0.9) !important;
-    border: none !important;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
 }
 
 body.high-brightness .slider-value {
-    background: none !important;
-    color: rgba(0, 0, 0, 0.9) !important;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+    background: rgba(0, 0, 0, 0.8) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Print Styles */
