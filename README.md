@@ -1,5 +1,11 @@
 # bright.supply 💡
 
+[![Live Site](https://img.shields.io/badge/Live-bright.supply-00d9ff?style=for-the-badge)](https://bright.supply)
+[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen?style=for-the-badge)](https://github.com/banastas/bright.supply)
+[![Vanilla JS](https://img.shields.io/badge/Vanilla-JavaScript-f7df1e?style=for-the-badge&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![PWA Ready](https://img.shields.io/badge/PWA-Ready-5a0fc8?style=for-the-badge&logo=pwa)](https://web.dev/progressive-web-apps/)
+[![MIT License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+
 <img src="https://github.com/banastas/bright.supply/blob/main/assets/images/readme.png?raw=true" alt="bright.supply - Lightbox for video calls">
 
 **Use your 2nd monitor as a lightbox for video calls.**
