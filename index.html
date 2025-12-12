@@ -52,25 +52,52 @@ Made in California w/ ❤️ by https://banast.as
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<header class="branding" id="branding" aria-label="Site branding">
+<span class="brand-icon">☀</span>
+<span class="brand-name">bright.supply</span>
+</header>
 <main role="main" aria-label="Brightness control interface">
 <div class="controls-container" role="region" aria-label="Brightness controls">
+<div class="slider-container">
+<div class="slider-label-row">
+<label for="brightness" class="slider-label">Brightness</label>
+<span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
+</div>
+<input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Adjust brightness level" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
+</div>
 <div class="preset-buttons" role="group" aria-label="Brightness presets">
 <button id="preset-low" class="preset-btn" aria-label="Set to low brightness">Low</button>
 <button id="preset-medium" class="preset-btn" aria-label="Set to medium brightness">Medium</button>
- <button id="preset-high" class="preset-btn" aria-label="Set to high brightness">High</button>
+<button id="preset-high" class="preset-btn" aria-label="Set to high brightness">High</button>
 <button id="preset-max" class="preset-btn" aria-label="Set to maximum brightness">Max</button>
 </div>
-<div class="slider-container">
-<label for="brightness" class="slider-label">Brightness</label>
-<input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Adjust brightness level" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
-<div class="slider-value" id="brightness-value" aria-live="polite">75%</div>
+<div class="slider-container temperature-container">
+<label for="temperature" class="slider-label">Temperature</label>
+<div class="temperature-labels">
+<span class="temp-label temp-cool">Cool</span>
+<span class="temp-label temp-warm">Warm</span>
+</div>
+<input type="range" id="temperature" value="50" min="0" max="100" class="slider temperature-slider" aria-label="Adjust color temperature" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
 </div>
 <div class="control-buttons" role="group" aria-label="Additional controls">
 <button id="reset-btn" class="control-btn" aria-label="Reset to maximum brightness">Reset</button>
 <button id="fullscreen-btn" class="control-btn" aria-label="Toggle fullscreen mode">Fullscreen</button>
 </div>
 </div>
-<div class="instructions" id="instructions" aria-live="polite"><p>Use the slider or arrow keys to adjust brightness. Press <kbd>F</kbd> for fullscreen, <kbd>R</kbd> to reset.</p></div>
+<button class="help-toggle" id="help-toggle" aria-label="Show keyboard shortcuts" aria-expanded="false">
+<span class="help-icon">?</span>
+</button>
+<div class="instructions" id="instructions" aria-live="polite">
+<div class="instructions-header">Keyboard Shortcuts</div>
+<div class="instructions-grid">
+<div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Adjust brightness</span></div>
+<div class="shortcut"><kbd>F</kbd><span>Fullscreen</span></div>
+<div class="shortcut"><kbd>R</kbd><span>Reset</span></div>
+<div class="shortcut"><kbd>H</kbd><span>Hide help</span></div>
+<div class="shortcut"><kbd>Space</kbd><span>Toggle previous</span></div>
+<div class="shortcut"><kbd>1</kbd>-<kbd>4</kbd><span>Presets</span></div>
+</div>
+</div>
 </main>
 <script>
 if ('serviceWorker' in navigator) {
