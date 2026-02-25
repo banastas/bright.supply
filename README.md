@@ -1,7 +1,6 @@
-# bright.supply 💡
+# bright.supply
 
 [![Live Site](https://img.shields.io/badge/Live-bright.supply-00d9ff?style=for-the-badge)](https://bright.supply)
-[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen?style=for-the-badge)](https://github.com/banastas/bright.supply)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla-JavaScript-f7df1e?style=for-the-badge&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![PWA Ready](https://img.shields.io/badge/PWA-Ready-5a0fc8?style=for-the-badge&logo=pwa)](https://web.dev/progressive-web-apps/)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
@@ -10,108 +9,111 @@
 
 **Use your 2nd monitor as a lightbox for video calls.**
 
-## ✨ Features
+A lightweight PWA that turns any screen into an adjustable light source for video conferencing, content creation, and photography. No dependencies, no install required — just open it in your browser.
 
-- **Adjustable brightness** - Fine-tune the light intensity with a smooth slider
-- **Full-screen lightbox** - Covers your entire second monitor
-- **Keyboard shortcuts** - Use arrow keys for quick adjustments
-- **Preset levels** - Quick access to common brightness settings
-- **Settings persistence** - Remembers your preferences
-- **Responsive design** - Works on any screen size
-- **Zero installation** - Just open in your browser
-- **PWA ready** - Install as a desktop app
+## Features
 
-## 🚀 How to Use
+- **Adjustable brightness** — Fine-tune light intensity from 0-100% with a smooth slider
+- **Color temperature** — Shift from cool (blue-white) to warm (amber) to match your environment
+- **Preset levels** — One-click access to Low, Medium, High, and Max brightness
+- **Fullscreen mode** — Maximize light output across your entire screen
+- **Keyboard shortcuts** — Full keyboard control for quick adjustments
+- **Settings persistence** — Remembers your brightness and temperature preferences
+- **PWA ready** — Install as a standalone desktop or mobile app
+- **Accessible** — Full keyboard navigation, ARIA labels, and screen reader support
+- **Zero dependencies** — Pure HTML, CSS, and vanilla JavaScript
 
-1. **Open** [bright.supply](https://bright.supply) in your second monitor
-2. **Adjust** the brightness slider at the bottom
-3. **Position** your camera to capture the light
-4. **Enjoy** better lighting for your video calls!
+## How to Use
+
+1. **Open** [bright.supply](https://bright.supply) on your second monitor
+2. **Adjust** brightness and color temperature using the sliders
+3. **Go fullscreen** for maximum light output
+4. **Position** your camera to capture the light
+5. **Look great** on your next video call
 
 ### Keyboard Shortcuts
 
-- `←` / `→` - Decrease/Increase brightness
-- `Space` - Toggle between current and previous brightness
-- `R` - Reset to maximum brightness
-- `F` - Toggle fullscreen mode
+| Key | Action |
+|-----|--------|
+| `←` / `→` | Decrease / increase brightness by 5% |
+| `Space` | Toggle between current and previous brightness |
+| `R` | Reset to defaults (75% brightness, neutral temperature) |
+| `F` | Toggle fullscreen |
+| `H` | Toggle help panel |
+| `1` - `4` | Quick presets (Low, Medium, High, Max) |
 
 ### Preset Levels
 
-- **Low** - Subtle fill light
-- **Medium** - Balanced lighting
-- **High** - Bright key light
-- **Max** - Maximum brightness
+| Preset | Brightness | Best for |
+|--------|-----------|----------|
+| **Low** | 20% | Subtle fill light in dark rooms |
+| **Medium** | 50% | Balanced, general-purpose lighting |
+| **High** | 75% | Bright key light for calls |
+| **Max** | 100% | Maximum brightness output |
 
-## 🎯 Use Cases
+## Use Cases
 
-- **Video conferencing** - Improve your appearance on Zoom, Teams, Meet
-- **Content creation** - Better lighting for streaming and recording
-- **Photography** - Use as a softbox for product photos
-- **Presentations** - Eliminate shadows and improve visibility
+- **Video conferencing** — Look better on Zoom, Teams, Meet, and WebEx
+- **Content creation** — Better lighting for streaming, recording, and podcasting
+- **Photography** — Softbox alternative for product photos and flat-lays
+- **Presentations** — Eliminate shadows for interviews, webinars, and online teaching
 
-## 🛠️ Technical Details
+## Technical Details
 
-- **Pure HTML/CSS/JavaScript** - No dependencies required
-- **Progressive Web App** - Installable on desktop and mobile
-- **Accessible** - Full keyboard navigation and screen reader support
-- **Cross-platform** - Works on Windows, macOS, and Linux
-- **Modern browsers** - Chrome, Firefox, Safari, Edge
+- **Pure HTML/CSS/JavaScript** — No frameworks, no build step, no dependencies
+- **Progressive Web App** — Installable on desktop and mobile, works offline
+- **Accessible** — WCAG-friendly with full keyboard navigation and screen reader support
+- **Cross-platform** — Works on Windows, macOS, Linux, iOS, and Android
+- **Lightweight** — ~40KB total page weight (~15KB gzipped)
 
-## 🌐 Browser Compatibility
+## Browser Compatibility
 
 | Browser | Version | Status |
 |---------|---------|--------|
-| Chrome | 60+ | ✅ |
-| Firefox | 55+ | ✅ |
-| Safari | 12+ | ✅ |
-| Edge | 79+ | ✅ |
+| Chrome | 60+ | Supported |
+| Firefox | 55+ | Supported |
+| Safari | 12+ | Supported |
+| Edge | 79+ | Supported |
 
-## 📱 Installation
+## Installation
 
-### As a Web App
+### As a Web App (PWA)
 1. Visit [bright.supply](https://bright.supply)
-2. Click the install button in your browser
-3. Launch from your desktop/app drawer
+2. Click the install prompt in your browser's address bar
+3. Launch from your desktop or app drawer
 
 ### As a Bookmark
 1. Bookmark [bright.supply](https://bright.supply)
-2. Open in your second monitor
-3. Use as needed for video calls
+2. Open on your second monitor when needed
 
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help:
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
-
-### Development Setup
+## Development
 
 ```bash
-# Clone the repository
 git clone https://github.com/banastas/bright.supply.git
-
-# Navigate to the project
 cd bright.supply
 
-# Open in your browser
-open index.html
+# No dependencies to install — just start a local server
+python3 -m http.server 8000
+# or
+npx http-server -p 8000
+# or just open index.html directly
 ```
 
-## 📄 License
+## Contributing
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/your-feature`)
+3. **Commit** your changes
+4. **Push** to the branch
+5. **Open** a Pull Request
 
-## 🙏 Acknowledgments
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
-- Made with ❤️ in California
-- Inspired by the need for better video call lighting
-- Thanks to all contributors and users
+## License
 
-## 📞 Support
+MIT License — see [LICENSE](LICENSE) for details.
+
+## Support
 
 - **Website**: [bright.supply](https://bright.supply)
 - **Email**: info@bright.supply
