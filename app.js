@@ -28,7 +28,7 @@ class BrightSupply {
 
         // State
         this.currentBrightness = 750;
-        this.previousBrightness = 750;
+        this.previousBrightness = 0;
         this.currentTemperature = 50;
         this.isFullscreen = false;
         this.isHelpVisible = false;
@@ -58,10 +58,7 @@ class BrightSupply {
     
     setupEventListeners() {
         // Brightness slider
-        this.brightnessSlider.addEventListener('input', () => {
-            this.updateBrightness();
-            this.updateSliderFill();
-        });
+        this.brightnessSlider.addEventListener('input', () => this.updateBrightness());
         this.brightnessSlider.addEventListener('change', () => this.saveSettings());
 
         // Temperature slider
@@ -92,12 +89,6 @@ class BrightSupply {
         // Visibility change (for persistence)
         document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
         
-        // Window resize
-        window.addEventListener('resize', () => this.handleResize());
-        
-        // Orientation change
-        window.addEventListener('orientationchange', () => this.handleOrientationChange());
-        
         // Touch events for better mobile interaction
         this.setupTouchEvents();
     }
@@ -125,17 +116,17 @@ class BrightSupply {
 
         // Update text colors for high brightness
         this.updateTextColors(percentage);
-
-        // Save settings
-        this.saveSettings();
     }
 
     updateTemperature() {
         this.currentTemperature = parseInt(this.temperatureSlider.value);
         this.temperatureSlider.setAttribute('aria-valuenow', this.currentTemperature);
 
-        // Re-apply brightness with new temperature
-        this.updateBrightness();
+        // Re-apply background with new temperature
+        const percentage = Math.round((this.currentBrightness / 1000) * 100);
+        const tempColor = this.getTemperatureColor();
+        const opacity = (1000 - this.currentBrightness) / 1000;
+        document.body.style.background = `linear-gradient(rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, ${opacity})), ${tempColor}`;
     }
 
     getTemperatureColor() {
@@ -168,7 +159,7 @@ class BrightSupply {
         const value = this.presets[preset];
         this.brightnessSlider.value = value;
         this.updateBrightness();
-        this.updateSliderFill();
+        this.saveSettings();
         this.showFeedback(`Set to ${preset} brightness`);
     }
     
@@ -244,6 +235,7 @@ class BrightSupply {
         this.temperatureSlider.value = 50;
         this.currentTemperature = 50;
         this.updateBrightness();
+        this.saveSettings();
         this.showFeedback('Reset to defaults');
     }
     
@@ -341,15 +333,17 @@ class BrightSupply {
         const newValue = Math.max(0, Math.min(1000, this.currentBrightness + delta));
         this.brightnessSlider.value = newValue;
         this.updateBrightness();
+        this.saveSettings();
     }
     
     toggleBrightness() {
         const temp = this.currentBrightness;
         this.currentBrightness = this.previousBrightness;
         this.previousBrightness = temp;
-        
+
         this.brightnessSlider.value = this.currentBrightness;
         this.updateBrightness();
+        this.saveSettings();
         this.showFeedback('Toggled brightness');
     }
     
@@ -361,7 +355,10 @@ class BrightSupply {
     }
     
     showFeedback(message) {
-        // Create or update feedback element
+        // Clear any pending fade/removal
+        if (this._feedbackTimer) clearTimeout(this._feedbackTimer);
+        if (this._feedbackRemoveTimer) clearTimeout(this._feedbackRemoveTimer);
+
         let feedback = document.getElementById('feedback');
         if (!feedback) {
             feedback = document.createElement('div');
@@ -382,12 +379,15 @@ class BrightSupply {
             `;
             document.body.appendChild(feedback);
         }
-        
+
         feedback.textContent = message;
         feedback.style.opacity = '1';
-        
-        setTimeout(() => {
+
+        this._feedbackTimer = setTimeout(() => {
             feedback.style.opacity = '0';
+            this._feedbackRemoveTimer = setTimeout(() => {
+                feedback.remove();
+            }, 300);
         }, 2000);
     }
     
@@ -410,8 +410,7 @@ class BrightSupply {
         try {
             const settings = {
                 brightness: this.currentBrightness,
-                temperature: this.currentTemperature,
-                timestamp: Date.now()
+                temperature: this.currentTemperature
             };
             localStorage.setItem('brightSupplySettings', JSON.stringify(settings));
         } catch (e) {
@@ -425,49 +424,12 @@ class BrightSupply {
         }
     }
     
-    handleResize() {
-        // Handle any resize-specific logic if needed
-        this.updatePresetButtons();
-    }
-    
-    handleOrientationChange() {
-        // Delay to allow viewport to adjust
-        setTimeout(() => {
-            this.updatePresetButtons();
-            this.updateBrightness();
-        }, 100);
-    }
-    
     setupTouchEvents() {
-        // Prevent double-tap zoom on buttons
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            button.addEventListener('touchend', (e) => {
-                e.preventDefault();
-                button.click();
-            });
-        });
-        
-        // Improve slider touch interaction
-        this.brightnessSlider.addEventListener('touchstart', (e) => {
-            e.stopPropagation();
-        });
-        
-        this.brightnessSlider.addEventListener('touchend', (e) => {
-            e.stopPropagation();
-        });
-        
-        // Add haptic feedback for supported devices
-        this.addHapticFeedback();
-    }
-    
-    addHapticFeedback() {
-        // Add subtle haptic feedback for touch interactions
-        const buttons = document.querySelectorAll('button');
-        buttons.forEach(button => {
-            button.addEventListener('touchstart', () => {
+        // Haptic feedback for supported devices
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('pointerdown', () => {
                 if (navigator.vibrate) {
-                    navigator.vibrate(10); // Very short vibration
+                    navigator.vibrate(10);
                 }
             });
         });
@@ -487,7 +449,3 @@ window.addEventListener('beforeunload', () => {
     }
 });
 
-// Export for potential module use
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = BrightSupply;
-}

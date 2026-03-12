@@ -68,12 +68,8 @@ body {
     overflow: hidden;
     user-select: none;
     -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     /* Prevent pull-to-refresh on mobile */
     overscroll-behavior: none;
-    /* Improve touch scrolling */
-    -webkit-overflow-scrolling: touch;
 }
 
 /* Main Content */
@@ -139,13 +135,9 @@ main {
 @media (max-width: 768px) {
     .preset-btn,
     .control-btn {
-        /* Improve touch responsiveness */
         -webkit-tap-highlight-color: transparent;
         touch-action: manipulation;
-        /* Prevent text selection on touch */
         -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
         user-select: none;
     }
     
@@ -307,20 +299,6 @@ main {
 @media (max-width: 1024px) {
     .slider-container {
         max-width: 600px;
-    }
-    
-    .preset-buttons {
-        gap: var(--spacing-sm);
-    }
-    
-    .preset-btn {
-        padding: var(--spacing-sm) var(--spacing-md);
-        font-size: var(--font-size-small);
-    }
-    
-    .control-btn {
-        padding: var(--spacing-sm) var(--spacing-md);
-        font-size: var(--font-size-small);
     }
 }
 
@@ -530,8 +508,7 @@ main {
 /* Print Styles */
 @media print {
     .controls-container,
-    .instructions,
-    .product-hunt-badge {
+    .instructions {
         display: none !important;
     }
 

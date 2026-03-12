@@ -43,7 +43,7 @@
       "url": "/?preset=low",
       "icons": [
         {
-          "src": "bright.supply.png",
+          "src": "assets/images/bright.supply.png",
           "sizes": "96x96"
         }
       ]
@@ -55,7 +55,7 @@
       "url": "/?preset=medium",
       "icons": [
         {
-          "src": "bright.supply.png",
+          "src": "assets/images/bright.supply.png",
           "sizes": "96x96"
         }
       ]
@@ -67,7 +67,7 @@
       "url": "/?preset=high",
       "icons": [
         {
-          "src": "bright.supply.png",
+          "src": "assets/images/bright.supply.png",
           "sizes": "96x96"
         }
       ]
@@ -79,7 +79,7 @@
       "url": "/?preset=max",
       "icons": [
         {
-          "src": "bright.supply.png",
+          "src": "assets/images/bright.supply.png",
           "sizes": "96x96"
         }
       ]
