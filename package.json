@@ -1,16 +1,17 @@
 {
   "name": "bright-supply",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.",
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000",
     "serve": "python3 -m http.server 8000",
     "dev": "python -m http.server 8000",
-    "build": "echo 'No build step required for static site'",
+    "build": "npm run validate",
     "deploy": "echo 'Deploy to your hosting provider'",
-    "test": "echo 'No tests specified'",
-    "lint": "echo 'No linter configured'",
+    "test": "npm run validate",
+    "lint": "npm run validate",
+    "validate": "node scripts/validate.mjs",
     "format": "echo 'No formatter configured'"
   },
   "keywords": [
@@ -56,10 +57,14 @@
     "index.html",
     "styles.css",
     "app.js",
+    "sw.js",
     "manifest.json",
-    "bright.supply.png",
-    "readme.png",
+    "sitemap.xml",
+    "scripts/validate.mjs",
+    "assets/images/bright.supply.png",
+    "assets/images/readme.png",
     "robots.txt",
+    "docs/API.md",
     "LICENSE",
     "README.md"
   ],

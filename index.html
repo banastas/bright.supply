@@ -79,14 +79,14 @@ Made in California w/ ❤️ by https://banast.as
 <input type="range" id="temperature" value="50" min="0" max="100" class="slider temperature-slider" aria-label="Adjust color temperature" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
 </div>
 <div class="control-buttons" role="group" aria-label="Additional controls">
-<button id="reset-btn" class="control-btn" aria-label="Reset to maximum brightness">Reset</button>
+<button id="reset-btn" class="control-btn" aria-label="Reset to default brightness and temperature">Reset</button>
 <button id="fullscreen-btn" class="control-btn" aria-label="Toggle fullscreen mode">Fullscreen</button>
 </div>
 </div>
 <button class="help-toggle" id="help-toggle" aria-label="Show keyboard shortcuts" aria-expanded="false">
 <span class="help-icon">?</span>
 </button>
-<div class="instructions" id="instructions" aria-live="polite">
+<div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
 <div class="instructions-header">Keyboard Shortcuts</div>
 <div class="instructions-grid">
 <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Adjust brightness</span></div>
@@ -101,7 +101,9 @@ Made in California w/ ❤️ by https://banast.as
 <script>
 if ('serviceWorker' in navigator) {
 window.addEventListener('load', () => {
-navigator.serviceWorker.register('/sw.js').catch(() => {});
+navigator.serviceWorker.register('/sw.js').catch((error) => {
+console.warn('Service worker registration failed:', error);
+});
 });
 }
 </script>

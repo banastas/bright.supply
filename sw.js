@@ -13,7 +13,6 @@ const STATIC_FILES = [
     '/app.js',
     '/manifest.json',
     '/assets/images/bright.supply.png',
-    '/assets/images/readme.png',
     '/robots.txt'
 ];
 
@@ -58,8 +57,10 @@ self.addEventListener('fetch', (event) => {
                         }
 
                         const responseToCache = response.clone();
-                        caches.open(CACHE_NAME)
-                            .then((cache) => cache.put(event.request, responseToCache));
+                        event.waitUntil(
+                            caches.open(CACHE_NAME)
+                                .then((cache) => cache.put(event.request, responseToCache))
+                        );
 
                         return response;
                     })
@@ -67,6 +68,8 @@ self.addEventListener('fetch', (event) => {
                         if (event.request.mode === 'navigate') {
                             return caches.match('/index.html');
                         }
+
+                        return Response.error();
                     });
             })
     );

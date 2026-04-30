@@ -67,8 +67,12 @@ bright.supply/
 ├── LICENSE            # MIT License
 ├── README.md          # Project documentation
 ├── CONTRIBUTING.md    # This file
-├── bright.supply.png  # App icon
-└── readme.png         # Screenshot
+├── assets/
+│   └── images/
+│       ├── bright.supply.png  # App icon
+│       └── readme.png         # Screenshot
+└── scripts/
+    └── validate.mjs    # Zero-dependency validation
 ```
 
 ## 📋 Coding Standards
@@ -109,6 +113,7 @@ Before submitting changes:
    - Test on different screen sizes
    - Test keyboard navigation
    - Test accessibility features
+   - Run `npm run validate`
 
 2. **Feature Testing**
    - Verify all brightness controls work

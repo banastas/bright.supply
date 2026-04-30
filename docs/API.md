@@ -27,7 +27,7 @@ brightSupply.setPreset('medium');
 ```
 
 #### `resetBrightness()`
-Resets brightness to maximum (1000).
+Resets brightness and color temperature to the default state: 75% brightness and neutral temperature.
 
 #### `toggleFullscreen()`
 Toggles fullscreen mode.
@@ -57,8 +57,8 @@ Previous brightness level (0-1000).
 #### `isFullscreen`
 Whether the app is in fullscreen mode.
 
-#### `isPhBadgeVisible`
-Whether the Product Hunt badge is visible.
+#### `currentTemperature`
+Current color temperature level (0-100).
 
 ### Events
 
@@ -67,7 +67,7 @@ The class doesn't emit custom events, but you can listen to DOM events:
 ```javascript
 // Listen for brightness changes
 document.getElementById('brightness').addEventListener('input', (e) => {
-    console.log('Brightness changed to:', e.target.value);
+    updatePreview(e.target.value);
 });
 ```
 
@@ -87,7 +87,7 @@ The app supports URL parameters for preset brightness:
 | `←` | Decrease brightness |
 | `→` | Increase brightness |
 | `Space` | Toggle brightness |
-| `R` | Reset to maximum |
+| `R` | Reset to defaults |
 | `F` | Toggle fullscreen |
 | `H` | Toggle instructions |
 | `1` | Set low preset |
@@ -102,8 +102,7 @@ Settings are automatically saved to `localStorage` with the key `brightSupplySet
 ```javascript
 {
     "brightness": 750,
-    "showPhBadge": false,
-    "timestamp": 1703001234567
+    "temperature": 50
 }
 ```
 
@@ -120,16 +119,16 @@ The app is a Progressive Web App with:
 
 - Service Worker for offline functionality
 - Web App Manifest for installation
-- Background sync capabilities
-- Push notification support (future)
+- Cache-first static asset loading
+- URL launch shortcuts for preset brightness levels
 
 ## Examples
 
 ### Basic Usage
 
 ```javascript
-// Initialize the app
-const app = new BrightSupply();
+// Access the app initialized on page load
+const app = window.brightSupply;
 
 // Set to medium brightness
 app.setPreset('medium');

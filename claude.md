@@ -108,7 +108,7 @@ PWA installation:
 - **App Name:** bright.supply
 - **Short Name:** bright.supply
 - **Description:** Lightbox for video calls
-- **Display Mode:** Standalone
+- **Display Mode:** Fullscreen
 - **Theme Color:** #fccd03 (yellow)
 - **Icons:** Multiple sizes for different platforms
 - **Start URL:** /
@@ -135,7 +135,7 @@ PWA installation:
 - `updateBrightness()` - Update background brightness
 - `updateTemperature()` - Update color temperature
 - `setPreset(preset)` - Apply brightness preset
-- `resetBrightness()` - Reset to maximum brightness
+- `resetBrightness()` - Reset to default brightness and temperature
 - `toggleFullscreen()` - Enter/exit fullscreen mode
 - `toggleInstructions()` - Show/hide help panel
 - `handleKeydown(e)` - Process keyboard shortcuts
@@ -156,13 +156,13 @@ PWA installation:
 ### Color Temperature
 - **Range:** Cool (blue-white) to Warm (yellow-orange)
 - **Visual Labels:** "Cool" and "Warm" indicators
-- **CSS Filters:** Hue rotation and saturation adjustments
+- **RGB Blending:** Cool-neutral-warm background color calculation
 - **Use Cases:** Match room lighting or personal preference
 
 ### Keyboard Shortcuts
 - **←/→** - Decrease/Increase brightness by 5%
 - **Space** - Toggle between current and previous brightness
-- **R** - Reset to maximum brightness (100%)
+- **R** - Reset to defaults (75% brightness, neutral temperature)
 - **F** - Toggle fullscreen mode
 - **H** - Toggle help panel
 - **1-4** - Quick presets (Low, Medium, High, Max)
@@ -184,7 +184,6 @@ PWA installation:
 Saves to localStorage:
 - Current brightness value
 - Current temperature value
-- Fullscreen preference (optional)
 - Automatically loads on page refresh
 - Graceful degradation if localStorage unavailable
 
@@ -307,7 +306,7 @@ Could add Schema.org WebApplication markup for rich snippets.
   "short_name": "bright.supply",
   "description": "Use your 2nd monitor as a lightbox for video calls",
   "start_url": "/",
-  "display": "standalone",
+  "display": "fullscreen",
   "theme_color": "#fccd03",
   "background_color": "#000000",
   "icons": [...]
@@ -596,8 +595,8 @@ MIT License - Free to use, modify, and distribute.
 
 ---
 
-**Last Updated:** December 2024
-**Version:** 2.0.0
+**Last Updated:** April 2026
+**Version:** 2.0.1
 **Live Site:** https://bright.supply
 **Project Type:** Progressive Web App (Vanilla JS)
 **Dependencies:** None (Zero dependencies!)

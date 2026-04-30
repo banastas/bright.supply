@@ -2,7 +2,7 @@
   "name": "bright.supply - Lightbox for Video Calls",
   "short_name": "bright.supply",
   "description": "Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "start_url": "/",
   "display": "fullscreen",
   "orientation": "any",
@@ -15,13 +15,13 @@
   "icons": [
     {
       "src": "assets/images/bright.supply.png",
-      "sizes": "192x192",
+      "sizes": "500x500",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
       "src": "assets/images/bright.supply.png",
-      "sizes": "512x512",
+      "sizes": "500x500",
       "type": "image/png",
       "purpose": "any maskable"
     }
@@ -29,7 +29,7 @@
   "screenshots": [
     {
       "src": "assets/images/readme.png",
-      "sizes": "1280x720",
+      "sizes": "2942x2172",
       "type": "image/png",
       "form_factor": "wide",
       "label": "bright.supply interface showing brightness controls"
@@ -44,7 +44,7 @@
       "icons": [
         {
           "src": "assets/images/bright.supply.png",
-          "sizes": "96x96"
+          "sizes": "500x500"
         }
       ]
     },
@@ -56,7 +56,7 @@
       "icons": [
         {
           "src": "assets/images/bright.supply.png",
-          "sizes": "96x96"
+          "sizes": "500x500"
         }
       ]
     },
@@ -68,7 +68,7 @@
       "icons": [
         {
           "src": "assets/images/bright.supply.png",
-          "sizes": "96x96"
+          "sizes": "500x500"
         }
       ]
     },
@@ -80,7 +80,7 @@
       "icons": [
         {
           "src": "assets/images/bright.supply.png",
-          "sizes": "96x96"
+          "sizes": "500x500"
         }
       ]
     }

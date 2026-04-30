@@ -97,6 +97,9 @@ python3 -m http.server 8000
 # or
 npx http-server -p 8000
 # or just open index.html directly
+
+# Run local validation
+npm run validate
 ```
 
 ## Contributing

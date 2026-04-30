@@ -27,11 +27,14 @@ class BrightSupply {
         this.fullscreenBtn = document.getElementById('fullscreen-btn');
 
         // State
-        this.currentBrightness = 750;
+        this.defaultBrightness = 750;
+        this.defaultTemperature = 50;
+        this.currentBrightness = this.defaultBrightness;
         this.previousBrightness = 0;
-        this.currentTemperature = 50;
+        this.currentTemperature = this.defaultTemperature;
         this.isFullscreen = false;
         this.isHelpVisible = false;
+        this.brightnessInteractionStart = null;
 
         // Preset values
         this.presets = {
@@ -46,9 +49,10 @@ class BrightSupply {
     
     init() {
         this.loadSettings();
+        this.applyLaunchPreset();
         this.setupEventListeners();
-        this.updateBrightness();
-        this.updateTemperature();
+        this.renderBrightness();
+        this.renderTemperature();
         this.updatePresetButtons();
         this.updateSliderFill();
         // Apply initial text colors
@@ -58,11 +62,11 @@ class BrightSupply {
     
     setupEventListeners() {
         // Brightness slider
-        this.brightnessSlider.addEventListener('input', () => this.updateBrightness());
-        this.brightnessSlider.addEventListener('change', () => this.saveSettings());
+        this.brightnessSlider.addEventListener('input', () => this.handleBrightnessInput());
+        this.brightnessSlider.addEventListener('change', () => this.handleBrightnessChange());
 
         // Temperature slider
-        this.temperatureSlider.addEventListener('input', () => this.updateTemperature());
+        this.temperatureSlider.addEventListener('input', () => this.renderTemperature());
         this.temperatureSlider.addEventListener('change', () => this.saveSettings());
 
         // Help toggle button
@@ -93,20 +97,65 @@ class BrightSupply {
         this.setupTouchEvents();
     }
     
+    clampNumber(value, fallback, min, max) {
+        const number = Number(value);
+        if (!Number.isFinite(number)) {
+            return fallback;
+        }
+
+        return Math.min(max, Math.max(min, Math.round(number)));
+    }
+
+    handleBrightnessInput() {
+        if (this.brightnessInteractionStart === null) {
+            this.brightnessInteractionStart = this.currentBrightness;
+        }
+
+        this.setBrightness(this.brightnessSlider.value, {
+            previousValue: this.brightnessInteractionStart
+        });
+    }
+
+    handleBrightnessChange() {
+        this.brightnessInteractionStart = null;
+        this.saveSettings();
+    }
+
+    setBrightness(value, options = {}) {
+        const nextBrightness = this.clampNumber(value, this.defaultBrightness, 0, 1000);
+        const previousValue = this.clampNumber(
+            options.previousValue,
+            this.currentBrightness,
+            0,
+            1000
+        );
+
+        if (nextBrightness !== this.currentBrightness) {
+            if (options.trackPrevious) {
+                this.previousBrightness = this.currentBrightness;
+            } else if (options.previousValue !== undefined && previousValue !== nextBrightness) {
+                this.previousBrightness = previousValue;
+            }
+        }
+
+        this.currentBrightness = nextBrightness;
+        this.brightnessSlider.value = String(nextBrightness);
+        this.renderBrightness();
+    }
+
     updateBrightness() {
-        this.currentBrightness = parseInt(this.brightnessSlider.value);
+        this.setBrightness(this.brightnessSlider.value);
+    }
+
+    renderBrightness() {
         const percentage = Math.round((this.currentBrightness / 1000) * 100);
 
-        // Calculate base color from temperature
-        const tempColor = this.getTemperatureColor();
-
-        // Apply brightness as opacity overlay
-        const opacity = (1000 - this.currentBrightness) / 1000;
-        document.body.style.background = `linear-gradient(rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, ${opacity})), ${tempColor}`;
+        this.applyBackground();
 
         // Update display
         this.brightnessValue.textContent = `${percentage}%`;
         this.brightnessSlider.setAttribute('aria-valuenow', this.currentBrightness);
+        this.brightnessSlider.setAttribute('aria-valuetext', `${percentage}%`);
 
         // Update slider fill
         this.updateSliderFill();
@@ -118,12 +167,20 @@ class BrightSupply {
         this.updateTextColors(percentage);
     }
 
-    updateTemperature() {
-        this.currentTemperature = parseInt(this.temperatureSlider.value);
+    renderTemperature() {
+        this.currentTemperature = this.clampNumber(this.temperatureSlider.value, this.defaultTemperature, 0, 100);
+        this.temperatureSlider.value = String(this.currentTemperature);
         this.temperatureSlider.setAttribute('aria-valuenow', this.currentTemperature);
+        this.temperatureSlider.setAttribute('aria-valuetext', `${this.currentTemperature}%`);
 
-        // Re-apply background with new temperature
-        const percentage = Math.round((this.currentBrightness / 1000) * 100);
+        this.applyBackground();
+    }
+
+    updateTemperature() {
+        this.renderTemperature();
+    }
+
+    applyBackground() {
         const tempColor = this.getTemperatureColor();
         const opacity = (1000 - this.currentBrightness) / 1000;
         document.body.style.background = `linear-gradient(rgba(0, 0, 0, ${opacity}), rgba(0, 0, 0, ${opacity})), ${tempColor}`;
@@ -155,12 +212,21 @@ class BrightSupply {
         this.brightnessSlider.style.setProperty('--slider-fill-percent', `${percentage}%`);
     }
     
-    setPreset(preset) {
+    setPreset(preset, options = {}) {
+        if (!Object.prototype.hasOwnProperty.call(this.presets, preset)) {
+            return;
+        }
+
         const value = this.presets[preset];
-        this.brightnessSlider.value = value;
-        this.updateBrightness();
-        this.saveSettings();
-        this.showFeedback(`Set to ${preset} brightness`);
+        this.setBrightness(value, { trackPrevious: options.trackPrevious !== false });
+
+        if (options.save !== false) {
+            this.saveSettings();
+        }
+
+        if (options.feedback !== false) {
+            this.showFeedback(`Set to ${preset} brightness`);
+        }
     }
     
     updatePresetButtons() {
@@ -171,6 +237,11 @@ class BrightSupply {
             
             button.classList.toggle('active', isActive);
             button.setAttribute('aria-pressed', isActive);
+
+            if (isActive) {
+                button.style.removeProperty('color');
+                button.style.removeProperty('border-color');
+            }
         });
     }
     
@@ -189,11 +260,10 @@ class BrightSupply {
             }
         });
         
-        // Update "Brightness" label text color
-        const sliderLabel = document.querySelector('.slider-label');
-        if (sliderLabel) {
-            sliderLabel.style.color = isHighBrightness ? darkColor : lightColor;
-        }
+        // Update slider labels text color
+        document.querySelectorAll('.slider-label').forEach(label => {
+            label.style.color = isHighBrightness ? darkColor : lightColor;
+        });
         
         // Update percentage marker text color
         if (this.brightnessValue) {
@@ -213,10 +283,15 @@ class BrightSupply {
             this.branding.style.color = isHighBrightness ? darkColor : lightColor;
         }
 
-        // Update help toggle button (when not active)
-        if (this.helpToggle && !this.helpToggle.classList.contains('active')) {
-            this.helpToggle.style.color = isHighBrightness ? darkColor : lightColor;
-            this.helpToggle.style.borderColor = isHighBrightness ? darkBorderColor : lightBorderColor;
+        // Update help toggle button
+        if (this.helpToggle) {
+            if (this.helpToggle.classList.contains('active')) {
+                this.helpToggle.style.removeProperty('color');
+                this.helpToggle.style.removeProperty('border-color');
+            } else {
+                this.helpToggle.style.color = isHighBrightness ? darkColor : lightColor;
+                this.helpToggle.style.borderColor = isHighBrightness ? darkBorderColor : lightBorderColor;
+            }
         }
 
         // Update temperature labels
@@ -231,10 +306,9 @@ class BrightSupply {
     }
     
     resetBrightness() {
-        this.brightnessSlider.value = 750;
-        this.temperatureSlider.value = 50;
-        this.currentTemperature = 50;
-        this.updateBrightness();
+        this.setBrightness(this.defaultBrightness, { trackPrevious: true });
+        this.temperatureSlider.value = String(this.defaultTemperature);
+        this.renderTemperature();
         this.saveSettings();
         this.showFeedback('Reset to defaults');
     }
@@ -249,27 +323,45 @@ class BrightSupply {
     
     enterFullscreen() {
         const elem = document.documentElement;
+        let request;
         
         if (elem.requestFullscreen) {
-            elem.requestFullscreen();
+            request = elem.requestFullscreen();
         } else if (elem.webkitRequestFullscreen) {
-            elem.webkitRequestFullscreen();
+            request = elem.webkitRequestFullscreen();
         } else if (elem.mozRequestFullScreen) {
-            elem.mozRequestFullScreen();
+            request = elem.mozRequestFullScreen();
         } else if (elem.msRequestFullscreen) {
-            elem.msRequestFullscreen();
+            request = elem.msRequestFullscreen();
+        } else {
+            this.showFeedback('Fullscreen unavailable');
         }
+
+        this.handleFullscreenRequest(request, 'enter fullscreen');
     }
     
     exitFullscreen() {
+        let request;
+
         if (document.exitFullscreen) {
-            document.exitFullscreen();
+            request = document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
+            request = document.webkitExitFullscreen();
         } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
+            request = document.mozCancelFullScreen();
         } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
+            request = document.msExitFullscreen();
+        }
+
+        this.handleFullscreenRequest(request, 'exit fullscreen');
+    }
+
+    handleFullscreenRequest(request, action) {
+        if (request && typeof request.catch === 'function') {
+            request.catch((error) => {
+                console.warn(`Could not ${action}:`, error);
+                this.showFeedback('Fullscreen unavailable');
+            });
         }
     }
     
@@ -289,8 +381,23 @@ class BrightSupply {
     
     
     handleKeydown(e) {
+        if (this.shouldIgnoreShortcut(e)) {
+            return;
+        }
+
         // Prevent default for our shortcuts
-        const shortcuts = ['ArrowLeft', 'ArrowRight', 'Space', 'KeyR', 'KeyF', 'KeyH'];
+        const shortcuts = [
+            'ArrowLeft',
+            'ArrowRight',
+            'Space',
+            'KeyR',
+            'KeyF',
+            'KeyH',
+            'Digit1',
+            'Digit2',
+            'Digit3',
+            'Digit4'
+        ];
         if (shortcuts.includes(e.code)) {
             e.preventDefault();
         }
@@ -328,21 +435,28 @@ class BrightSupply {
                 break;
         }
     }
+
+    shouldIgnoreShortcut(event) {
+        const target = event.target;
+        if (!(target instanceof Element)) {
+            return false;
+        }
+
+        return Boolean(target.closest('input, textarea, select, button, [contenteditable="true"]'));
+    }
     
     adjustBrightness(delta) {
-        const newValue = Math.max(0, Math.min(1000, this.currentBrightness + delta));
-        this.brightnessSlider.value = newValue;
-        this.updateBrightness();
+        this.setBrightness(this.currentBrightness + delta, { trackPrevious: true });
         this.saveSettings();
     }
     
     toggleBrightness() {
         const temp = this.currentBrightness;
-        this.currentBrightness = this.previousBrightness;
+        this.currentBrightness = this.clampNumber(this.previousBrightness, this.defaultBrightness, 0, 1000);
         this.previousBrightness = temp;
 
-        this.brightnessSlider.value = this.currentBrightness;
-        this.updateBrightness();
+        this.brightnessSlider.value = String(this.currentBrightness);
+        this.renderBrightness();
         this.saveSettings();
         this.showFeedback('Toggled brightness');
     }
@@ -350,8 +464,14 @@ class BrightSupply {
     toggleInstructions() {
         this.isHelpVisible = !this.isHelpVisible;
         this.instructions.classList.toggle('visible', this.isHelpVisible);
+        this.instructions.setAttribute('aria-hidden', String(!this.isHelpVisible));
         this.helpToggle.classList.toggle('active', this.isHelpVisible);
         this.helpToggle.setAttribute('aria-expanded', this.isHelpVisible);
+        this.helpToggle.setAttribute(
+            'aria-label',
+            this.isHelpVisible ? 'Hide keyboard shortcuts' : 'Show keyboard shortcuts'
+        );
+        this.updateTextColors(Math.round((this.currentBrightness / 1000) * 100));
     }
     
     showFeedback(message) {
@@ -396,14 +516,43 @@ class BrightSupply {
             const saved = localStorage.getItem('brightSupplySettings');
             if (saved) {
                 const settings = JSON.parse(saved);
-                this.brightnessSlider.value = settings.brightness || 750;
-                this.currentBrightness = settings.brightness || 750;
-                this.temperatureSlider.value = settings.temperature ?? 50;
-                this.currentTemperature = settings.temperature ?? 50;
+                if (!settings || typeof settings !== 'object') {
+                    return;
+                }
+
+                this.currentBrightness = this.clampNumber(
+                    settings.brightness,
+                    this.defaultBrightness,
+                    0,
+                    1000
+                );
+                this.brightnessSlider.value = String(this.currentBrightness);
+                this.currentTemperature = this.clampNumber(
+                    settings.temperature,
+                    this.defaultTemperature,
+                    0,
+                    100
+                );
+                this.temperatureSlider.value = String(this.currentTemperature);
             }
         } catch (e) {
             console.warn('Could not load settings:', e);
         }
+    }
+
+    applyLaunchPreset() {
+        const params = new URLSearchParams(window.location.search);
+        const preset = params.get('preset');
+
+        if (!preset || !Object.prototype.hasOwnProperty.call(this.presets, preset)) {
+            return;
+        }
+
+        this.setPreset(preset, {
+            feedback: false,
+            save: true,
+            trackPrevious: true
+        });
     }
 
     saveSettings() {
@@ -448,4 +597,3 @@ window.addEventListener('beforeunload', () => {
         window.brightSupply.saveSettings();
     }
 });
-
