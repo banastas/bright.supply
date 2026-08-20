@@ -29,10 +29,10 @@
   "screenshots": [
     {
       "src": "/assets/images/readme.png",
-      "sizes": "2942x2172",
+      "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "bright.supply interface showing brightness controls"
+      "label": "bright.supply interface showing color, brightness, temperature, fullscreen, and language controls"
     }
   ],
   "shortcuts": [

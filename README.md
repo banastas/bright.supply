@@ -5,11 +5,25 @@
 [![PWA Ready](https://img.shields.io/badge/PWA-Ready-5a0fc8?style=for-the-badge&logo=pwa)](https://web.dev/progressive-web-apps/)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-<img src="https://github.com/banastas/bright.supply/blob/main/assets/images/readme.png?raw=true" alt="bright.supply fullscreen color light controls">
+<img src="https://github.com/banastas/bright.supply/blob/main/assets/images/readme.png?raw=true" alt="bright.supply showing color, brightness, temperature, fullscreen, and language controls">
 
 Turn any monitor, tablet, or phone into an adjustable fullscreen light.
 
-bright.supply is a dependency-free Progressive Web App for video calls, photography, streaming, ambience, display testing, and creative work. It provides 14 color screens, 18 localized editions, brightness controls, white balance, presets, keyboard control, and offline support.
+bright.supply is a free, dependency-free Progressive Web App for video calls, photography, streaming, ambience, display testing, and creative work. Choose one of 14 screen colors, set its intensity, and use the whole display as a light source. No download, account, or sign-up is required.
+
+## Use it
+
+1. Open [bright.supply](https://bright.supply) on a monitor, tablet, or phone.
+2. Choose a color and adjust its brightness. White screens also include a cool-to-warm temperature control.
+3. Select **Fullscreen** to dedicate the display to light output.
+
+Low, Medium, High, and Max set brightness to 20, 50, 75, and 100 percent. A preset can also be included in any non-black screen URL:
+
+```text
+https://bright.supply/white/?preset=max
+https://bright.supply/blue/?preset=medium
+https://bright.supply/es/orange/?preset=low
+```
 
 ## Color screens
 
@@ -58,15 +72,16 @@ English uses root-level routes such as `/blue/`. Localized routes use the langua
 - Direct URLs for every color and language combination
 - Adjustable brightness from 0 to 100 percent on light-emitting colors
 - A true black screen with brightness, presets, and reset hidden because they cannot alter black
-- Cool-to-warm white balance on white screens
-- Low, Medium, High, and Max presets
-- Fullscreen mode
-- Keyboard shortcuts
-- Brightness and temperature persistence
+- Cool-to-warm white balance on the home and white-screen routes
+- Low, Medium, High, and Max presets, including launchable `?preset=` URLs
+- Fullscreen mode and installable PWA shortcuts for White, Red, Blue, and Black
+- Keyboard shortcuts that stay out of the way while a control has focus
+- Brightness and temperature persistence in `localStorage`
+- A language picker that keeps the current color while switching editions
 - Responsive left-to-right and right-to-left layouts
-- Installable PWA with route-aware offline caching
+- Network-first pages with route-specific offline caching
 - Accessible labels, focus styles, touch targets, and adaptive text contrast
-- Zero runtime dependencies
+- Pure HTML, CSS, and vanilla JavaScript with zero package dependencies
 
 ## Keyboard shortcuts
 
@@ -85,7 +100,8 @@ Keyboard shortcuts do not intercept input, select, or button interactions.
 
 The repository contains 270 generated static HTML documents: 15 page types across 18 languages. Each document includes:
 
-- A unique title, description, canonical URL, and H1
+- A route-specific title, description, and canonical URL
+- Exactly one H1, with a compact localized color label on color routes
 - Fully qualified, reciprocal `hreflang` links for all 18 editions
 - An `x-default` fallback
 - Localized Open Graph and Twitter metadata
@@ -93,19 +109,29 @@ The repository contains 270 generated static HTML documents: 15 page types acros
 - Crawlable links to all colors
 - A matching entry in `sitemap.xml`
 
-Search-focused phrases remain in metadata and structured data. The working lightbox surface uses only a quiet brand and color label, so search copy does not obstruct the utility.
+Search-focused phrases remain in metadata and structured data. The working lightbox surface uses only quiet branding and, on color routes, a localized color label, so search copy does not obstruct the utility.
 
 The generated pages, language catalog, validation rules, and sitemap are kept in sync by one build command. See [Routing and SEO](docs/ROUTING_AND_SEO.md) for the complete contract.
+
+## PWA and offline behavior
+
+The service worker precaches the shared app shell plus the home, White, Black, Red, and Blue routes. Other pages use a network-first strategy and keep an exact route-specific copy after a successful visit, so a previously opened localized color screen can be reopened offline. Shared interface files are refreshed from the network when available.
+
+The web app manifest supports fullscreen standalone use, shortcuts to four common screens, and installation on browsers that support PWAs.
+
+## Privacy
+
+Brightness and temperature settings remain in the browser's local storage. The app has no accounts, forms, or server-side user profiles. The site loads Google Analytics 4 for site-usage measurement, but the application does not send the stored brightness or temperature values to it.
 
 ## Development
 
 ```bash
 git clone https://github.com/banastas/bright.supply.git
 cd bright.supply
-python3 -m http.server 8000
+npm run serve
 ```
 
-Visit `http://localhost:8000`. There are no packages to install and no framework build step.
+Visit `http://localhost:8000`. Python 3 is used only for the local server. Node.js 14 or newer is required for page generation and validation. There are no packages to install and no framework build step.
 
 After changing routes, colors, translations, metadata, or templates, run:
 
@@ -113,7 +139,7 @@ After changing routes, colors, translations, metadata, or templates, run:
 npm run build
 ```
 
-The build regenerates all 270 pages and the sitemap, then runs more than 4,000 checks for syntax, assets, routes, canonicals, reciprocal language alternatives, structured data, PWA files, and sitemap completeness.
+The build regenerates all 270 pages and the sitemap, then runs more than 5,500 checks for syntax, assets, routes, canonicals, reciprocal language alternatives, structured data, PWA files, and sitemap completeness. Use `npm run validate` when the generated output is already current and only validation is needed.
 
 ## Source layout
 
@@ -128,6 +154,9 @@ bright.supply/
 ├── manifest.json                  PWA manifest
 ├── sw.js                          Offline and update behavior
 ├── sitemap.xml                    Generated international sitemap
+├── docs/
+│   ├── API.md                     Browser API and integration notes
+│   └── ROUTING_AND_SEO.md         Generated routing and search contract
 └── scripts/
     ├── site-data.mjs              Color and translation catalog
     ├── generate-pages.mjs         HTML and sitemap generator
