@@ -518,45 +518,22 @@ body.use-dark-text {
     text-decoration: none;
 }
 
-.page-summary {
-    position: fixed;
-    top: clamp(5rem, 17vh, 10rem);
-    left: 50%;
-    width: min(42rem, calc(100% - 8rem));
-    transform: translateX(-50%);
-    padding: var(--spacing-md) var(--spacing-lg);
-    color: var(--adaptive-text);
-    text-align: center;
-    border: 1px solid var(--adaptive-border);
-    border-radius: var(--border-radius-lg);
-    background: var(--adaptive-panel);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    z-index: 20;
-}
-
-.page-summary h1 {
-    margin: 0;
-    font-size: clamp(1.1rem, 2.5vw, 1.65rem);
-    line-height: 1.2;
-}
-
-.page-summary p {
-    margin: var(--spacing-sm) 0;
-    color: var(--adaptive-muted);
-    font-size: var(--font-size-small);
-    line-height: 1.5;
-}
-
-.page-summary ul {
+.brand-heading {
     display: flex;
-    justify-content: center;
-    gap: var(--spacing-lg);
+    align-items: center;
+    gap: var(--spacing-sm);
     margin: 0;
-    padding: 0;
+    color: var(--adaptive-text);
+    font-size: var(--font-size-small);
+    line-height: 1;
+}
+
+.brand-divider,
+.page-color-name {
     color: var(--adaptive-muted);
     font-size: 0.75rem;
-    list-style-position: inside;
+    font-weight: 500;
+    letter-spacing: 0.02em;
 }
 
 .color-picker {
@@ -629,25 +606,53 @@ body.use-dark-text {
 
 .utility-row {
     display: flex;
-    align-items: flex-end;
+    align-items: stretch;
     justify-content: center;
     gap: var(--spacing-sm);
 }
 
 .utility-row .control-buttons {
+    align-items: stretch;
     margin-top: 0;
 }
 
+.utility-row .control-btn,
+.language-picker,
 .language-picker select {
-    min-height: 34px;
+    min-height: 38px;
+}
+
+.language-picker {
+    position: relative;
+    display: flex;
+}
+
+.language-picker::after {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    color: var(--adaptive-text);
+    content: "⌄";
+    font-size: 1rem;
+    line-height: 1;
+    pointer-events: none;
+    transform: translateY(-58%);
+}
+
+.language-picker select {
+    height: 100%;
     max-width: 10rem;
-    padding: var(--spacing-sm) 2rem var(--spacing-sm) var(--spacing-sm);
+    padding: var(--spacing-sm) 2.25rem var(--spacing-sm) var(--spacing-md);
+    appearance: none;
+    -webkit-appearance: none;
     color: var(--adaptive-text);
     background-color: var(--button-bg);
     border: 1px solid var(--adaptive-border);
     border-radius: var(--border-radius-md);
     font: inherit;
     font-size: var(--font-size-small);
+    font-weight: 500;
+    line-height: 1;
     cursor: pointer;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -709,17 +714,17 @@ html[dir="rtl"] .instructions {
     text-align: right;
 }
 
+html[dir="rtl"] .language-picker::after {
+    right: auto;
+    left: 0.75rem;
+}
+
+html[dir="rtl"] .language-picker select {
+    padding-right: var(--spacing-md);
+    padding-left: 2.25rem;
+}
+
 @media (max-width: 768px) {
-    .page-summary {
-        top: 4.5rem;
-        width: calc(100% - 5rem);
-        padding: var(--spacing-sm) var(--spacing-md);
-    }
-
-    .page-summary ul {
-        gap: var(--spacing-md);
-    }
-
     .color-picker {
         max-width: 95%;
     }
@@ -738,21 +743,6 @@ html[dir="rtl"] .instructions {
 }
 
 @media (max-width: 480px) {
-    .page-summary {
-        top: 4rem;
-        width: calc(100% - 1rem);
-    }
-
-    .page-summary p {
-        display: none;
-    }
-
-    .page-summary ul {
-        margin-top: var(--spacing-xs);
-        gap: var(--spacing-sm);
-        font-size: 0.65rem;
-    }
-
     .color-picker {
         margin-bottom: var(--spacing-sm);
     }
@@ -790,17 +780,6 @@ html[dir="rtl"] .instructions {
 }
 
 @media (orientation: landscape) and (max-height: 500px) {
-    .page-summary {
-        top: var(--spacing-xs);
-        width: min(28rem, 55%);
-        padding: var(--spacing-xs) var(--spacing-sm);
-    }
-
-    .page-summary p,
-    .page-summary ul {
-        display: none;
-    }
-
     .color-picker {
         max-width: 360px;
         margin-bottom: var(--spacing-xs);

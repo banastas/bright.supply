@@ -99,9 +99,25 @@ for (const { locale, color } of pageRecords) {
     record(`title is useful: ${route}`, Boolean(title && title.length >= minimumTitleLength && title.length <= 90), title || 'missing');
     record(`description is useful: ${route}`, Boolean(description && description.length >= minimumDescriptionLength && description.length <= 220), description || 'missing');
     record(`one H1: ${route}`, h1Count === 1, String(h1Count));
+    record(`utility UI has no promotional hero: ${route}`, !html.includes('class="page-summary"'));
     record(`indexable robots: ${route}`, html.includes('name="robots" content="index, follow'));
     record(`absolute core assets: ${route}`, html.includes('href="/styles.css"') && html.includes('src="/app.js"') && html.includes('href="/manifest.json"'));
     record(`route color data: ${route}`, html.includes(`data-color-slug="${color?.slug || 'white'}"`));
+    const isBlackScreen = color?.slug === 'black';
+    record(
+        `brightness availability matches color: ${route}`,
+        html.includes(`data-supports-brightness="${isBlackScreen ? 'false' : 'true'}"`)
+    );
+    record(
+        `black-only controls are truthful: ${route}`,
+        isBlackScreen
+            ? html.includes('<div class="slider-container" hidden>') &&
+                html.includes(`class="preset-buttons" role="group" aria-label="${locale.presets}" hidden`) &&
+                html.includes('id="reset-btn" class="control-btn"') &&
+                html.includes('id="reset-btn" class="control-btn" aria-label=') &&
+                /id="reset-btn"[^>]+ hidden>/.test(html)
+            : !html.includes('<div class="slider-container" hidden>')
+    );
     record(`all color links: ${route}`, colorLinks.length === colors.length && colorLinks.every((value, index) => value === routePath(locale, colors[index])));
     record(`all language choices: ${route}`, languageValues.length === locales.length && languageValues.every((value, index) => value === routePath(locales[index], color)));
     record(`complete hreflang set: ${route}`, alternates.length === locales.length + 1);

@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "밝기",
     "전체 화면",
     "색상"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/ko/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/ko/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">검은색</span></h1>
     </header>
-    <main aria-label="무료 온라인 검은색 화면">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">무료 온라인 검은색 화면</h1>
-            <p>이 조절식 검은색 화면을 화상 통화, 사진, 스트리밍, 분위기 조명, 화면 테스트, 창작에 활용하세요.</p>
-            <ul><li>밝기 조절 가능</li><li>한 번에 전체 화면</li><li>다운로드나 가입 불필요</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="밝기">
+    <main aria-label="화면 색상 선택">
+        <div class="controls-container" role="region" aria-label="화면 색상 선택">
             <div class="color-picker" role="group" aria-label="화면 색상 선택">
                 <span class="control-label">색상</span>
                 <nav class="color-swatches" aria-label="화면 색상 선택">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/ko/orange/" style="--swatch-color: #ff6b00" title="주황색" aria-label="주황색"><span class="visually-hidden">주황색</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">밝기</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="밝기" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="프리셋">
+            <div class="preset-buttons" role="group" aria-label="프리셋" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="밝기를 낮음(으)로 설정">낮음</button>
                 <button id="preset-medium" class="preset-btn" aria-label="밝기를 중간(으)로 설정">중간</button>
                 <button id="preset-high" class="preset-btn" aria-label="밝기를 높음(으)로 설정">높음</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="밝기와 색온도 초기화">초기화</button>
+                    <button id="reset-btn" class="control-btn" aria-label="밝기와 색온도 초기화" hidden>초기화</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="전체 화면 시작">전체 화면</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">키보드 단축키</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>밝기 조절</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>밝기 조절</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>전체 화면</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>초기화</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>초기화</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>도움말 숨기기</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>이전 밝기 전환</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>프리셋</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>이전 밝기 전환</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>프리셋</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "Độ sáng",
     "Toàn màn hình",
     "Màu"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/vi/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/vi/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">đen</span></h1>
     </header>
-    <main aria-label="Màn hình đen trực tuyến miễn phí">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">Màn hình đen trực tuyến miễn phí</h1>
-            <p>Dùng màn hình đen có thể điều chỉnh cho cuộc gọi video, chụp ảnh, phát trực tiếp, tạo không khí, kiểm tra màn hình và sáng tạo.</p>
-            <ul><li>Điều chỉnh độ sáng</li><li>Toàn màn hình một chạm</li><li>Không cần tải xuống hay đăng ký</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="Độ sáng">
+    <main aria-label="Chọn màu màn hình">
+        <div class="controls-container" role="region" aria-label="Chọn màu màn hình">
             <div class="color-picker" role="group" aria-label="Chọn màu màn hình">
                 <span class="control-label">Màu</span>
                 <nav class="color-swatches" aria-label="Chọn màu màn hình">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/vi/orange/" style="--swatch-color: #ff6b00" title="cam" aria-label="cam"><span class="visually-hidden">cam</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">Độ sáng</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Độ sáng" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="Mức đặt sẵn">
+            <div class="preset-buttons" role="group" aria-label="Mức đặt sẵn" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="Đặt độ sáng Thấp">Thấp</button>
                 <button id="preset-medium" class="preset-btn" aria-label="Đặt độ sáng Vừa">Vừa</button>
                 <button id="preset-high" class="preset-btn" aria-label="Đặt độ sáng Cao">Cao</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="Đặt lại độ sáng và nhiệt độ màu">Đặt lại</button>
+                    <button id="reset-btn" class="control-btn" aria-label="Đặt lại độ sáng và nhiệt độ màu" hidden>Đặt lại</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="Bật toàn màn hình">Toàn màn hình</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">Phím tắt</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Điều chỉnh độ sáng</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>Điều chỉnh độ sáng</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>Toàn màn hình</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>Đặt lại</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>Đặt lại</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>Ẩn trợ giúp</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>Chuyển mức trước</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>Mức đặt sẵn</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>Chuyển mức trước</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>Mức đặt sẵn</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

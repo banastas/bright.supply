@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "Kecerahan",
     "Layar penuh",
     "Warna"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/id/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/id/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">hitam</span></h1>
     </header>
-    <main aria-label="Layar hitam online gratis">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">Layar hitam online gratis</h1>
-            <p>Gunakan layar hitam yang dapat diatur ini untuk panggilan video, fotografi, streaming, suasana, pengujian layar, dan karya kreatif.</p>
-            <ul><li>Kecerahan dapat diatur</li><li>Layar penuh sekali klik</li><li>Tanpa unduhan atau pendaftaran</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="Kecerahan">
+    <main aria-label="Pilih warna layar">
+        <div class="controls-container" role="region" aria-label="Pilih warna layar">
             <div class="color-picker" role="group" aria-label="Pilih warna layar">
                 <span class="control-label">Warna</span>
                 <nav class="color-swatches" aria-label="Pilih warna layar">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/id/orange/" style="--swatch-color: #ff6b00" title="jingga" aria-label="jingga"><span class="visually-hidden">jingga</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">Kecerahan</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Kecerahan" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="Preset">
+            <div class="preset-buttons" role="group" aria-label="Preset" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="Atur kecerahan ke Rendah">Rendah</button>
                 <button id="preset-medium" class="preset-btn" aria-label="Atur kecerahan ke Sedang">Sedang</button>
                 <button id="preset-high" class="preset-btn" aria-label="Atur kecerahan ke Tinggi">Tinggi</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="Atur ulang kecerahan dan suhu warna">Atur ulang</button>
+                    <button id="reset-btn" class="control-btn" aria-label="Atur ulang kecerahan dan suhu warna" hidden>Atur ulang</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="Masuk layar penuh">Layar penuh</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">Pintasan keyboard</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Atur kecerahan</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>Atur kecerahan</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>Layar penuh</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>Atur ulang</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>Atur ulang</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>Sembunyikan bantuan</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>Beralih ke sebelumnya</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>Preset</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>Beralih ke sebelumnya</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>Preset</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

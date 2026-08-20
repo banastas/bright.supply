@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "Helligkeit",
     "Vollbild",
     "Farbe"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/de/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/de/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">Schwarz</span></h1>
     </header>
-    <main aria-label="Kostenloser Bildschirm in Schwarz online">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">Kostenloser Bildschirm in Schwarz online</h1>
-            <p>Nutze diesen einstellbaren Bildschirm in Schwarz für Videoanrufe, Fotografie, Streaming, Atmosphäre, Displaytests und kreative Arbeit.</p>
-            <ul><li>Einstellbare Helligkeit</li><li>Vollbild mit einem Klick</li><li>Kein Download oder Konto</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="Helligkeit">
+    <main aria-label="Bildschirmfarbe auswählen">
+        <div class="controls-container" role="region" aria-label="Bildschirmfarbe auswählen">
             <div class="color-picker" role="group" aria-label="Bildschirmfarbe auswählen">
                 <span class="control-label">Farbe</span>
                 <nav class="color-swatches" aria-label="Bildschirmfarbe auswählen">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/de/orange/" style="--swatch-color: #ff6b00" title="Orange" aria-label="Orange"><span class="visually-hidden">Orange</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">Helligkeit</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Helligkeit" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="Voreinstellungen">
+            <div class="preset-buttons" role="group" aria-label="Voreinstellungen" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="Helligkeit auf Niedrig setzen">Niedrig</button>
                 <button id="preset-medium" class="preset-btn" aria-label="Helligkeit auf Mittel setzen">Mittel</button>
                 <button id="preset-high" class="preset-btn" aria-label="Helligkeit auf Hoch setzen">Hoch</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="Helligkeit und Farbtemperatur zurücksetzen">Zurücksetzen</button>
+                    <button id="reset-btn" class="control-btn" aria-label="Helligkeit und Farbtemperatur zurücksetzen" hidden>Zurücksetzen</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="Vollbildmodus starten">Vollbild</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">Tastenkürzel</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Helligkeit anpassen</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>Helligkeit anpassen</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>Vollbild</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>Zurücksetzen</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>Zurücksetzen</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>Hilfe ausblenden</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>Vorherige Helligkeit</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>Voreinstellungen</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>Vorherige Helligkeit</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>Voreinstellungen</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

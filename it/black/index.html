@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "Luminosità",
     "Schermo intero",
     "Colore"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/it/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/it/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">nero</span></h1>
     </header>
-    <main aria-label="Schermo nero online gratuito">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">Schermo nero online gratuito</h1>
-            <p>Usa questo schermo nero regolabile per videochiamate, fotografia, streaming, atmosfera, test dello schermo e lavori creativi.</p>
-            <ul><li>Luminosità regolabile</li><li>Schermo intero con un clic</li><li>Nessun download o registrazione</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="Luminosità">
+    <main aria-label="Scegli un colore dello schermo">
+        <div class="controls-container" role="region" aria-label="Scegli un colore dello schermo">
             <div class="color-picker" role="group" aria-label="Scegli un colore dello schermo">
                 <span class="control-label">Colore</span>
                 <nav class="color-swatches" aria-label="Scegli un colore dello schermo">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/it/orange/" style="--swatch-color: #ff6b00" title="arancione" aria-label="arancione"><span class="visually-hidden">arancione</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">Luminosità</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Luminosità" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="Preimpostazioni">
+            <div class="preset-buttons" role="group" aria-label="Preimpostazioni" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="Imposta luminosità Bassa">Bassa</button>
                 <button id="preset-medium" class="preset-btn" aria-label="Imposta luminosità Media">Media</button>
                 <button id="preset-high" class="preset-btn" aria-label="Imposta luminosità Alta">Alta</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="Ripristina luminosità e temperatura">Ripristina</button>
+                    <button id="reset-btn" class="control-btn" aria-label="Ripristina luminosità e temperatura" hidden>Ripristina</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="Attiva schermo intero">Schermo intero</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">Scorciatoie da tastiera</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Regola luminosità</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>Regola luminosità</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>Schermo intero</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>Ripristina</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>Ripristina</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>Nascondi aiuto</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>Alterna precedente</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>Preimpostazioni</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>Alterna precedente</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>Preimpostazioni</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

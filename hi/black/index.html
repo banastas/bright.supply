@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "चमक",
     "फ़ुलस्क्रीन",
     "रंग"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/hi/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/hi/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">काली</span></h1>
     </header>
-    <main aria-label="मुफ़्त ऑनलाइन काली स्क्रीन">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">मुफ़्त ऑनलाइन काली स्क्रीन</h1>
-            <p>इस बदलने योग्य काली स्क्रीन को वीडियो कॉल, फ़ोटोग्राफ़ी, स्ट्रीमिंग, माहौल, डिस्प्ले टेस्ट और रचनात्मक काम के लिए इस्तेमाल करें।</p>
-            <ul><li>बदलने योग्य चमक</li><li>एक क्लिक में फ़ुलस्क्रीन</li><li>डाउनलोड या साइन-अप नहीं</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="चमक">
+    <main aria-label="स्क्रीन का रंग चुनें">
+        <div class="controls-container" role="region" aria-label="स्क्रीन का रंग चुनें">
             <div class="color-picker" role="group" aria-label="स्क्रीन का रंग चुनें">
                 <span class="control-label">रंग</span>
                 <nav class="color-swatches" aria-label="स्क्रीन का रंग चुनें">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/hi/orange/" style="--swatch-color: #ff6b00" title="नारंगी" aria-label="नारंगी"><span class="visually-hidden">नारंगी</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">चमक</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="चमक" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="प्रीसेट">
+            <div class="preset-buttons" role="group" aria-label="प्रीसेट" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="चमक कम करें">कम</button>
                 <button id="preset-medium" class="preset-btn" aria-label="चमक मध्यम करें">मध्यम</button>
                 <button id="preset-high" class="preset-btn" aria-label="चमक तेज़ करें">तेज़</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="चमक और रंग तापमान रीसेट करें">रीसेट</button>
+                    <button id="reset-btn" class="control-btn" aria-label="चमक और रंग तापमान रीसेट करें" hidden>रीसेट</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="फ़ुलस्क्रीन चालू करें">फ़ुलस्क्रीन</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">कीबोर्ड शॉर्टकट</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>चमक बदलें</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>चमक बदलें</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>फ़ुलस्क्रीन</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>रीसेट</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>रीसेट</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>मदद छिपाएँ</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>पिछली चमक</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>प्रीसेट</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>पिछली चमक</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>प्रीसेट</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

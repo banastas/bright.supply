@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "Parlaklık",
     "Tam ekran",
     "Renk"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/tr/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/tr/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">siyah</span></h1>
     </header>
-    <main aria-label="Ücretsiz çevrimiçi siyah ekran">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">Ücretsiz çevrimiçi siyah ekran</h1>
-            <p>Bu ayarlanabilir siyah ekranı görüntülü aramalar, fotoğraf, yayın, ortam ışığı, ekran testi ve yaratıcı işler için kullanın.</p>
-            <ul><li>Ayarlanabilir parlaklık</li><li>Tek tıkla tam ekran</li><li>İndirme veya kayıt yok</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="Parlaklık">
+    <main aria-label="Ekran rengi seç">
+        <div class="controls-container" role="region" aria-label="Ekran rengi seç">
             <div class="color-picker" role="group" aria-label="Ekran rengi seç">
                 <span class="control-label">Renk</span>
                 <nav class="color-swatches" aria-label="Ekran rengi seç">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/tr/orange/" style="--swatch-color: #ff6b00" title="turuncu" aria-label="turuncu"><span class="visually-hidden">turuncu</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">Parlaklık</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Parlaklık" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="Hazır ayarlar">
+            <div class="preset-buttons" role="group" aria-label="Hazır ayarlar" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="Parlaklığı Düşük yap">Düşük</button>
                 <button id="preset-medium" class="preset-btn" aria-label="Parlaklığı Orta yap">Orta</button>
                 <button id="preset-high" class="preset-btn" aria-label="Parlaklığı Yüksek yap">Yüksek</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="Parlaklığı ve renk sıcaklığını sıfırla">Sıfırla</button>
+                    <button id="reset-btn" class="control-btn" aria-label="Parlaklığı ve renk sıcaklığını sıfırla" hidden>Sıfırla</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="Tam ekrana geç">Tam ekran</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">Klavye kısayolları</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Parlaklığı ayarla</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>Parlaklığı ayarla</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>Tam ekran</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>Sıfırla</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>Sıfırla</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>Yardımı gizle</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>Öncekine geç</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>Hazır ayarlar</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>Öncekine geç</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>Hazır ayarlar</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

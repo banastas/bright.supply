@@ -68,6 +68,9 @@ RGB object loaded from the generated page's `data-color-value` attribute.
 #### `supportsTemperature`
 Whether the current route exposes white-balance controls. This is true for white screens and false for fixed-color screens.
 
+#### `supportsBrightness`
+Whether brightness controls and shortcuts apply to the current route. This is false for black because brightness scaling cannot change `#000000`.
+
 ### Events
 
 The class doesn't emit custom events, but you can listen to DOM events:

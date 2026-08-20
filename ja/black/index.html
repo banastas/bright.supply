@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "明るさ",
     "全画面",
     "色"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/ja/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/ja/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">黒色</span></h1>
     </header>
-    <main aria-label="無料オンライン黒色画面">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">無料オンライン黒色画面</h1>
-            <p>この調整可能な黒色画面は、ビデオ通話、撮影、配信、雰囲気作り、画面テスト、創作に使えます。</p>
-            <ul><li>明るさを調整可能</li><li>ワンクリックで全画面</li><li>ダウンロードや登録は不要</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="明るさ">
+    <main aria-label="画面の色を選択">
+        <div class="controls-container" role="region" aria-label="画面の色を選択">
             <div class="color-picker" role="group" aria-label="画面の色を選択">
                 <span class="control-label">色</span>
                 <nav class="color-swatches" aria-label="画面の色を選択">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/ja/orange/" style="--swatch-color: #ff6b00" title="オレンジ" aria-label="オレンジ"><span class="visually-hidden">オレンジ</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">明るさ</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="明るさ" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="プリセット">
+            <div class="preset-buttons" role="group" aria-label="プリセット" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="明るさを低に設定">低</button>
                 <button id="preset-medium" class="preset-btn" aria-label="明るさを中に設定">中</button>
                 <button id="preset-high" class="preset-btn" aria-label="明るさを高に設定">高</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="明るさと色温度をリセット">リセット</button>
+                    <button id="reset-btn" class="control-btn" aria-label="明るさと色温度をリセット" hidden>リセット</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="全画面にする">全画面</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">キーボードショートカット</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>明るさを調整</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>明るさを調整</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>全画面</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>リセット</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>リセット</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>ヘルプを隠す</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>前の明るさに切替</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>プリセット</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>前の明るさに切替</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>プリセット</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

@@ -27,6 +27,7 @@ class BrightSupply {
         this.previousBrightness = 0;
         this.currentTemperature = this.defaultTemperature;
         this.baseColor = this.parseHexColor(this.body.dataset.colorValue || '#ffffff');
+        this.supportsBrightness = this.body.dataset.supportsBrightness !== 'false';
         this.supportsTemperature = this.body.dataset.supportsTemperature === 'true';
         this.isFullscreen = false;
         this.isHelpVisible = false;
@@ -261,7 +262,10 @@ class BrightSupply {
 
     handleKeydown(event) {
         if (this.shouldIgnoreShortcut(event)) return;
-        const shortcuts = ['ArrowLeft', 'ArrowRight', 'Space', 'KeyR', 'KeyF', 'KeyH', 'Digit1', 'Digit2', 'Digit3', 'Digit4'];
+        const brightnessShortcuts = ['ArrowLeft', 'ArrowRight', 'Space', 'KeyR', 'Digit1', 'Digit2', 'Digit3', 'Digit4'];
+        const shortcuts = this.supportsBrightness
+            ? [...brightnessShortcuts, 'KeyF', 'KeyH']
+            : ['KeyF', 'KeyH'];
         if (shortcuts.includes(event.code)) event.preventDefault();
         const actions = {
             ArrowLeft: () => this.adjustBrightness(-50), ArrowRight: () => this.adjustBrightness(50),
@@ -338,6 +342,7 @@ class BrightSupply {
     }
 
     applyLaunchPreset() {
+        if (!this.supportsBrightness) return;
         const preset = new URLSearchParams(window.location.search).get('preset');
         if (preset && Object.prototype.hasOwnProperty.call(this.presets, preset)) {
             this.setPreset(preset, { feedback: false, save: true, trackPrevious: true });

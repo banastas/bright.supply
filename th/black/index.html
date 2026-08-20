@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "ความสว่าง",
     "เต็มจอ",
     "สี"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/th/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/th/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">สีดำ</span></h1>
     </header>
-    <main aria-label="หน้าจอสีดำออนไลน์ฟรี">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">หน้าจอสีดำออนไลน์ฟรี</h1>
-            <p>ใช้หน้าจอสีดำที่ปรับได้นี้สำหรับวิดีโอคอล ถ่ายภาพ สตรีม สร้างบรรยากาศ ทดสอบจอ และงานสร้างสรรค์</p>
-            <ul><li>ปรับความสว่างได้</li><li>เต็มจอในคลิกเดียว</li><li>ไม่ต้องดาวน์โหลดหรือสมัคร</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="ความสว่าง">
+    <main aria-label="เลือกสีหน้าจอ">
+        <div class="controls-container" role="region" aria-label="เลือกสีหน้าจอ">
             <div class="color-picker" role="group" aria-label="เลือกสีหน้าจอ">
                 <span class="control-label">สี</span>
                 <nav class="color-swatches" aria-label="เลือกสีหน้าจอ">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/th/orange/" style="--swatch-color: #ff6b00" title="สีส้ม" aria-label="สีส้ม"><span class="visually-hidden">สีส้ม</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">ความสว่าง</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="ความสว่าง" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="ค่าที่ตั้งไว้">
+            <div class="preset-buttons" role="group" aria-label="ค่าที่ตั้งไว้" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="ตั้งความสว่างเป็น ต่ำ">ต่ำ</button>
                 <button id="preset-medium" class="preset-btn" aria-label="ตั้งความสว่างเป็น กลาง">กลาง</button>
                 <button id="preset-high" class="preset-btn" aria-label="ตั้งความสว่างเป็น สูง">สูง</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="รีเซ็ตความสว่างและอุณหภูมิสี">รีเซ็ต</button>
+                    <button id="reset-btn" class="control-btn" aria-label="รีเซ็ตความสว่างและอุณหภูมิสี" hidden>รีเซ็ต</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="เปิดเต็มจอ">เต็มจอ</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">แป้นพิมพ์ลัด</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>ปรับความสว่าง</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>ปรับความสว่าง</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>เต็มจอ</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>รีเซ็ต</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>รีเซ็ต</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>ซ่อนวิธีใช้</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>สลับค่าก่อนหน้า</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>ค่าที่ตั้งไว้</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>สลับค่าก่อนหน้า</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>ค่าที่ตั้งไว้</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

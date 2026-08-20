@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "السطوع",
     "ملء الشاشة",
     "اللون"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/ar/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/ar/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">سوداء</span></h1>
     </header>
-    <main aria-label="شاشة سوداء مجانية عبر الإنترنت">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">شاشة سوداء مجانية عبر الإنترنت</h1>
-            <p>استخدم هذه الشاشة سوداء القابلة للتعديل لمكالمات الفيديو والتصوير والبث والأجواء واختبار الشاشة والعمل الإبداعي.</p>
-            <ul><li>سطوع قابل للتعديل</li><li>ملء الشاشة بنقرة واحدة</li><li>من دون تنزيل أو تسجيل</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="السطوع">
+    <main aria-label="اختر لون الشاشة">
+        <div class="controls-container" role="region" aria-label="اختر لون الشاشة">
             <div class="color-picker" role="group" aria-label="اختر لون الشاشة">
                 <span class="control-label">اللون</span>
                 <nav class="color-swatches" aria-label="اختر لون الشاشة">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/ar/orange/" style="--swatch-color: #ff6b00" title="برتقالية" aria-label="برتقالية"><span class="visually-hidden">برتقالية</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">السطوع</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="السطوع" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="إعدادات مسبقة">
+            <div class="preset-buttons" role="group" aria-label="إعدادات مسبقة" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="ضبط السطوع على منخفض">منخفض</button>
                 <button id="preset-medium" class="preset-btn" aria-label="ضبط السطوع على متوسط">متوسط</button>
                 <button id="preset-high" class="preset-btn" aria-label="ضبط السطوع على عالٍ">عالٍ</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="إعادة ضبط السطوع وحرارة اللون">إعادة ضبط</button>
+                    <button id="reset-btn" class="control-btn" aria-label="إعادة ضبط السطوع وحرارة اللون" hidden>إعادة ضبط</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="تشغيل ملء الشاشة">ملء الشاشة</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">اختصارات لوحة المفاتيح</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>ضبط السطوع</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>ضبط السطوع</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>ملء الشاشة</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>إعادة ضبط</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>إعادة ضبط</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>إخفاء المساعدة</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>التبديل إلى السابق</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>إعدادات مسبقة</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>التبديل إلى السابق</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>إعدادات مسبقة</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

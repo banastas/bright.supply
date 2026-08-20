@@ -63,11 +63,12 @@ Each generated document contains localized, server-readable content before JavaS
 - A unique `<title>`
 - A useful meta description
 - One localized H1
-- A localized lead and feature summary
 - Open Graph and Twitter metadata
 - `WebApplication` structured data
 - Crawlable links to the full color set
 - Indexable robots directives
+
+The visible interface intentionally avoids a promotional hero. Search phrases such as “free” and “online” live in titles, descriptions, and structured data, while the utility surface shows a compact brand and selected-color H1. This keeps the page truthful and indexable without sacrificing the lightbox experience.
 
 Color and language pages use self-referencing canonicals because their content and user intent are distinct. The landing page and `/white/` also have separate titles, descriptions, headings, and intent: the first introduces the complete tool while the second targets a dedicated white-screen experience.
 
@@ -80,6 +81,8 @@ Color and language pages use self-referencing canonicals because their content a
 5. Test the new English and localized URLs at desktop, mobile, and short landscape sizes.
 
 The route count, color navigation, language preservation, canonical metadata, reciprocal alternatives, structured data, sitemap, and service-worker cache targets are validated automatically.
+
+The `black` slug is treated as a true black screen. Brightness, preset, reset, and related shortcut controls are omitted because multiplying black by any brightness value still produces black.
 
 ## Adding a language
 

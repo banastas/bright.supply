@@ -99,7 +99,9 @@ const schemaPayload = (locale, color, copy, canonical) => JSON.stringify({
         price: '0',
         priceCurrency: 'USD'
     },
-    featureList: [locale.brightness, locale.fullscreen, locale.color],
+    featureList: color?.slug === 'black'
+        ? [locale.fullscreen, locale.color]
+        : [locale.brightness, locale.fullscreen, locale.color],
     ...(color ? { keywords: `${locale.colors[color.slug]} screen, ${locale.colors[color.slug]} light` } : {})
 }, null, 2).replaceAll('<', '\\u003c');
 
@@ -110,6 +112,8 @@ const renderPage = (locale, requestedColor) => {
     const canonical = absoluteUrl(path);
     const localHome = routePath(locale);
     const supportsTemperature = color.temperature ? 'true' : 'false';
+    const supportsBrightness = color.slug === 'black' ? 'false' : 'true';
+    const hiddenOnBlack = color.slug === 'black' ? ' hidden' : '';
     const pageKind = requestedColor ? 'color' : 'home';
 
     return `<!DOCTYPE html>
@@ -147,31 +151,26 @@ ${languageAlternates(requestedColor)}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="${pageKind}" data-color-slug="${color.slug}" data-color-value="${color.hex}" data-supports-temperature="${supportsTemperature}">
+<body data-page-kind="${pageKind}" data-color-slug="${color.slug}" data-color-value="${color.hex}" data-supports-brightness="${supportsBrightness}" data-supports-temperature="${supportsTemperature}">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="${localHome}"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="${localHome}"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>${requestedColor ? `<span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">${escapeHtml(locale.colors[color.slug])}</span>` : ''}</h1>
     </header>
-    <main aria-label="${escapeHtml(copy.heading)}">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">${escapeHtml(copy.heading)}</h1>
-            <p>${escapeHtml(copy.lead)}</p>
-            <ul>${locale.pageFeatures.map((feature) => `<li>${escapeHtml(feature)}</li>`).join('')}</ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="${escapeHtml(locale.brightness)}">
+    <main aria-label="${escapeHtml(locale.selectColor)}">
+        <div class="controls-container" role="region" aria-label="${escapeHtml(locale.selectColor)}">
             <div class="color-picker" role="group" aria-label="${escapeHtml(locale.selectColor)}">
                 <span class="control-label">${escapeHtml(locale.color)}</span>
                 <nav class="color-swatches" aria-label="${escapeHtml(locale.selectColor)}">
 ${colorLinks(locale, color)}
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container"${hiddenOnBlack}>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">${escapeHtml(locale.brightness)}</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="${escapeHtml(locale.brightness)}" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="${escapeHtml(locale.presets)}">
+            <div class="preset-buttons" role="group" aria-label="${escapeHtml(locale.presets)}"${hiddenOnBlack}>
                 <button id="preset-low" class="preset-btn" aria-label="${escapeHtml(interpolate(locale.setBrightness, { preset: locale.low }))}">${escapeHtml(locale.low)}</button>
                 <button id="preset-medium" class="preset-btn" aria-label="${escapeHtml(interpolate(locale.setBrightness, { preset: locale.medium }))}">${escapeHtml(locale.medium)}</button>
                 <button id="preset-high" class="preset-btn" aria-label="${escapeHtml(interpolate(locale.setBrightness, { preset: locale.high }))}">${escapeHtml(locale.high)}</button>
@@ -184,7 +183,7 @@ ${colorLinks(locale, color)}
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="${escapeHtml(locale.resetLabel)}">${escapeHtml(locale.reset)}</button>
+                    <button id="reset-btn" class="control-btn" aria-label="${escapeHtml(locale.resetLabel)}"${hiddenOnBlack}>${escapeHtml(locale.reset)}</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="${escapeHtml(locale.enterFullscreen)}">${escapeHtml(locale.fullscreen)}</button>
                 </div>
                 <label class="language-picker">
@@ -199,12 +198,12 @@ ${languageOptions(locale, requestedColor)}
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">${escapeHtml(locale.shortcuts)}</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>${escapeHtml(locale.adjustBrightness)}</span></div>
+                <div class="shortcut"${hiddenOnBlack}><kbd>←</kbd><kbd>→</kbd><span>${escapeHtml(locale.adjustBrightness)}</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>${escapeHtml(locale.fullscreen)}</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>${escapeHtml(locale.reset)}</span></div>
+                <div class="shortcut"${hiddenOnBlack}><kbd>R</kbd><span>${escapeHtml(locale.reset)}</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>${escapeHtml(locale.hideHelp)}</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>${escapeHtml(locale.togglePrevious)}</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>${escapeHtml(locale.presets)}</span></div>
+                <div class="shortcut"${hiddenOnBlack}><kbd>Space</kbd><span>${escapeHtml(locale.togglePrevious)}</span></div>
+                <div class="shortcut"${hiddenOnBlack}><kbd>1</kbd>–<kbd>4</kbd><span>${escapeHtml(locale.presets)}</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

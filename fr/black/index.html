@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "Luminosité",
     "Plein écran",
     "Couleur"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/fr/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/fr/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">noir</span></h1>
     </header>
-    <main aria-label="Écran noir gratuit en ligne">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">Écran noir gratuit en ligne</h1>
-            <p>Utilisez cet écran noir réglable pour les appels vidéo, la photo, le streaming, l’ambiance, les tests d’affichage et la création.</p>
-            <ul><li>Luminosité réglable</li><li>Plein écran en un clic</li><li>Sans téléchargement ni inscription</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="Luminosité">
+    <main aria-label="Choisir une couleur d’écran">
+        <div class="controls-container" role="region" aria-label="Choisir une couleur d’écran">
             <div class="color-picker" role="group" aria-label="Choisir une couleur d’écran">
                 <span class="control-label">Couleur</span>
                 <nav class="color-swatches" aria-label="Choisir une couleur d’écran">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/fr/orange/" style="--swatch-color: #ff6b00" title="orange" aria-label="orange"><span class="visually-hidden">orange</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">Luminosité</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Luminosité" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="Préréglages">
+            <div class="preset-buttons" role="group" aria-label="Préréglages" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="Régler la luminosité sur Faible">Faible</button>
                 <button id="preset-medium" class="preset-btn" aria-label="Régler la luminosité sur Moyenne">Moyenne</button>
                 <button id="preset-high" class="preset-btn" aria-label="Régler la luminosité sur Forte">Forte</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="Réinitialiser la luminosité et la température">Réinitialiser</button>
+                    <button id="reset-btn" class="control-btn" aria-label="Réinitialiser la luminosité et la température" hidden>Réinitialiser</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="Passer en plein écran">Plein écran</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">Raccourcis clavier</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Régler la luminosité</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>Régler la luminosité</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>Plein écran</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>Réinitialiser</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>Réinitialiser</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>Masquer l’aide</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>Revenir au réglage précédent</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>Préréglages</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>Revenir au réglage précédent</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>Préréglages</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>

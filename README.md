@@ -56,7 +56,8 @@ English uses root-level routes such as `/blue/`. Localized routes use the langua
 
 - Fourteen predefined screen colors
 - Direct URLs for every color and language combination
-- Adjustable brightness from 0 to 100 percent
+- Adjustable brightness from 0 to 100 percent on light-emitting colors
+- A true black screen with brightness, presets, and reset hidden because they cannot alter black
 - Cool-to-warm white balance on white screens
 - Low, Medium, High, and Max presets
 - Fullscreen mode
@@ -82,7 +83,7 @@ Keyboard shortcuts do not intercept input, select, or button interactions.
 
 ## Search architecture
 
-The repository contains 270 generated static HTML documents: 15 page types across 18 languages. Each document ships useful content without waiting for JavaScript and includes:
+The repository contains 270 generated static HTML documents: 15 page types across 18 languages. Each document includes:
 
 - A unique title, description, canonical URL, and H1
 - Fully qualified, reciprocal `hreflang` links for all 18 editions
@@ -91,6 +92,8 @@ The repository contains 270 generated static HTML documents: 15 page types acros
 - `WebApplication` JSON-LD
 - Crawlable links to all colors
 - A matching entry in `sitemap.xml`
+
+Search-focused phrases remain in metadata and structured data. The working lightbox surface uses only a quiet brand and color label, so search copy does not obstruct the utility.
 
 The generated pages, language catalog, validation rules, and sitemap are kept in sync by one build command. See [Routing and SEO](docs/ROUTING_AND_SEO.md) for the complete contract.
 

@@ -134,6 +134,7 @@ Before submitting changes:
    - Test the language picker while a color is selected
    - Test Arabic right-to-left layout
    - Test that white balance appears only on white screens
+   - Test that brightness, presets, reset, and their shortcuts are absent on black screens
 
 4. **Search and Route Testing**
    - Confirm the canonical matches the direct URL

@@ -64,7 +64,6 @@
     "priceCurrency": "USD"
   },
   "featureList": [
-    "Brilho",
     "Tela cheia",
     "Cor"
   ],
@@ -73,17 +72,12 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
-<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-temperature="false">
+<body data-page-kind="color" data-color-slug="black" data-color-value="#000000" data-supports-brightness="false" data-supports-temperature="false">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <a class="brand-link" href="/pt/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>
+        <h1 class="brand-heading"><a class="brand-link" href="/pt/"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a><span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">preta</span></h1>
     </header>
-    <main aria-label="Tela preta online grátis">
-        <section class="page-summary" id="page-summary" aria-labelledby="page-title">
-            <h1 id="page-title">Tela preta online grátis</h1>
-            <p>Use esta tela preta ajustável para videochamadas, fotografia, streaming, ambiente, testes de tela e trabalhos criativos.</p>
-            <ul><li>Brilho ajustável</li><li>Tela cheia com um clique</li><li>Sem download ou cadastro</li></ul>
-        </section>
-        <div class="controls-container" role="region" aria-label="Brilho">
+    <main aria-label="Escolher uma cor de tela">
+        <div class="controls-container" role="region" aria-label="Escolher uma cor de tela">
             <div class="color-picker" role="group" aria-label="Escolher uma cor de tela">
                 <span class="control-label">Cor</span>
                 <nav class="color-swatches" aria-label="Escolher uma cor de tela">
@@ -103,14 +97,14 @@
                 <a class="color-swatch" href="/pt/orange/" style="--swatch-color: #ff6b00" title="laranja" aria-label="laranja"><span class="visually-hidden">laranja</span></a>
                 </nav>
             </div>
-            <div class="slider-container">
+            <div class="slider-container" hidden>
                 <div class="slider-label-row">
                     <label for="brightness" class="slider-label">Brilho</label>
                     <span class="slider-value" id="brightness-value" aria-live="polite">75%</span>
                 </div>
                 <input type="range" id="brightness" value="750" min="0" max="1000" class="slider" aria-label="Brilho" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="750">
             </div>
-            <div class="preset-buttons" role="group" aria-label="Predefinições">
+            <div class="preset-buttons" role="group" aria-label="Predefinições" hidden>
                 <button id="preset-low" class="preset-btn" aria-label="Definir brilho como Baixa">Baixa</button>
                 <button id="preset-medium" class="preset-btn" aria-label="Definir brilho como Média">Média</button>
                 <button id="preset-high" class="preset-btn" aria-label="Definir brilho como Alta">Alta</button>
@@ -123,7 +117,7 @@
             </div>
             <div class="utility-row">
                 <div class="control-buttons" role="group">
-                    <button id="reset-btn" class="control-btn" aria-label="Redefinir brilho e temperatura">Redefinir</button>
+                    <button id="reset-btn" class="control-btn" aria-label="Redefinir brilho e temperatura" hidden>Redefinir</button>
                     <button id="fullscreen-btn" class="control-btn" aria-label="Entrar em tela cheia">Tela cheia</button>
                 </div>
                 <label class="language-picker">
@@ -155,12 +149,12 @@
         <div class="instructions" id="instructions" aria-live="polite" aria-hidden="true">
             <div class="instructions-header">Atalhos do teclado</div>
             <div class="instructions-grid">
-                <div class="shortcut"><kbd>←</kbd><kbd>→</kbd><span>Ajustar brilho</span></div>
+                <div class="shortcut" hidden><kbd>←</kbd><kbd>→</kbd><span>Ajustar brilho</span></div>
                 <div class="shortcut"><kbd>F</kbd><span>Tela cheia</span></div>
-                <div class="shortcut"><kbd>R</kbd><span>Redefinir</span></div>
+                <div class="shortcut" hidden><kbd>R</kbd><span>Redefinir</span></div>
                 <div class="shortcut"><kbd>H</kbd><span>Ocultar ajuda</span></div>
-                <div class="shortcut"><kbd>Space</kbd><span>Alternar anterior</span></div>
-                <div class="shortcut"><kbd>1</kbd>–<kbd>4</kbd><span>Predefinições</span></div>
+                <div class="shortcut" hidden><kbd>Space</kbd><span>Alternar anterior</span></div>
+                <div class="shortcut" hidden><kbd>1</kbd>–<kbd>4</kbd><span>Predefinições</span></div>
             </div>
         </div>
         <noscript><p class="noscript-message">JavaScript is required for the interactive controls.</p></noscript>
