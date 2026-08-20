@@ -4,6 +4,8 @@
 
 The `BrightSupply` class provides a programmatic interface to control the lightbox functionality.
 
+The current page route selects the base screen color. For example, `/red/` selects red and `/es/red/` selects the same color with Spanish content and controls.
+
 ### Constructor
 
 ```javascript
@@ -60,6 +62,12 @@ Whether the app is in fullscreen mode.
 #### `currentTemperature`
 Current color temperature level (0-100).
 
+#### `baseColor`
+RGB object loaded from the generated page's `data-color-value` attribute.
+
+#### `supportsTemperature`
+Whether the current route exposes white-balance controls. This is true for white screens and false for fixed-color screens.
+
 ### Events
 
 The class doesn't emit custom events, but you can listen to DOM events:
@@ -79,6 +87,29 @@ The app supports URL parameters for preset brightness:
 - `?preset=medium` - Set to medium brightness  
 - `?preset=high` - Set to high brightness
 - `?preset=max` - Set to maximum brightness
+
+Preset parameters are launch options. They are not included in the sitemap and do not replace the canonical page URL.
+
+## URL Routes
+
+Colors use stable path segments:
+
+- `/white/`
+- `/black/`
+- `/red/`
+- `/pink/`
+- `/magenta/`
+- `/purple/`
+- `/blue/`
+- `/cyan/`
+- `/teal/`
+- `/green/`
+- `/lime/`
+- `/yellow/`
+- `/amber/`
+- `/orange/`
+
+Localized pages add a language prefix and preserve the color slug, such as `/es/red/`, `/ar/blue/`, and `/ja/white/`. English remains at root-level paths.
 
 ## Keyboard Shortcuts
 
@@ -119,8 +150,9 @@ The app is a Progressive Web App with:
 
 - Service Worker for offline functionality
 - Web App Manifest for installation
-- Cache-first static asset loading
-- URL launch shortcuts for preset brightness levels
+- Network-first navigation with a route-specific offline fallback
+- Cache-first static assets
+- URL launch shortcuts for white, red, blue, and black screens
 
 ## Examples
 

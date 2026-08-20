@@ -58,22 +58,25 @@ open http://localhost:8000
 
 ```
 bright.supply/
-├── index.html          # Main HTML file
-├── styles.css          # All CSS styles
-├── app.js             # Main JavaScript application
-├── manifest.json      # PWA manifest
-├── package.json       # Project metadata
-├── robots.txt         # SEO configuration
-├── LICENSE            # MIT License
-├── README.md          # Project documentation
-├── CONTRIBUTING.md    # This file
+├── index.html                     # Generated English landing page
+├── {color}/index.html             # Generated English color pages
+├── {language}/{color}/index.html  # Generated localized color pages
+├── styles.css                     # Shared styles
+├── app.js                         # Shared application controller
+├── manifest.json                  # PWA manifest
+├── sw.js                          # Service worker
+├── sitemap.xml                    # Generated international sitemap
 ├── assets/
 │   └── images/
-│       ├── bright.supply.png  # App icon
-│       └── readme.png         # Screenshot
+│       ├── bright.supply.png       # App icon
+│       └── readme.png              # Screenshot
 └── scripts/
-    └── validate.mjs    # Zero-dependency validation
+    ├── site-data.mjs               # Colors and translations
+    ├── generate-pages.mjs          # Static-page generator
+    └── validate.mjs                # Release validation
 ```
+
+Do not edit generated `index.html` files or `sitemap.xml` directly. Edit `scripts/site-data.mjs`, `scripts/generate-pages.mjs`, shared CSS, or shared JavaScript, then run `npm run build`.
 
 ## 📋 Coding Standards
 
@@ -113,7 +116,7 @@ Before submitting changes:
    - Test on different screen sizes
    - Test keyboard navigation
    - Test accessibility features
-   - Run `npm run validate`
+   - Run `npm test`
 
 2. **Feature Testing**
    - Verify all brightness controls work
@@ -127,6 +130,17 @@ Before submitting changes:
    - Test rapid slider changes
    - Test fullscreen transitions
    - Test localStorage availability
+   - Test a direct color route and a localized color route
+   - Test the language picker while a color is selected
+   - Test Arabic right-to-left layout
+   - Test that white balance appears only on white screens
+
+4. **Search and Route Testing**
+   - Confirm the canonical matches the direct URL
+   - Confirm every page has one H1 and one unique title
+   - Confirm `hreflang` links include the page itself and `x-default`
+   - Confirm nested routes load shared root-relative assets
+   - Confirm the sitemap contains every generated page
 
 ## 🎯 Areas for Contribution
 
@@ -156,6 +170,7 @@ Before submitting changes:
 - [ ] Documentation is updated if needed
 - [ ] Commit messages are clear
 - [ ] No console errors or warnings
+- [ ] `npm test` passes without modifying generated files afterward
 
 ### PR Description
 Include:

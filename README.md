@@ -5,124 +5,147 @@
 [![PWA Ready](https://img.shields.io/badge/PWA-Ready-5a0fc8?style=for-the-badge&logo=pwa)](https://web.dev/progressive-web-apps/)
 [![MIT License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
-<img src="https://github.com/banastas/bright.supply/blob/main/assets/images/readme.png?raw=true" alt="bright.supply - Lightbox for video calls">
+<img src="https://github.com/banastas/bright.supply/blob/main/assets/images/readme.png?raw=true" alt="bright.supply fullscreen color light controls">
 
-**Use your 2nd monitor as a lightbox for video calls.**
+Turn any monitor, tablet, or phone into an adjustable fullscreen light.
 
-A lightweight PWA that turns any screen into an adjustable light source for video conferencing, content creation, and photography. No dependencies, no install required — just open it in your browser.
+bright.supply is a dependency-free Progressive Web App for video calls, photography, streaming, ambience, display testing, and creative work. It provides 14 color screens, 18 localized editions, brightness controls, white balance, presets, keyboard control, and offline support.
+
+## Color screens
+
+Every color has a direct, shareable, indexable URL:
+
+| Color | URL | Color | URL |
+|---|---|---|---|
+| White | [bright.supply/white/](https://bright.supply/white/) | Black | [bright.supply/black/](https://bright.supply/black/) |
+| Red | [bright.supply/red/](https://bright.supply/red/) | Pink | [bright.supply/pink/](https://bright.supply/pink/) |
+| Magenta | [bright.supply/magenta/](https://bright.supply/magenta/) | Purple | [bright.supply/purple/](https://bright.supply/purple/) |
+| Blue | [bright.supply/blue/](https://bright.supply/blue/) | Cyan | [bright.supply/cyan/](https://bright.supply/cyan/) |
+| Teal | [bright.supply/teal/](https://bright.supply/teal/) | Green | [bright.supply/green/](https://bright.supply/green/) |
+| Lime | [bright.supply/lime/](https://bright.supply/lime/) | Yellow | [bright.supply/yellow/](https://bright.supply/yellow/) |
+| Amber | [bright.supply/amber/](https://bright.supply/amber/) | Orange | [bright.supply/orange/](https://bright.supply/orange/) |
+
+The root page remains the general screen-light landing page. `/white/` is the dedicated white-screen search page. Color selection is route-driven, so a bookmarked red page always opens red.
+
+## Languages
+
+Every landing page and color page is available in:
+
+- English
+- German
+- Spanish
+- French
+- Indonesian
+- Italian
+- Polish
+- Portuguese
+- Vietnamese
+- Turkish
+- Russian
+- Arabic, including right-to-left layout
+- Hindi
+- Thai
+- Simplified Chinese
+- Traditional Chinese
+- Japanese
+- Korean
+
+English uses root-level routes such as `/blue/`. Localized routes use the language first, such as `/es/blue/`, `/ar/blue/`, and `/zh-cn/blue/`. The language picker preserves the current color.
 
 ## Features
 
-- **Adjustable brightness** — Fine-tune light intensity from 0-100% with a smooth slider
-- **Color temperature** — Shift from cool (blue-white) to warm (amber) to match your environment
-- **Preset levels** — One-click access to Low, Medium, High, and Max brightness
-- **Fullscreen mode** — Maximize light output across your entire screen
-- **Keyboard shortcuts** — Full keyboard control for quick adjustments
-- **Settings persistence** — Remembers your brightness and temperature preferences
-- **PWA ready** — Install as a standalone desktop or mobile app
-- **Accessible** — Full keyboard navigation, ARIA labels, and screen reader support
-- **Zero dependencies** — Pure HTML, CSS, and vanilla JavaScript
+- Fourteen predefined screen colors
+- Direct URLs for every color and language combination
+- Adjustable brightness from 0 to 100 percent
+- Cool-to-warm white balance on white screens
+- Low, Medium, High, and Max presets
+- Fullscreen mode
+- Keyboard shortcuts
+- Brightness and temperature persistence
+- Responsive left-to-right and right-to-left layouts
+- Installable PWA with route-aware offline caching
+- Accessible labels, focus styles, touch targets, and adaptive text contrast
+- Zero runtime dependencies
 
-## How to Use
-
-1. **Open** [bright.supply](https://bright.supply) on your second monitor
-2. **Adjust** brightness and color temperature using the sliders
-3. **Go fullscreen** for maximum light output
-4. **Position** your camera to capture the light
-5. **Look great** on your next video call
-
-### Keyboard Shortcuts
+## Keyboard shortcuts
 
 | Key | Action |
-|-----|--------|
-| `←` / `→` | Decrease / increase brightness by 5% |
-| `Space` | Toggle between current and previous brightness |
-| `R` | Reset to defaults (75% brightness, neutral temperature) |
+|---|---|
+| `←` / `→` | Decrease or increase brightness by 5 percent |
+| `Space` | Toggle between the current and previous brightness |
+| `R` | Reset brightness and white balance |
 | `F` | Toggle fullscreen |
-| `H` | Toggle help panel |
-| `1` - `4` | Quick presets (Low, Medium, High, Max) |
+| `H` | Toggle keyboard help |
+| `1` to `4` | Select Low, Medium, High, or Max |
 
-### Preset Levels
+Keyboard shortcuts do not intercept input, select, or button interactions.
 
-| Preset | Brightness | Best for |
-|--------|-----------|----------|
-| **Low** | 20% | Subtle fill light in dark rooms |
-| **Medium** | 50% | Balanced, general-purpose lighting |
-| **High** | 75% | Bright key light for calls |
-| **Max** | 100% | Maximum brightness output |
+## Search architecture
 
-## Use Cases
+The repository contains 270 generated static HTML documents: 15 page types across 18 languages. Each document ships useful content without waiting for JavaScript and includes:
 
-- **Video conferencing** — Look better on Zoom, Teams, Meet, and WebEx
-- **Content creation** — Better lighting for streaming, recording, and podcasting
-- **Photography** — Softbox alternative for product photos and flat-lays
-- **Presentations** — Eliminate shadows for interviews, webinars, and online teaching
+- A unique title, description, canonical URL, and H1
+- Fully qualified, reciprocal `hreflang` links for all 18 editions
+- An `x-default` fallback
+- Localized Open Graph and Twitter metadata
+- `WebApplication` JSON-LD
+- Crawlable links to all colors
+- A matching entry in `sitemap.xml`
 
-## Technical Details
-
-- **Pure HTML/CSS/JavaScript** — No frameworks, no build step, no dependencies
-- **Progressive Web App** — Installable on desktop and mobile, works offline
-- **Accessible** — WCAG-friendly with full keyboard navigation and screen reader support
-- **Cross-platform** — Works on Windows, macOS, Linux, iOS, and Android
-- **Lightweight** — ~40KB total page weight (~15KB gzipped)
-
-## Browser Compatibility
-
-| Browser | Version | Status |
-|---------|---------|--------|
-| Chrome | 60+ | Supported |
-| Firefox | 55+ | Supported |
-| Safari | 12+ | Supported |
-| Edge | 79+ | Supported |
-
-## Installation
-
-### As a Web App (PWA)
-1. Visit [bright.supply](https://bright.supply)
-2. Click the install prompt in your browser's address bar
-3. Launch from your desktop or app drawer
-
-### As a Bookmark
-1. Bookmark [bright.supply](https://bright.supply)
-2. Open on your second monitor when needed
+The generated pages, language catalog, validation rules, and sitemap are kept in sync by one build command. See [Routing and SEO](docs/ROUTING_AND_SEO.md) for the complete contract.
 
 ## Development
 
 ```bash
 git clone https://github.com/banastas/bright.supply.git
 cd bright.supply
-
-# No dependencies to install — just start a local server
 python3 -m http.server 8000
-# or
-npx http-server -p 8000
-# or just open index.html directly
-
-# Run local validation
-npm run validate
 ```
+
+Visit `http://localhost:8000`. There are no packages to install and no framework build step.
+
+After changing routes, colors, translations, metadata, or templates, run:
+
+```bash
+npm run build
+```
+
+The build regenerates all 270 pages and the sitemap, then runs more than 4,000 checks for syntax, assets, routes, canonicals, reciprocal language alternatives, structured data, PWA files, and sitemap completeness.
+
+## Source layout
+
+```text
+bright.supply/
+├── index.html                     Generated English landing page
+├── {color}/index.html             Generated English color pages
+├── {language}/index.html          Generated localized landing pages
+├── {language}/{color}/index.html  Generated localized color pages
+├── app.js                         Shared interactive behavior
+├── styles.css                     Shared responsive presentation
+├── manifest.json                  PWA manifest
+├── sw.js                          Offline and update behavior
+├── sitemap.xml                    Generated international sitemap
+└── scripts/
+    ├── site-data.mjs              Color and translation catalog
+    ├── generate-pages.mjs         HTML and sitemap generator
+    └── validate.mjs               Release validation
+```
+
+Generated HTML and `sitemap.xml` carry a generated-file marker. Edit the catalog or generator, then rebuild. Do not hand-edit generated pages.
 
 ## Contributing
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/your-feature`)
-3. **Commit** your changes
-4. **Push** to the branch
-5. **Open** a Pull Request
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Run `npm test` before opening a pull request.
 
 ## License
 
-MIT License — see [LICENSE](LICENSE) for details.
+MIT License. See [LICENSE](LICENSE).
 
 ## Support
 
-- **Website**: [bright.supply](https://bright.supply)
-- **Email**: info@bright.supply
-- **Issues**: [GitHub Issues](https://github.com/banastas/bright.supply/issues)
-- **Twitter**: [@banastas](https://twitter.com/banastas)
+- Website: [bright.supply](https://bright.supply)
+- Email: info@bright.supply
+- Issues: [GitHub Issues](https://github.com/banastas/bright.supply/issues)
+- Twitter: [@banastas](https://twitter.com/banastas)
 
----
-
-**Made by [banast.as](https://banast.as)**
+Made by [banast.as](https://banast.as)

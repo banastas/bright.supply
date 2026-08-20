@@ -1,8 +1,8 @@
 {
-  "name": "bright.supply - Lightbox for Video Calls",
+  "name": "bright.supply - Fullscreen Color Light",
   "short_name": "bright.supply",
-  "description": "Use your 2nd monitor as a lightbox for video calls. Adjustable brightness, keyboard shortcuts, and preset levels.",
-  "version": "2.0.1",
+  "description": "Turn any monitor, tablet, or phone into an adjustable fullscreen light in white or 13 vivid colors.",
+  "version": "3.0.0",
   "start_url": "/",
   "display": "fullscreen",
   "orientation": "any",
@@ -14,13 +14,13 @@
   "scope": "/",
   "icons": [
     {
-      "src": "assets/images/bright.supply.png",
+      "src": "/assets/images/bright.supply.png",
       "sizes": "500x500",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "assets/images/bright.supply.png",
+      "src": "/assets/images/bright.supply.png",
       "sizes": "500x500",
       "type": "image/png",
       "purpose": "any maskable"
@@ -28,7 +28,7 @@
   ],
   "screenshots": [
     {
-      "src": "assets/images/readme.png",
+      "src": "/assets/images/readme.png",
       "sizes": "2942x2172",
       "type": "image/png",
       "form_factor": "wide",
@@ -37,49 +37,49 @@
   ],
   "shortcuts": [
     {
-      "name": "Low Brightness",
-      "short_name": "Low",
-      "description": "Set to low brightness preset",
-      "url": "/?preset=low",
+      "name": "White Screen",
+      "short_name": "White",
+      "description": "Open an adjustable white screen",
+      "url": "/white/",
       "icons": [
         {
-          "src": "assets/images/bright.supply.png",
+          "src": "/assets/images/bright.supply.png",
           "sizes": "500x500"
         }
       ]
     },
     {
-      "name": "Medium Brightness",
-      "short_name": "Medium",
-      "description": "Set to medium brightness preset",
-      "url": "/?preset=medium",
+      "name": "Red Screen",
+      "short_name": "Red",
+      "description": "Open an adjustable red screen",
+      "url": "/red/",
       "icons": [
         {
-          "src": "assets/images/bright.supply.png",
+          "src": "/assets/images/bright.supply.png",
           "sizes": "500x500"
         }
       ]
     },
     {
-      "name": "High Brightness",
-      "short_name": "High",
-      "description": "Set to high brightness preset",
-      "url": "/?preset=high",
+      "name": "Blue Screen",
+      "short_name": "Blue",
+      "description": "Open an adjustable blue screen",
+      "url": "/blue/",
       "icons": [
         {
-          "src": "assets/images/bright.supply.png",
+          "src": "/assets/images/bright.supply.png",
           "sizes": "500x500"
         }
       ]
     },
     {
-      "name": "Maximum Brightness",
-      "short_name": "Max",
-      "description": "Set to maximum brightness",
-      "url": "/?preset=max",
+      "name": "Black Screen",
+      "short_name": "Black",
+      "description": "Open an adjustable black screen",
+      "url": "/black/",
       "icons": [
         {
-          "src": "assets/images/bright.supply.png",
+          "src": "/assets/images/bright.supply.png",
           "sizes": "500x500"
         }
       ]

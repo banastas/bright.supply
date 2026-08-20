@@ -1,22 +1,25 @@
 /**
- * bright.supply - Service Worker
- * Provides offline functionality and caching for PWA
+ * bright.supply service worker.
+ * Core assets are precached. HTML navigations prefer the network and retain a
+ * route-specific offline copy after the first visit.
  */
 
-const CACHE_NAME = 'bright-supply-v2.0.1';
-
-// Files to cache for offline use
+const CACHE_NAME = 'bright-supply-v3.0.0';
 const STATIC_FILES = [
     '/',
-    '/index.html',
+    '/white/',
+    '/black/',
+    '/red/',
+    '/blue/',
     '/styles.css',
     '/app.js',
     '/manifest.json',
     '/assets/images/bright.supply.png',
-    '/robots.txt'
+    '/assets/images/readme.png',
+    '/robots.txt',
+    '/sitemap.xml'
 ];
 
-// Install event - cache static files
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -25,59 +28,53 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys()
-            .then((cacheNames) => {
-                return Promise.all(
-                    cacheNames
-                        .filter((name) => name !== CACHE_NAME)
-                        .map((name) => caches.delete(name))
-                );
-            })
+            .then((names) => Promise.all(
+                names.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name))
+            ))
             .then(() => self.clients.claim())
     );
 });
 
-// Fetch event - serve from cache, fall back to network
+const cacheResponse = async (request, response) => {
+    if (response && response.ok && response.type === 'basic') {
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(request, response.clone());
+    }
+    return response;
+};
+
+const handleNavigation = async (request) => {
+    try {
+        return await cacheResponse(request, await fetch(request));
+    } catch (error) {
+        return (await caches.match(request)) || (await caches.match('/')) || Response.error();
+    }
+};
+
+const handleAsset = async (request) => {
+    const cached = await caches.match(request);
+    if (cached) return cached;
+    try {
+        return await cacheResponse(request, await fetch(request));
+    } catch (error) {
+        return Response.error();
+    }
+};
+
 self.addEventListener('fetch', (event) => {
     if (event.request.method !== 'GET') return;
-    if (!event.request.url.startsWith('http')) return;
-
+    const url = new URL(event.request.url);
+    if (url.origin !== self.location.origin) return;
     event.respondWith(
-        caches.match(event.request)
-            .then((cachedResponse) => {
-                if (cachedResponse) return cachedResponse;
-
-                return fetch(event.request)
-                    .then((response) => {
-                        if (!response || response.status !== 200 || response.type !== 'basic') {
-                            return response;
-                        }
-
-                        const responseToCache = response.clone();
-                        event.waitUntil(
-                            caches.open(CACHE_NAME)
-                                .then((cache) => cache.put(event.request, responseToCache))
-                        );
-
-                        return response;
-                    })
-                    .catch(() => {
-                        if (event.request.mode === 'navigate') {
-                            return caches.match('/index.html');
-                        }
-
-                        return Response.error();
-                    });
-            })
+        event.request.mode === 'navigate'
+            ? handleNavigation(event.request)
+            : handleAsset(event.request)
     );
 });
 
-// Allow forcing update from main thread
 self.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'SKIP_WAITING') {
-        self.skipWaiting();
-    }
+    if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
 });
