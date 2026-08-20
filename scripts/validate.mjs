@@ -99,6 +99,14 @@ for (const { locale, color } of pageRecords) {
     record(`title is useful: ${route}`, Boolean(title && title.length >= minimumTitleLength && title.length <= 90), title || 'missing');
     record(`description is useful: ${route}`, Boolean(description && description.length >= minimumDescriptionLength && description.length <= 220), description || 'missing');
     record(`one H1: ${route}`, h1Count === 1, String(h1Count));
+    record(
+        `compact color context: ${route}`,
+        color
+            ? html.includes('class="page-context"') &&
+                html.includes('class="page-color-dot"') &&
+                !html.includes('class="brand-divider"')
+            : !html.includes('class="page-context"')
+    );
     record(`utility UI has no promotional hero: ${route}`, !html.includes('class="page-summary"'));
     record(`indexable robots: ${route}`, html.includes('name="robots" content="index, follow'));
     record(`absolute core assets: ${route}`, html.includes('href="/styles.css"') && html.includes('src="/app.js"') && html.includes('href="/manifest.json"'));
@@ -174,6 +182,11 @@ if (staticFilesMatch) {
     record('service worker static file list is readable', false);
 }
 record('service worker uses network-first navigation', serviceWorker.includes("request.mode === 'navigate'") && serviceWorker.includes('handleNavigation'));
+record(
+    'service worker refreshes interface assets online',
+    serviceWorker.includes("new Set(['/styles.css', '/app.js', '/manifest.json'])") &&
+        serviceWorker.includes('NETWORK_FIRST_ASSETS.has(url.pathname)')
+);
 
 const sitemap = readText('sitemap.xml');
 const sitemapBlocks = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => match[1]);

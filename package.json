@@ -1,6 +1,6 @@
 {
   "name": "bright-supply",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Turn any screen into an adjustable fullscreen light in white or 13 vivid colors, with 18 localized editions.",
   "main": "index.html",
   "scripts": {

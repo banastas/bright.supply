@@ -4,7 +4,8 @@
  * route-specific offline copy after the first visit.
  */
 
-const CACHE_NAME = 'bright-supply-v3.0.0';
+const CACHE_NAME = 'bright-supply-v3.0.1';
+const NETWORK_FIRST_ASSETS = new Set(['/styles.css', '/app.js', '/manifest.json']);
 const STATIC_FILES = [
     '/',
     '/white/',
@@ -69,7 +70,7 @@ self.addEventListener('fetch', (event) => {
     const url = new URL(event.request.url);
     if (url.origin !== self.location.origin) return;
     event.respondWith(
-        event.request.mode === 'navigate'
+        event.request.mode === 'navigate' || NETWORK_FIRST_ASSETS.has(url.pathname)
             ? handleNavigation(event.request)
             : handleAsset(event.request)
     );

@@ -153,7 +153,7 @@ ${languageAlternates(requestedColor)}
 </head>
 <body data-page-kind="${pageKind}" data-color-slug="${color.slug}" data-color-value="${color.hex}" data-supports-brightness="${supportsBrightness}" data-supports-temperature="${supportsTemperature}">
     <header class="branding" id="branding" aria-label="bright.supply">
-        <h1 class="brand-heading"><a class="brand-link" href="${localHome}"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>${requestedColor ? `<span class="brand-divider" aria-hidden="true">/</span><span class="page-color-name">${escapeHtml(locale.colors[color.slug])}</span>` : ''}</h1>
+        <h1 class="brand-heading"><a class="brand-link" href="${localHome}"><span class="brand-icon" aria-hidden="true">☀</span><span class="brand-name">bright.supply</span></a>${requestedColor ? `<span class="page-context"><span class="page-color-dot" style="--page-color: ${color.hex}" aria-hidden="true"></span><span class="page-color-name">${escapeHtml(locale.colors[color.slug])}</span></span>` : ''}</h1>
     </header>
     <main aria-label="${escapeHtml(locale.selectColor)}">
         <div class="controls-container" role="region" aria-label="${escapeHtml(locale.selectColor)}">

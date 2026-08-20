@@ -2,7 +2,7 @@
   "name": "bright.supply - Fullscreen Color Light",
   "short_name": "bright.supply",
   "description": "Turn any monitor, tablet, or phone into an adjustable fullscreen light in white or 13 vivid colors.",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "start_url": "/",
   "display": "fullscreen",
   "orientation": "any",
