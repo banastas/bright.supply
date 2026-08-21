@@ -56,7 +56,7 @@ const languageAlternates = (color) => [
 const colorLinks = (locale, selectedColor) => colors.map((color) => {
     const colorName = locale.colors[color.slug];
     const current = color.slug === selectedColor.slug ? ' aria-current="page"' : '';
-    return `                <a class="color-swatch" href="${routePath(locale, color)}" style="--swatch-color: ${color.hex}" title="${escapeHtml(colorName)}" aria-label="${escapeHtml(colorName)}"${current}><span class="visually-hidden">${escapeHtml(colorName)}</span></a>`;
+    return `                <a class="color-swatch" href="${routePath(locale, color)}" data-color-slug="${color.slug}" style="--swatch-color: ${color.hex}" title="${escapeHtml(colorName)}" aria-label="${escapeHtml(colorName)}"${current}><span class="visually-hidden">${escapeHtml(colorName)}</span></a>`;
 }).join('\n');
 
 const languageOptions = (locale, color) => locales.map((candidate) => {
@@ -148,8 +148,6 @@ ${languageAlternates(requestedColor)}
     <meta name="twitter:image" content="${SITE_URL}/assets/images/readme.png">
     <meta name="twitter:creator" content="@banastas">
     <script type="application/ld+json">${schemaPayload(locale, requestedColor, copy, canonical)}</script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DP3EWLQT9L"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DP3EWLQT9L');</script>
 </head>
 <body data-page-kind="${pageKind}" data-color-slug="${color.slug}" data-color-value="${color.hex}" data-supports-brightness="${supportsBrightness}" data-supports-temperature="${supportsTemperature}">
     <header class="branding" id="branding" aria-label="bright.supply">
@@ -210,6 +208,7 @@ ${languageOptions(locale, requestedColor)}
     </main>
     <script type="application/json" id="app-translations">${translationPayload(locale)}</script>
     <script>if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(error=>console.warn('Service worker registration failed:',error)))}</script>
+    <script src="/analytics.js"></script>
     <script src="/app.js"></script>
 </body>
 </html>

@@ -4,8 +4,8 @@
  * route-specific offline copy after the first visit.
  */
 
-const CACHE_NAME = 'bright-supply-v3.0.1';
-const NETWORK_FIRST_ASSETS = new Set(['/styles.css', '/app.js', '/manifest.json']);
+const CACHE_NAME = 'bright-supply-v3.1.0';
+const NETWORK_FIRST_ASSETS = new Set(['/styles.css', '/analytics.js', '/app.js', '/manifest.json']);
 const STATIC_FILES = [
     '/',
     '/white/',
@@ -13,6 +13,7 @@ const STATIC_FILES = [
     '/red/',
     '/blue/',
     '/styles.css',
+    '/analytics.js',
     '/app.js',
     '/manifest.json',
     '/assets/images/bright.supply.png',

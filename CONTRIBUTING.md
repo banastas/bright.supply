@@ -62,6 +62,7 @@ bright.supply/
 ├── {color}/index.html             # Generated English color pages
 ├── {language}/{color}/index.html  # Generated localized color pages
 ├── styles.css                     # Shared styles
+├── analytics.js                   # Production analytics adapter
 ├── app.js                         # Shared application controller
 ├── manifest.json                  # PWA manifest
 ├── sw.js                          # Service worker
@@ -73,6 +74,7 @@ bright.supply/
 └── scripts/
     ├── site-data.mjs               # Colors and translations
     ├── generate-pages.mjs          # Static-page generator
+    ├── test-analytics.mjs          # Analytics runtime tests
     └── validate.mjs                # Release validation
 ```
 
@@ -143,6 +145,12 @@ Before submitting changes:
    - Confirm nested routes load shared root-relative assets
    - Confirm the sitemap contains every generated page
 
+5. **Analytics Testing**
+   - Keep all application events behind `window.brightSupplyAnalytics.track()`
+   - Confirm analytics remains disabled on localhost and preview hosts
+   - Confirm each interaction fires once at its committed state, not on every slider input
+   - Update `docs/ANALYTICS.md`, validation, and runtime tests when changing the event contract
+
 ## 🎯 Areas for Contribution
 
 ### High Priority
@@ -161,7 +169,7 @@ Before submitting changes:
 - Themes/skins
 - Advanced lighting effects
 - Integration with video conferencing apps
-- Analytics and usage tracking
+- Additional analytics reporting dimensions that preserve the documented privacy contract
 
 ## 📝 Pull Request Guidelines
 

@@ -1,6 +1,6 @@
 {
   "name": "bright-supply",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Turn any screen into an adjustable fullscreen light in white or 13 vivid colors, with 18 localized editions.",
   "main": "index.html",
   "scripts": {
@@ -10,8 +10,8 @@
     "generate": "node scripts/generate-pages.mjs",
     "build": "npm run generate && npm run validate",
     "deploy": "echo 'Deploy to your hosting provider'",
-    "test": "npm run build",
-    "check": "npm run build",
+    "test": "npm run build && node scripts/test-analytics.mjs",
+    "check": "npm test",
     "lint": "npm run validate",
     "validate": "node scripts/validate.mjs",
     "format": "echo 'No formatter configured'"
@@ -58,17 +58,20 @@
   "files": [
     "index.html",
     "styles.css",
+    "analytics.js",
     "app.js",
     "sw.js",
     "manifest.json",
     "sitemap.xml",
     "scripts/validate.mjs",
+    "scripts/test-analytics.mjs",
     "scripts/generate-pages.mjs",
     "scripts/site-data.mjs",
     "assets/images/bright.supply.png",
     "assets/images/readme.png",
     "robots.txt",
     "docs/API.md",
+    "docs/ANALYTICS.md",
     "docs/ROUTING_AND_SEO.md",
     "LICENSE",
     "README.md"

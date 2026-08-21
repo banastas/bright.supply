@@ -1,5 +1,5 @@
 export const SITE_URL = 'https://bright.supply';
-export const LAST_MODIFIED = '2026-08-19';
+export const LAST_MODIFIED = '2026-08-20';
 
 export const colors = [
     { slug: 'white', hex: '#ffffff', temperature: true },

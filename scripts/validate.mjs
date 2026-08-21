@@ -27,7 +27,7 @@ const getPngSize = (path) => {
     return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
 };
 
-for (const path of ['app.js', 'sw.js', 'scripts/validate.mjs', 'scripts/generate-pages.mjs', 'scripts/site-data.mjs']) {
+for (const path of ['analytics.js', 'app.js', 'sw.js', 'scripts/test-analytics.mjs', 'scripts/validate.mjs', 'scripts/generate-pages.mjs', 'scripts/site-data.mjs']) {
     const result = spawnSync(process.execPath, ['--check', path], { encoding: 'utf8' });
     record(`${path} syntax`, result.status === 0, result.stderr.trim());
 }
@@ -87,6 +87,7 @@ for (const { locale, color } of pageRecords) {
     const h1Count = (html.match(/<h1\b/g) || []).length;
     const alternates = [...html.matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)];
     const colorLinks = [...html.matchAll(/<a class="color-swatch" href="([^"]+)"/g)].map((match) => match[1]);
+    const colorSlugs = [...html.matchAll(/<a class="color-swatch"[^>]+data-color-slug="([^"]+)"/g)].map((match) => match[1]);
     const languageValues = [...html.matchAll(/<option value="([^"]+)"/g)].map((match) => match[1]);
     const schemaText = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)?.[1];
 
@@ -109,7 +110,12 @@ for (const { locale, color } of pageRecords) {
     );
     record(`utility UI has no promotional hero: ${route}`, !html.includes('class="page-summary"'));
     record(`indexable robots: ${route}`, html.includes('name="robots" content="index, follow'));
-    record(`absolute core assets: ${route}`, html.includes('href="/styles.css"') && html.includes('src="/app.js"') && html.includes('href="/manifest.json"'));
+    record(`absolute core assets: ${route}`, html.includes('href="/styles.css"') && html.includes('src="/analytics.js"') && html.includes('src="/app.js"') && html.includes('href="/manifest.json"'));
+    record(
+        `analytics runtime precedes application: ${route}`,
+        html.indexOf('src="/analytics.js"') > -1 && html.indexOf('src="/analytics.js"') < html.indexOf('src="/app.js"')
+    );
+    record(`no duplicated inline Google tag: ${route}`, !html.includes('googletagmanager.com') && !html.includes('G-DP3EWLQT9L'));
     record(`route color data: ${route}`, html.includes(`data-color-slug="${color?.slug || 'white'}"`));
     const isBlackScreen = color?.slug === 'black';
     record(
@@ -127,6 +133,7 @@ for (const { locale, color } of pageRecords) {
             : !html.includes('<div class="slider-container" hidden>')
     );
     record(`all color links: ${route}`, colorLinks.length === colors.length && colorLinks.every((value, index) => value === routePath(locale, colors[index])));
+    record(`all color links expose stable analytics slugs: ${route}`, colorSlugs.length === colors.length && colorSlugs.every((value, index) => value === colors[index].slug));
     record(`all language choices: ${route}`, languageValues.length === locales.length && languageValues.every((value, index) => value === routePath(locales[index], color)));
     record(`complete hreflang set: ${route}`, alternates.length === locales.length + 1);
 
@@ -184,9 +191,33 @@ if (staticFilesMatch) {
 record('service worker uses network-first navigation', serviceWorker.includes("request.mode === 'navigate'") && serviceWorker.includes('handleNavigation'));
 record(
     'service worker refreshes interface assets online',
-    serviceWorker.includes("new Set(['/styles.css', '/app.js', '/manifest.json'])") &&
+    serviceWorker.includes("new Set(['/styles.css', '/analytics.js', '/app.js', '/manifest.json'])") &&
         serviceWorker.includes('NETWORK_FIRST_ASSETS.has(url.pathname)')
 );
+
+const analytics = readText('analytics.js');
+const application = readText('app.js');
+const expectedAnalyticsEvents = [
+    'brightness_change',
+    'brightness_toggle',
+    'color_select',
+    'fullscreen_enter',
+    'fullscreen_error',
+    'fullscreen_exit',
+    'help_toggle',
+    'language_select',
+    'settings_reset',
+    'temperature_change'
+];
+record('analytics uses the configured GA4 measurement ID', analytics.includes("const MEASUREMENT_ID = 'G-DP3EWLQT9L'"));
+record('analytics is production-host gated', analytics.includes("new Set(['bright.supply', 'www.bright.supply'])"));
+record('analytics strips query strings from measured URLs', analytics.includes('`${url.origin}${url.pathname}`'));
+record('analytics disables Google Signals', analytics.includes('allow_google_signals: false'));
+record('analytics disables ad personalization signals', analytics.includes('allow_ad_personalization_signals: false'));
+record('application uses the shared analytics adapter', application.includes('window.brightSupplyAnalytics?.track') && !/\bgtag\s*\(/.test(application));
+for (const eventName of expectedAnalyticsEvents) {
+    record(`analytics event is instrumented: ${eventName}`, application.includes(`'${eventName}'`));
+}
 
 const sitemap = readText('sitemap.xml');
 const sitemapBlocks = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map((match) => match[1]);

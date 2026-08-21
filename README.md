@@ -81,6 +81,7 @@ English uses root-level routes such as `/blue/`. Localized routes use the langua
 - Responsive left-to-right and right-to-left layouts
 - Network-first pages with route-specific offline caching
 - Accessible labels, focus styles, touch targets, and adaptive text contrast
+- Production-only GA4 page views and product interaction events
 - Pure HTML, CSS, and vanilla JavaScript with zero package dependencies
 
 ## Keyboard shortcuts
@@ -121,7 +122,7 @@ The web app manifest supports fullscreen standalone use, shortcuts to four commo
 
 ## Privacy
 
-Brightness and temperature settings remain in the browser's local storage. The app has no accounts, forms, or server-side user profiles. The site loads Google Analytics 4 for site-usage measurement, but the application does not send the stored brightness or temperature values to it.
+Brightness and temperature settings remain in the browser's local storage. The app has no accounts, forms, or server-side user profiles. On the production domain, Google Analytics 4 measures page views and completed product interactions such as color selection, brightness changes, fullscreen use, and PWA installation. Saved settings are not sent on page load. Measured URLs exclude query strings and fragments, Google Signals and ad-personalization signals are disabled, and analytics stays off on localhost and preview hosts. See [Analytics implementation](docs/ANALYTICS.md) for the full event and data contract.
 
 ## Development
 
@@ -139,7 +140,7 @@ After changing routes, colors, translations, metadata, or templates, run:
 npm run build
 ```
 
-The build regenerates all 270 pages and the sitemap, then runs more than 5,500 checks for syntax, assets, routes, canonicals, reciprocal language alternatives, structured data, PWA files, and sitemap completeness. Use `npm run validate` when the generated output is already current and only validation is needed.
+The build regenerates all 270 pages and the sitemap, then runs more than 6,000 checks for syntax, assets, routes, canonicals, reciprocal language alternatives, structured data, analytics coverage, PWA files, and sitemap completeness. `npm test` also executes the analytics runtime contract. Use `npm run validate` when the generated output is already current and only static validation is needed.
 
 ## Source layout
 
@@ -149,6 +150,7 @@ bright.supply/
 ├── {color}/index.html             Generated English color pages
 ├── {language}/index.html          Generated localized landing pages
 ├── {language}/{color}/index.html  Generated localized color pages
+├── analytics.js                   Production GA4 loader and event adapter
 ├── app.js                         Shared interactive behavior
 ├── styles.css                     Shared responsive presentation
 ├── manifest.json                  PWA manifest
@@ -156,10 +158,12 @@ bright.supply/
 ├── sitemap.xml                    Generated international sitemap
 ├── docs/
 │   ├── API.md                     Browser API and integration notes
+│   ├── ANALYTICS.md               GA4 event, privacy, and reporting contract
 │   └── ROUTING_AND_SEO.md         Generated routing and search contract
 └── scripts/
     ├── site-data.mjs              Color and translation catalog
     ├── generate-pages.mjs         HTML and sitemap generator
+    ├── test-analytics.mjs         Analytics runtime tests
     └── validate.mjs               Release validation
 ```
 

@@ -73,7 +73,18 @@ Whether brightness controls and shortcuts apply to the current route. This is fa
 
 ### Events
 
-The class doesn't emit custom events, but you can listen to DOM events:
+The class reports product interactions through `window.brightSupplyAnalytics.track()`. The adapter is active only on the production hostname. Application code never calls `gtag()` directly.
+
+```javascript
+window.brightSupplyAnalytics.track('brightness_change', {
+    brightness_percent: 50,
+    interaction_method: 'custom_integration'
+});
+```
+
+The adapter accepts GA4-compatible event names plus string, number, or boolean parameters. It adds page kind, screen color, content language, and display mode. Invalid names and values are ignored. See [Analytics implementation](ANALYTICS.md) for the supported product events and GA4 custom-definition setup.
+
+You can also listen to the underlying DOM events for a separate integration:
 
 ```javascript
 // Listen for brightness changes

@@ -32,6 +32,8 @@ class BrightSupply {
         this.isFullscreen = false;
         this.isHelpVisible = false;
         this.brightnessInteractionStart = null;
+        this.brightnessEventTimer = null;
+        this.pendingFullscreenMethod = 'browser';
         this.presets = { low: 200, medium: 500, high: 750, max: 1000 };
         this.messages = this.loadTranslations();
         this.init();
@@ -62,16 +64,23 @@ class BrightSupply {
 
     setupEventListeners() {
         this.brightnessSlider.addEventListener('input', () => this.handleBrightnessInput());
-        this.brightnessSlider.addEventListener('change', () => this.handleBrightnessChange());
+        this.brightnessSlider.addEventListener('change', () => this.handleBrightnessChange('slider'));
         this.temperatureSlider.addEventListener('input', () => this.renderTemperature());
-        this.temperatureSlider.addEventListener('change', () => this.saveSettings());
-        this.helpToggle.addEventListener('click', () => this.toggleInstructions());
+        this.temperatureSlider.addEventListener('change', () => this.handleTemperatureChange('slider'));
+        this.helpToggle.addEventListener('click', () => this.toggleInstructions('button'));
         for (const preset of Object.keys(this.presetButtons)) {
-            this.presetButtons[preset].addEventListener('click', () => this.setPreset(preset));
+            this.presetButtons[preset].addEventListener('click', () => this.setPreset(preset, { interactionMethod: 'button' }));
         }
-        this.resetBtn.addEventListener('click', () => this.resetBrightness());
-        this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen());
+        this.resetBtn.addEventListener('click', () => this.resetBrightness('button'));
+        this.fullscreenBtn.addEventListener('click', () => this.toggleFullscreen('button'));
         this.languageSelect.addEventListener('change', () => this.changeLanguage());
+        document.querySelectorAll('.color-swatch').forEach((link) => {
+            link.addEventListener('click', () => this.trackEvent('color_select', {
+                selected_color: link.dataset.colorSlug,
+                destination_path: new URL(link.href, window.location.origin).pathname,
+                interaction_method: 'swatch'
+            }));
+        });
         document.addEventListener('keydown', (event) => this.handleKeydown(event));
         document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
         document.addEventListener('webkitfullscreenchange', () => this.handleFullscreenChange());
@@ -104,9 +113,18 @@ class BrightSupply {
         this.setBrightness(this.brightnessSlider.value, { previousValue: this.brightnessInteractionStart });
     }
 
-    handleBrightnessChange() {
+    handleBrightnessChange(interactionMethod) {
         this.brightnessInteractionStart = null;
         this.saveSettings();
+        this.trackBrightnessChange(interactionMethod);
+    }
+
+    handleTemperatureChange(interactionMethod) {
+        this.saveSettings();
+        this.trackEvent('temperature_change', {
+            temperature_percent: this.currentTemperature,
+            interaction_method: interactionMethod
+        });
     }
 
     setBrightness(value, options = {}) {
@@ -197,6 +215,9 @@ class BrightSupply {
             const template = this.message('setBrightness', 'Set to {preset} brightness');
             this.showFeedback(template.replace('{preset}', presetName));
         }
+        if (options.analytics !== false) {
+            this.trackBrightnessChange(options.interactionMethod || 'preset', { preset });
+        }
     }
 
     updatePresetButtons() {
@@ -208,32 +229,55 @@ class BrightSupply {
         }
     }
 
-    resetBrightness() {
+    resetBrightness(interactionMethod = 'button') {
         this.setBrightness(this.defaultBrightness, { trackPrevious: true });
         this.temperatureSlider.value = String(this.defaultTemperature);
         this.renderTemperature();
         this.saveSettings();
         this.showFeedback(this.message('resetFeedback', 'Reset to defaults'));
+        this.trackEvent('settings_reset', {
+            brightness_percent: this.brightnessPercent(),
+            temperature_percent: this.currentTemperature,
+            interaction_method: interactionMethod
+        });
     }
 
-    toggleFullscreen() {
+    toggleFullscreen(interactionMethod = 'button') {
+        this.pendingFullscreenMethod = interactionMethod;
         if (this.isFullscreen) this.exitFullscreen();
         else this.enterFullscreen();
     }
 
     enterFullscreen() {
         const element = document.documentElement;
-        const request = element.requestFullscreen?.() || element.webkitRequestFullscreen?.() ||
-            element.mozRequestFullScreen?.() || element.msRequestFullscreen?.();
-        if (!request && !document.fullscreenEnabled) {
+        const requestFullscreen = element.requestFullscreen || element.webkitRequestFullscreen ||
+            element.mozRequestFullScreen || element.msRequestFullscreen;
+        if (!requestFullscreen) {
             this.showFeedback(this.message('fullscreenUnavailable', 'Fullscreen unavailable'));
+            this.trackEvent('fullscreen_error', {
+                interaction_method: this.pendingFullscreenMethod,
+                error_reason: 'unsupported'
+            });
+            this.pendingFullscreenMethod = 'browser';
+            return;
         }
+        const request = requestFullscreen.call(element);
         this.handleFullscreenRequest(request, 'enter fullscreen');
     }
 
     exitFullscreen() {
-        const request = document.exitFullscreen?.() || document.webkitExitFullscreen?.() ||
-            document.mozCancelFullScreen?.() || document.msExitFullscreen?.();
+        const exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen ||
+            document.mozCancelFullScreen || document.msExitFullscreen;
+        if (!exitFullscreen) {
+            this.showFeedback(this.message('fullscreenUnavailable', 'Fullscreen unavailable'));
+            this.trackEvent('fullscreen_error', {
+                interaction_method: this.pendingFullscreenMethod,
+                error_reason: 'unsupported'
+            });
+            this.pendingFullscreenMethod = 'browser';
+            return;
+        }
+        const request = exitFullscreen.call(document);
         this.handleFullscreenRequest(request, 'exit fullscreen');
     }
 
@@ -242,22 +286,43 @@ class BrightSupply {
             request.catch((error) => {
                 console.warn(`Could not ${action}:`, error);
                 this.showFeedback(this.message('fullscreenUnavailable', 'Fullscreen unavailable'));
+                this.trackEvent('fullscreen_error', {
+                    interaction_method: this.pendingFullscreenMethod,
+                    error_reason: error?.name || 'request_rejected'
+                });
+                this.pendingFullscreenMethod = 'browser';
             });
         }
     }
 
     handleFullscreenChange() {
+        const wasFullscreen = this.isFullscreen;
         this.isFullscreen = Boolean(document.fullscreenElement || document.webkitFullscreenElement ||
             document.mozFullScreenElement || document.msFullscreenElement);
         this.fullscreenBtn.textContent = this.isFullscreen ? this.message('exit', 'Exit') : this.message('fullscreen', 'Fullscreen');
         this.fullscreenBtn.setAttribute('aria-label', this.isFullscreen
             ? this.message('exitFullscreen', 'Exit fullscreen mode')
             : this.message('enterFullscreen', 'Enter fullscreen mode'));
+        if (wasFullscreen !== this.isFullscreen) {
+            this.trackEvent(this.isFullscreen ? 'fullscreen_enter' : 'fullscreen_exit', {
+                interaction_method: this.pendingFullscreenMethod,
+                brightness_percent: this.brightnessPercent()
+            });
+            this.pendingFullscreenMethod = 'browser';
+        }
     }
 
     changeLanguage() {
         const target = new URL(this.languageSelect.value, window.location.origin);
-        if (target.origin === window.location.origin) window.location.assign(target.href);
+        if (target.origin === window.location.origin) {
+            const option = this.languageSelect.selectedOptions[0];
+            this.trackEvent('language_select', {
+                selected_language: option?.lang || 'unknown',
+                destination_path: target.pathname,
+                interaction_method: 'select'
+            });
+            window.location.assign(target.href);
+        }
     }
 
     handleKeydown(event) {
@@ -269,10 +334,12 @@ class BrightSupply {
         if (shortcuts.includes(event.code)) event.preventDefault();
         const actions = {
             ArrowLeft: () => this.adjustBrightness(-50), ArrowRight: () => this.adjustBrightness(50),
-            Space: () => this.toggleBrightness(), KeyR: () => this.resetBrightness(),
-            KeyF: () => this.toggleFullscreen(), KeyH: () => this.toggleInstructions(),
-            Digit1: () => this.setPreset('low'), Digit2: () => this.setPreset('medium'),
-            Digit3: () => this.setPreset('high'), Digit4: () => this.setPreset('max')
+            Space: () => this.toggleBrightness('keyboard'), KeyR: () => this.resetBrightness('keyboard'),
+            KeyF: () => this.toggleFullscreen('keyboard'), KeyH: () => this.toggleInstructions('keyboard'),
+            Digit1: () => this.setPreset('low', { interactionMethod: 'keyboard' }),
+            Digit2: () => this.setPreset('medium', { interactionMethod: 'keyboard' }),
+            Digit3: () => this.setPreset('high', { interactionMethod: 'keyboard' }),
+            Digit4: () => this.setPreset('max', { interactionMethod: 'keyboard' })
         };
         actions[event.code]?.();
     }
@@ -285,9 +352,10 @@ class BrightSupply {
     adjustBrightness(delta) {
         this.setBrightness(this.currentBrightness + delta, { trackPrevious: true });
         this.saveSettings();
+        this.scheduleBrightnessEvent('keyboard');
     }
 
-    toggleBrightness() {
+    toggleBrightness(interactionMethod = 'keyboard') {
         const current = this.currentBrightness;
         this.currentBrightness = this.clampNumber(this.previousBrightness, this.defaultBrightness, 0, 1000);
         this.previousBrightness = current;
@@ -295,9 +363,13 @@ class BrightSupply {
         this.renderBrightness();
         this.saveSettings();
         this.showFeedback(this.message('toggleFeedback', 'Toggled brightness'));
+        this.trackEvent('brightness_toggle', {
+            brightness_percent: this.brightnessPercent(),
+            interaction_method: interactionMethod
+        });
     }
 
-    toggleInstructions() {
+    toggleInstructions(interactionMethod = 'button') {
         this.isHelpVisible = !this.isHelpVisible;
         this.instructions.classList.toggle('visible', this.isHelpVisible);
         this.instructions.setAttribute('aria-hidden', String(!this.isHelpVisible));
@@ -306,6 +378,10 @@ class BrightSupply {
         this.helpToggle.setAttribute('aria-label', this.isHelpVisible
             ? this.message('hideHelp', 'Hide keyboard shortcuts')
             : this.message('showHelp', 'Show keyboard shortcuts'));
+        this.trackEvent('help_toggle', {
+            state: this.isHelpVisible ? 'open' : 'closed',
+            interaction_method: interactionMethod
+        });
     }
 
     showFeedback(message) {
@@ -345,8 +421,33 @@ class BrightSupply {
         if (!this.supportsBrightness) return;
         const preset = new URLSearchParams(window.location.search).get('preset');
         if (preset && Object.prototype.hasOwnProperty.call(this.presets, preset)) {
-            this.setPreset(preset, { feedback: false, save: true, trackPrevious: true });
+            this.setPreset(preset, { analytics: false, feedback: false, save: true, trackPrevious: true });
+            this.trackBrightnessChange('launch_preset', { preset });
         }
+    }
+
+    brightnessPercent() {
+        return Math.round(this.currentBrightness / 10);
+    }
+
+    trackBrightnessChange(interactionMethod, parameters = {}) {
+        this.trackEvent('brightness_change', {
+            brightness_percent: this.brightnessPercent(),
+            interaction_method: interactionMethod,
+            ...parameters
+        });
+    }
+
+    scheduleBrightnessEvent(interactionMethod) {
+        if (this.brightnessEventTimer) clearTimeout(this.brightnessEventTimer);
+        this.brightnessEventTimer = setTimeout(() => {
+            this.brightnessEventTimer = null;
+            this.trackBrightnessChange(interactionMethod);
+        }, 500);
+    }
+
+    trackEvent(name, parameters = {}) {
+        return window.brightSupplyAnalytics?.track(name, parameters) || false;
     }
 
     saveSettings() {
