@@ -250,8 +250,6 @@ const createApplicationRuntime = () => {
         documentElement,
         fullscreenElement: null,
         webkitFullscreenElement: null,
-        mozFullScreenElement: null,
-        msFullscreenElement: null,
         hidden: false,
         getElementById(id) {
             return elements.get(id) || null;
@@ -355,4 +353,4 @@ const createApplicationRuntime = () => {
     assert.equal(runtime.events.find(({ name }) => name === 'fullscreen_exit').parameters.interaction_method, 'browser');
 }
 
-process.stdout.write('Analytics runtime and event contract tests passed.\n');
+process.stdout.write('Application and analytics runtime tests passed.\n');

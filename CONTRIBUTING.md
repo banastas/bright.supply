@@ -1,235 +1,79 @@
 # Contributing to bright.supply
 
-Thank you for your interest in contributing to bright.supply! This document provides guidelines and information for contributors.
+Thanks for helping improve bright.supply. The project deliberately stays small, dependency-free, accessible, and useful on a wide range of screens.
 
-## 🤝 How to Contribute
+## Before you start
 
-### Reporting Issues
+- Search existing [issues](https://github.com/banastas/bright.supply/issues) and pull requests.
+- Keep proposals focused on the screen-light experience.
+- For bugs, include reproduction steps, the expected result, the actual result, browser and OS versions, and screenshots when useful.
+- Report security problems privately according to [SECURITY.md](SECURITY.md).
 
-Before creating an issue, please:
-1. Check if the issue already exists
-2. Use the issue templates when available
-3. Provide clear steps to reproduce the problem
-4. Include browser and OS information
+## Local setup
 
-### Suggesting Enhancements
-
-We welcome feature suggestions! Please:
-1. Check existing issues and discussions first
-2. Describe the enhancement clearly
-3. Explain why it would be useful
-4. Consider the project's scope and simplicity
-
-### Code Contributions
-
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Make** your changes
-4. **Test** your changes thoroughly
-5. **Commit** with clear messages (`git commit -m 'Add amazing feature'`)
-6. **Push** to your branch (`git push origin feature/amazing-feature`)
-7. **Open** a Pull Request
-
-## 🛠️ Development Setup
-
-### Prerequisites
-
-- A modern web browser
-- Git
-- Python 3 (for local development server)
-
-### Getting Started
+You need Git, Node.js 24 or newer, Python 3, and a modern browser. There are no package dependencies to install.
 
 ```bash
-# Clone your fork
 git clone https://github.com/YOUR_USERNAME/bright.supply.git
 cd bright.supply
-
-# Start a local development server
-python -m http.server 8000
-# or
-python3 -m http.server 8000
-
-# Open in browser
-open http://localhost:8000
+npm start
 ```
 
-### Project Structure
+Open `http://localhost:8000`.
 
+## Source and generated files
+
+The 270 public HTML documents and `sitemap.xml` are generated. Do not edit them directly.
+
+| Change | Source file |
+|---|---|
+| Colors, translations, route data, or metadata copy | `scripts/site-data.mjs` |
+| HTML structure, metadata markup, or sitemap output | `scripts/generate-pages.mjs` |
+| Interface behavior | `app.js` |
+| Presentation and responsive behavior | `styles.css` |
+| Analytics behavior | `analytics.js` |
+| Offline behavior | `sw.js` |
+| Install metadata | `manifest.json` |
+
+After changing a source file, regenerate and validate the repository with `npm test`.
+
+## Code standards
+
+- Use semantic HTML and native browser controls where possible.
+- Preserve keyboard operation, useful accessible names, visible focus, and reduced-motion support.
+- Keep CSS responsive from 320 px wide screens through large desktop displays and short landscape viewports.
+- Keep JavaScript framework-free and avoid adding runtime dependencies.
+- Treat English color slugs and public route paths as stable identifiers.
+- Update documentation and tests whenever a public or internal contract changes.
+- Do not add direct `gtag()` calls to application code. Use `window.brightSupplyAnalytics.track()` and update the documented event contract.
+
+## Required checks
+
+Run:
+
+```bash
+npm test
+git diff --check
+git status --short
 ```
-bright.supply/
-├── index.html                     # Generated English landing page
-├── {color}/index.html             # Generated English color pages
-├── {language}/{color}/index.html  # Generated localized color pages
-├── styles.css                     # Shared styles
-├── analytics.js                   # Production analytics adapter
-├── app.js                         # Shared application controller
-├── manifest.json                  # PWA manifest
-├── sw.js                          # Service worker
-├── sitemap.xml                    # Generated international sitemap
-├── assets/
-│   └── images/
-│       ├── bright.supply.png       # App icon
-│       └── readme.png              # Screenshot
-└── scripts/
-    ├── site-data.mjs               # Colors and translations
-    ├── generate-pages.mjs          # Static-page generator
-    ├── test-analytics.mjs          # Analytics runtime tests
-    └── validate.mjs                # Release validation
-```
 
-Do not edit generated `index.html` files or `sitemap.xml` directly. Edit `scripts/site-data.mjs`, `scripts/generate-pages.mjs`, shared CSS, or shared JavaScript, then run `npm run build`.
+`npm test` regenerates the route matrix, validates every generated document and PWA asset, and exercises the application and analytics runtime contracts. `git status --short` should show only intentional changes. Generated output must be committed with its source changes.
 
-## 📋 Coding Standards
+For interface changes, also verify:
 
-### HTML
-- Use semantic HTML5 elements
-- Include proper ARIA labels and roles
-- Ensure accessibility compliance
-- Keep structure clean and minimal
+- Root, direct color, localized, and localized-color routes
+- Brightness, presets, temperature, reset, fullscreen, and help
+- Keyboard-only navigation and shortcuts
+- Settings after a reload
+- A 390 px mobile viewport and a short landscape viewport
+- Arabic right-to-left layout
+- Black-screen controls remain absent
+- The browser console has no application errors
 
-### CSS
-- Use CSS custom properties (variables) for consistency
-- Follow mobile-first responsive design
-- Use meaningful class names
-- Include comments for complex sections
-- Support high contrast and reduced motion preferences
+For offline changes, confirm that the home and precached color routes open offline, then visit another localized color route online and confirm that exact route can reopen offline.
 
-### JavaScript
-- Use modern ES6+ features
-- Follow the existing class-based structure
-- Include JSDoc comments for functions
-- Handle errors gracefully
-- Maintain backward compatibility
+## Pull requests
 
-### General
-- Keep the project simple and focused
-- Maintain cross-browser compatibility
-- Test on multiple devices and browsers
-- Follow the existing code style
-- Write clear commit messages
+Describe what changed, why it changed, and how it was verified. Include before-and-after screenshots for visible changes and call out any changed route, storage, analytics, or caching contract.
 
-## 🧪 Testing
-
-Before submitting changes:
-
-1. **Manual Testing**
-   - Test on different browsers (Chrome, Firefox, Safari, Edge)
-   - Test on different screen sizes
-   - Test keyboard navigation
-   - Test accessibility features
-   - Run `npm test`
-
-2. **Feature Testing**
-   - Verify all brightness controls work
-   - Test keyboard shortcuts
-   - Test preset buttons
-   - Test fullscreen functionality
-   - Test settings persistence
-
-3. **Edge Cases**
-   - Test with very low/high brightness values
-   - Test rapid slider changes
-   - Test fullscreen transitions
-   - Test localStorage availability
-   - Test a direct color route and a localized color route
-   - Test the language picker while a color is selected
-   - Test Arabic right-to-left layout
-   - Test that white balance appears only on white screens
-   - Test that brightness, presets, reset, and their shortcuts are absent on black screens
-
-4. **Search and Route Testing**
-   - Confirm the canonical matches the direct URL
-   - Confirm every page has one H1 and one unique title
-   - Confirm `hreflang` links include the page itself and `x-default`
-   - Confirm nested routes load shared root-relative assets
-   - Confirm the sitemap contains every generated page
-
-5. **Analytics Testing**
-   - Keep all application events behind `window.brightSupplyAnalytics.track()`
-   - Confirm analytics remains disabled on localhost and preview hosts
-   - Confirm each interaction fires once at its committed state, not on every slider input
-   - Update `docs/ANALYTICS.md`, validation, and runtime tests when changing the event contract
-
-## 🎯 Areas for Contribution
-
-### High Priority
-- Accessibility improvements
-- Performance optimizations
-- Mobile experience enhancements
-- Browser compatibility fixes
-
-### Medium Priority
-- Additional keyboard shortcuts
-- More preset options
-- Color temperature controls
-- Settings import/export
-
-### Low Priority
-- Themes/skins
-- Advanced lighting effects
-- Integration with video conferencing apps
-- Additional analytics reporting dimensions that preserve the documented privacy contract
-
-## 📝 Pull Request Guidelines
-
-### Before Submitting
-- [ ] Code follows project standards
-- [ ] Changes are tested thoroughly
-- [ ] Documentation is updated if needed
-- [ ] Commit messages are clear
-- [ ] No console errors or warnings
-- [ ] `npm test` passes without modifying generated files afterward
-
-### PR Description
-Include:
-- What changes were made
-- Why the changes were necessary
-- How to test the changes
-- Screenshots if UI changes
-- Any breaking changes
-
-### Review Process
-- All PRs require review
-- Maintainers will provide feedback
-- Address requested changes promptly
-- Keep PRs focused and small when possible
-
-## 🐛 Bug Reports
-
-When reporting bugs, include:
-
-1. **Description** - Clear description of the issue
-2. **Steps to Reproduce** - Detailed steps to reproduce
-3. **Expected Behavior** - What should happen
-4. **Actual Behavior** - What actually happens
-5. **Environment** - Browser, OS, device info
-6. **Screenshots** - If applicable
-
-## 💡 Feature Requests
-
-When suggesting features:
-
-1. **Use Case** - Why is this feature needed?
-2. **Description** - Clear description of the feature
-3. **Alternatives** - Other solutions considered
-4. **Implementation** - Any ideas on how to implement
-
-## 📞 Getting Help
-
-- **Issues**: [GitHub Issues](https://github.com/banastas/bright.supply/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/banastas/bright.supply/discussions)
-- **Email**: info@bright.supply
-
-## 📄 License
-
-By contributing to bright.supply, you agree that your contributions will be licensed under the MIT License.
-
-## 🙏 Recognition
-
-Contributors will be recognized in:
-- README.md contributors section
-- Release notes
-- Project documentation
-
-Thank you for contributing to bright.supply! 🎉
+By contributing, you agree that your contribution will be licensed under the [MIT License](LICENSE).

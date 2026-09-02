@@ -1,20 +1,16 @@
 {
   "name": "bright-supply",
-  "version": "3.1.0",
+  "version": "3.2.0",
+  "private": true,
   "description": "Turn any screen into an adjustable fullscreen light in white or 13 vivid colors, with 18 localized editions.",
-  "main": "index.html",
   "scripts": {
-    "start": "python -m http.server 8000",
+    "start": "python3 -m http.server 8000",
     "serve": "python3 -m http.server 8000",
-    "dev": "python -m http.server 8000",
     "generate": "node scripts/generate-pages.mjs",
     "build": "npm run generate && npm run validate",
-    "deploy": "echo 'Deploy to your hosting provider'",
-    "test": "npm run build && node scripts/test-analytics.mjs",
-    "check": "npm test",
-    "lint": "npm run validate",
     "validate": "node scripts/validate.mjs",
-    "format": "echo 'No formatter configured'"
+    "test": "npm run build && node scripts/test-runtime.mjs",
+    "check": "npm test"
   },
   "keywords": [
     "lightbox",
@@ -48,37 +44,6 @@
     "url": "https://github.com/banastas/bright.supply/issues"
   },
   "engines": {
-    "node": ">=14.0.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ],
-  "files": [
-    "index.html",
-    "styles.css",
-    "analytics.js",
-    "app.js",
-    "sw.js",
-    "manifest.json",
-    "sitemap.xml",
-    "scripts/validate.mjs",
-    "scripts/test-analytics.mjs",
-    "scripts/generate-pages.mjs",
-    "scripts/site-data.mjs",
-    "assets/images/bright.supply.png",
-    "assets/images/readme.png",
-    "robots.txt",
-    "docs/API.md",
-    "docs/ANALYTICS.md",
-    "docs/ROUTING_AND_SEO.md",
-    "LICENSE",
-    "README.md"
-  ],
-  "devDependencies": {},
-  "dependencies": {},
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "node": ">=24.0.0"
   }
 }

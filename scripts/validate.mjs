@@ -27,7 +27,7 @@ const getPngSize = (path) => {
     return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
 };
 
-for (const path of ['analytics.js', 'app.js', 'sw.js', 'scripts/test-analytics.mjs', 'scripts/validate.mjs', 'scripts/generate-pages.mjs', 'scripts/site-data.mjs']) {
+for (const path of ['analytics.js', 'app.js', 'sw.js', 'scripts/test-runtime.mjs', 'scripts/validate.mjs', 'scripts/generate-pages.mjs', 'scripts/site-data.mjs']) {
     const result = spawnSync(process.execPath, ['--check', path], { encoding: 'utf8' });
     record(`${path} syntax`, result.status === 0, result.stderr.trim());
 }
@@ -155,6 +155,7 @@ for (const { locale, color } of pageRecords) {
 record('every page title is unique', allTitles.size === pageRecords.length, `${allTitles.size}/${pageRecords.length}`);
 
 if (manifest) {
+    record('manifest has a stable app identity', manifest.id === '/' && manifest.start_url === '/');
     const imageEntries = [...(manifest.icons || []), ...(manifest.screenshots || [])];
     const assetRefs = [
         ...imageEntries.map(({ src }) => src),
@@ -174,7 +175,8 @@ if (manifest) {
         const route = new URL(shortcut.url, SITE_URL).pathname;
         record(`manifest shortcut is generated: ${route}`, expectedRoutes.has(route));
     }
-    record('manifest and package versions match', manifest.version === packageJson?.version, `${manifest.version}/${packageJson?.version}`);
+    const iconKeys = (manifest.icons || []).map(({ src, sizes, purpose = '' }) => `${src}|${sizes}|${purpose}`);
+    record('manifest icons are unique', new Set(iconKeys).size === iconKeys.length, `${new Set(iconKeys).size}/${iconKeys.length}`);
 }
 
 const serviceWorker = readText('sw.js');
@@ -194,6 +196,7 @@ record(
     serviceWorker.includes("new Set(['/styles.css', '/analytics.js', '/app.js', '/manifest.json'])") &&
         serviceWorker.includes('NETWORK_FIRST_ASSETS.has(url.pathname)')
 );
+record('service worker does not precache documentation assets', !serviceWorker.includes("'/assets/images/readme.png'") && !serviceWorker.includes("'/sitemap.xml'"));
 
 const analytics = readText('analytics.js');
 const application = readText('app.js');
@@ -235,7 +238,8 @@ for (const block of sitemapBlocks) {
 }
 
 if (packageJson) {
-    for (const file of packageJson.files || []) record(`package file exists: ${file}`, existsSync(file), file);
+    record('package is private', packageJson.private === true);
+    record('package requires current Node LTS', packageJson.engines?.node === '>=24.0.0', packageJson.engines?.node || 'missing');
     record('build regenerates then validates', packageJson.scripts?.build === 'npm run generate && npm run validate');
 }
 

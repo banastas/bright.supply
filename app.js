@@ -84,8 +84,6 @@ class BrightSupply {
         document.addEventListener('keydown', (event) => this.handleKeydown(event));
         document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
         document.addEventListener('webkitfullscreenchange', () => this.handleFullscreenChange());
-        document.addEventListener('mozfullscreenchange', () => this.handleFullscreenChange());
-        document.addEventListener('MSFullscreenChange', () => this.handleFullscreenChange());
         document.addEventListener('visibilitychange', () => this.handleVisibilityChange());
         this.setupTouchEvents();
     }
@@ -250,8 +248,7 @@ class BrightSupply {
 
     enterFullscreen() {
         const element = document.documentElement;
-        const requestFullscreen = element.requestFullscreen || element.webkitRequestFullscreen ||
-            element.mozRequestFullScreen || element.msRequestFullscreen;
+        const requestFullscreen = element.requestFullscreen || element.webkitRequestFullscreen;
         if (!requestFullscreen) {
             this.showFeedback(this.message('fullscreenUnavailable', 'Fullscreen unavailable'));
             this.trackEvent('fullscreen_error', {
@@ -266,8 +263,7 @@ class BrightSupply {
     }
 
     exitFullscreen() {
-        const exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen ||
-            document.mozCancelFullScreen || document.msExitFullscreen;
+        const exitFullscreen = document.exitFullscreen || document.webkitExitFullscreen;
         if (!exitFullscreen) {
             this.showFeedback(this.message('fullscreenUnavailable', 'Fullscreen unavailable'));
             this.trackEvent('fullscreen_error', {
@@ -297,8 +293,7 @@ class BrightSupply {
 
     handleFullscreenChange() {
         const wasFullscreen = this.isFullscreen;
-        this.isFullscreen = Boolean(document.fullscreenElement || document.webkitFullscreenElement ||
-            document.mozFullScreenElement || document.msFullscreenElement);
+        this.isFullscreen = Boolean(document.fullscreenElement || document.webkitFullscreenElement);
         this.fullscreenBtn.textContent = this.isFullscreen ? this.message('exit', 'Exit') : this.message('fullscreen', 'Fullscreen');
         this.fullscreenBtn.setAttribute('aria-label', this.isFullscreen
             ? this.message('exitFullscreen', 'Exit fullscreen mode')

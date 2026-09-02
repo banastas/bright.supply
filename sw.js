@@ -4,7 +4,7 @@
  * route-specific offline copy after the first visit.
  */
 
-const CACHE_NAME = 'bright-supply-v3.1.0';
+const CACHE_NAME = 'bright-supply-v3.2.0';
 const NETWORK_FIRST_ASSETS = new Set(['/styles.css', '/analytics.js', '/app.js', '/manifest.json']);
 const STATIC_FILES = [
     '/',
@@ -16,10 +16,7 @@ const STATIC_FILES = [
     '/analytics.js',
     '/app.js',
     '/manifest.json',
-    '/assets/images/bright.supply.png',
-    '/assets/images/readme.png',
-    '/robots.txt',
-    '/sitemap.xml'
+    '/assets/images/bright.supply.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -34,7 +31,8 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys()
             .then((names) => Promise.all(
-                names.filter((name) => name !== CACHE_NAME).map((name) => caches.delete(name))
+                names.filter((name) => name.startsWith('bright-supply-') && name !== CACHE_NAME)
+                    .map((name) => caches.delete(name))
             ))
             .then(() => self.clients.claim())
     );
